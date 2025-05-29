@@ -75,4 +75,4 @@ export interface FloatingShapeProps {
   position: { x: number; y: number; z: number };
   rotationSpeed?: number;
   glitchChance?: number;
-} 
+}

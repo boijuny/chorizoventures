@@ -7,25 +7,23 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-bg-primary">
+    <main className="min-h-screen bg-black text-white">
       {/* Hero Section */}
-      <section className="container-responsive py-3xl">
-        <div className="text-center space-y-xl">
+      <section className="max-w-4xl mx-auto px-4 py-16">
+        <div className="text-center space-y-8">
           {/* Logo/Title */}
-          <div className="space-y-md">
-            <h1 className="text-6xl font-bold text-text-primary">
-              GUEZ VC
-            </h1>
-            
+          <div className="space-y-4">
+            <h1 className="text-6xl font-bold text-white">GUEZ VC</h1>
+
             {/* Floating 3D Shape Placeholder */}
-            <div className="floating-element w-16 h-16 bg-accent-primary/20 rounded-lg mx-auto">
+            <div className="w-16 h-16 bg-blue-500/20 rounded-lg mx-auto animate-pulse">
               {/* 3D shape will be implemented in Phase 2 */}
             </div>
           </div>
 
           {/* Rotating Tagline Placeholder */}
-          <div className="space-y-lg">
-            <div className="text-2xl text-text-secondary">
+          <div className="space-y-6">
+            <div className="text-2xl text-gray-300">
               {/* Rotating taglines component will be implemented in Phase 2 */}
               "Disrupting disruption since never"
             </div>
@@ -33,21 +31,21 @@ export default function HomePage() {
 
           {/* Chat Input Placeholder */}
           <div className="max-w-2xl mx-auto">
-            <div className="bg-bg-secondary rounded-lg p-lg space-y-md">
-              <div className="text-lg text-text-primary">
+            <div className="bg-gray-800 rounded-lg p-6 space-y-4">
+              <div className="text-lg text-white">
                 What can we disrupt for you?
               </div>
-              
+
               {/* Input field placeholder */}
-              <div className="flex gap-md">
+              <div className="flex gap-4">
                 <input
                   type="text"
                   placeholder="Enter your startup idea..."
-                  className="flex-1 bg-bg-tertiary text-text-primary px-md py-sm rounded-lg border border-bg-tertiary focus:border-accent-primary transition-colors"
+                  className="flex-1 bg-gray-700 text-white px-4 py-2 rounded-lg border border-gray-600 focus:border-blue-500 transition-colors"
                   disabled
                 />
                 <button
-                  className="liquid-button bg-accent-primary text-white px-lg py-sm rounded-lg disabled:opacity-50"
+                  className="bg-blue-500 text-white px-6 py-2 rounded-lg disabled:opacity-50 transition-all duration-300 hover:scale-105"
                   disabled
                 >
                   Send
@@ -57,17 +55,17 @@ export default function HomePage() {
           </div>
 
           {/* Mode Selector Placeholder */}
-          <div className="flex justify-center gap-md">
-            <button className="liquid-button bg-bg-secondary text-text-primary px-lg py-sm rounded-lg border border-accent-primary">
+          <div className="flex justify-center gap-4">
+            <button className="bg-gray-800 text-white px-6 py-2 rounded-lg border border-blue-500 transition-all duration-300 hover:scale-105">
               Normal
             </button>
-            <button className="liquid-button bg-bg-secondary text-text-secondary px-lg py-sm rounded-lg border border-bg-tertiary hover:border-accent-roast">
+            <button className="bg-gray-800 text-gray-300 px-6 py-2 rounded-lg border border-gray-600 hover:border-red-500 transition-all duration-300 hover:scale-105">
               Roast
             </button>
-            <button className="liquid-button bg-bg-secondary text-text-secondary px-lg py-sm rounded-lg border border-bg-tertiary hover:border-accent-calculator">
+            <button className="bg-gray-800 text-gray-300 px-6 py-2 rounded-lg border border-gray-600 hover:border-green-500 transition-all duration-300 hover:scale-105">
               Calculator
             </button>
-            <button className="liquid-button bg-bg-secondary text-text-secondary px-lg py-sm rounded-lg border border-bg-tertiary hover:border-accent-neon">
+            <button className="bg-gray-800 text-gray-300 px-6 py-2 rounded-lg border border-gray-600 hover:border-purple-500 transition-all duration-300 hover:scale-105">
               More
             </button>
           </div>
@@ -75,8 +73,8 @@ export default function HomePage() {
       </section>
 
       {/* Timezone Clocks Placeholder */}
-      <section className="container-responsive pb-xl">
-        <div className="flex justify-center gap-xl text-text-secondary text-sm">
+      <section className="max-w-4xl mx-auto px-4 pb-8">
+        <div className="flex justify-center gap-8 text-gray-400 text-sm">
           <div className="text-center">
             <div>SF</div>
             <div>6:55 AM</div>
@@ -93,4 +91,4 @@ export default function HomePage() {
       </section>
     </main>
   );
-} 
+}

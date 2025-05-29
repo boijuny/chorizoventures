@@ -8,12 +8,12 @@
   --bg-primary: #0a0a0a;
   --bg-secondary: #1a1a1a;
   --bg-tertiary: #2a2a2a;
-  
+
   /* Text colors */
   --text-primary: #f5f5f5;
   --text-secondary: #a3a3a3;
   --text-muted: #6b7280;
-  
+
   /* Accent colors */
   --accent-primary: #3b82f6;
   --accent-roast: #ef4444;
@@ -91,20 +91,20 @@ body {
     @apply transition-all duration-300 ease-in-out;
     @apply hover:scale-105 active:scale-95;
   }
-  
+
   .floating-element {
     @apply animate-float;
   }
-  
+
   .glitch-text {
     @apply transition-all duration-100;
   }
-  
+
   .container-responsive {
     @apply max-w-container-lg mx-auto px-md;
   }
-  
+
   .text-gradient {
     @apply bg-gradient-primary bg-clip-text text-transparent;
   }
-} 
+}

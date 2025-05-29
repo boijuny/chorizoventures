@@ -6,9 +6,9 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "prefer-const": "error",
-    "no-var": "error"
+    "no-var": "error",
+    "react/no-unescaped-entities": "off"
   },
   "ignorePatterns": ["node_modules/", ".next/", "out/", "build/"]
-} 
+}

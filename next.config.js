@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    // Enable the app directory
-    appDir: true,
-  },
   typescript: {
     // Enable strict mode TypeScript checking
     ignoreBuildErrors: false,
@@ -45,4 +41,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig; 
+module.exports = nextConfig;

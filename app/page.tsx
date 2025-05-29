@@ -1,11 +1,15 @@
-import { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'Home',
-  description: 'Welcome to Guez VC - where we disrupt disruption since never.',
-};
+import { useState } from 'react';
+import RotatingTaglines from '@/components/RotatingTaglines';
+import TimezoneClock from '@/components/TimezoneClock';
+import FloatingShape from '@/components/FloatingShape';
+import ChatModeSelector from '@/components/ChatModeSelector';
+import { ChatMode } from '@/types';
 
 export default function HomePage() {
+  const [currentMode, setCurrentMode] = useState<ChatMode>('normal');
+
   return (
     <main className="min-h-screen bg-black text-white">
       {/* Hero Section */}
@@ -15,18 +19,32 @@ export default function HomePage() {
           <div className="space-y-4">
             <h1 className="text-6xl font-bold text-white">GUEZ VC</h1>
 
-            {/* Floating 3D Shape Placeholder */}
-            <div className="w-16 h-16 bg-blue-500/20 rounded-lg mx-auto animate-pulse">
-              {/* 3D shape will be implemented in Phase 2 */}
+            {/* Floating 3D Shape - Now Interactive! */}
+            <div className="flex justify-center space-x-4">
+              <FloatingShape
+                type="cube"
+                size="medium"
+                rotationSpeed={25}
+                glitchChance={5}
+              />
+              <FloatingShape
+                type="sphere"
+                size="small"
+                rotationSpeed={15}
+                glitchChance={3}
+              />
+              <FloatingShape
+                type="pyramid"
+                size="small"
+                rotationSpeed={30}
+                glitchChance={2}
+              />
             </div>
           </div>
 
-          {/* Rotating Tagline Placeholder */}
-          <div className="space-y-6">
-            <div className="text-2xl text-gray-300">
-              {/* Rotating taglines component will be implemented in Phase 2 */}
-              "Disrupting disruption since never"
-            </div>
+          {/* Rotating Taglines - Now Animated! */}
+          <div className="space-y-6 min-h-[120px] flex items-center justify-center">
+            <RotatingTaglines className="w-full" />
           </div>
 
           {/* Chat Input Placeholder */}
@@ -54,41 +72,44 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Mode Selector Placeholder */}
-          <div className="flex justify-center gap-4">
-            <button className="bg-gray-800 text-white px-6 py-2 rounded-lg border border-blue-500 transition-all duration-300 hover:scale-105">
-              Normal
-            </button>
-            <button className="bg-gray-800 text-gray-300 px-6 py-2 rounded-lg border border-gray-600 hover:border-red-500 transition-all duration-300 hover:scale-105">
-              Roast
-            </button>
-            <button className="bg-gray-800 text-gray-300 px-6 py-2 rounded-lg border border-gray-600 hover:border-green-500 transition-all duration-300 hover:scale-105">
-              Calculator
-            </button>
-            <button className="bg-gray-800 text-gray-300 px-6 py-2 rounded-lg border border-gray-600 hover:border-purple-500 transition-all duration-300 hover:scale-105">
-              More
-            </button>
-          </div>
+          {/* Interactive Mode Selector */}
+          <ChatModeSelector
+            currentMode={currentMode}
+            onModeChange={setCurrentMode}
+            className="relative"
+          />
         </div>
       </section>
 
-      {/* Timezone Clocks Placeholder */}
+      {/* Real-time Timezone Clocks */}
       <section className="max-w-4xl mx-auto px-4 pb-8">
-        <div className="flex justify-center gap-8 text-gray-400 text-sm">
-          <div className="text-center">
-            <div>SF</div>
-            <div>6:55 AM</div>
-          </div>
-          <div className="text-center">
-            <div>NYC</div>
-            <div>9:55 AM</div>
-          </div>
-          <div className="text-center">
-            <div>PARIS</div>
-            <div>3:55 PM</div>
-          </div>
-        </div>
+        <TimezoneClock />
       </section>
+
+      {/* Background floating elements */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <FloatingShape
+          type="cube"
+          size="small"
+          position={{ x: -200, y: 100, z: 0 }}
+          rotationSpeed={40}
+          className="absolute top-20 left-10 opacity-30"
+        />
+        <FloatingShape
+          type="sphere"
+          size="small"
+          position={{ x: 200, y: -50, z: 0 }}
+          rotationSpeed={35}
+          className="absolute top-1/3 right-20 opacity-20"
+        />
+        <FloatingShape
+          type="pyramid"
+          size="medium"
+          position={{ x: -100, y: 200, z: 0 }}
+          rotationSpeed={45}
+          className="absolute bottom-32 left-1/4 opacity-25"
+        />
+      </div>
     </main>
   );
 }

@@ -18,8 +18,8 @@ export interface ChatState {
 
 // Component prop types from PRD
 export interface TaglineProps {
-  taglines: string[];
-  interval: number;
+  taglines?: string[];
+  interval?: number;
   className?: string;
 }
 

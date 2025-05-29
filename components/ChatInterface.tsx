@@ -20,6 +20,7 @@ export default function ChatInterface({
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [hasStartedChat, setHasStartedChat] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -36,6 +37,11 @@ export default function ChatInterface({
   const sendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
 
+    // Set hasStartedChat to true on first message
+    if (!hasStartedChat) {
+      setHasStartedChat(true);
+    }
+
     const userMessage: ChatMessageType = {
       id: generateId(),
       content: inputValue.trim(),
@@ -50,7 +56,7 @@ export default function ChatInterface({
     setError(null);
 
     try {
-      // API call to chat endpoint (Phase 3b)
+      // API call to chat endpoint
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -123,42 +129,148 @@ export default function ChatInterface({
     calculator: "Tell us your business model and we'll run the numbers...",
   };
 
-  return (
-    <div className={`max-w-4xl mx-auto ${className}`}>
-      {/* Chat Messages Area */}
-      <div className="h-96 overflow-y-auto mb-4 px-4 space-y-2 bg-gray-900/20 rounded-lg border border-gray-700/50 backdrop-blur-sm">
-        {messages.length === 0 ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center h-full text-gray-400 text-center"
-          >
-            <div>
-              <div className="text-lg mb-2">
-                {currentMode === 'normal' && '💡 Ready to disrupt?'}
-                {currentMode === 'roast' && '🔥 Prepare for brutal honesty'}
-                {currentMode === 'calculator' && "📊 Let's crunch some numbers"}
-              </div>
-              <div className="text-sm opacity-75">
-                Start a conversation with our {currentMode} AI
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <AnimatePresence>
-            {messages.map(message => (
-              <ChatMessage
-                key={message.id}
-                message={message}
-                animate="slide"
-                enableGlitch={true}
+  const welcomeContent = {
+    normal: {
+      icon: '💡',
+      title: 'Ready to disrupt?',
+      subtitle: 'Let our AI guide your startup journey with satirical wisdom',
+    },
+    roast: {
+      icon: '🔥',
+      title: 'Prepare for brutal honesty',
+      subtitle: 'Get your startup idea roasted by our merciless AI critic',
+    },
+    calculator: {
+      icon: '📊',
+      title: "Let's crunch some numbers",
+      subtitle: 'Analyze your business model with our data-driven AI',
+    },
+  };
+
+  if (!hasStartedChat) {
+    // Initial state - Large centered interface (OpenAI style)
+    return (
+      <div className={`max-w-4xl mx-auto ${className}`}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="flex flex-col items-center justify-center min-h-[60vh] text-center"
+        >
+          {/* Welcome Content */}
+          <div className="mb-12">
+            <motion.div
+              className="text-6xl mb-4"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              {welcomeContent[currentMode].icon}
+            </motion.div>
+            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-purple-500 to-green-400 bg-clip-text text-transparent">
+              {welcomeContent[currentMode].title}
+            </h2>
+            <p className="text-gray-400 text-lg max-w-md mx-auto">
+              {welcomeContent[currentMode].subtitle}
+            </p>
+          </div>
+
+          {/* Large Input Area */}
+          <div className="w-full max-w-2xl">
+            <div className="relative">
+              <motion.textarea
+                ref={inputRef}
+                value={inputValue}
+                onChange={e => setInputValue(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder={placeholderText[currentMode]}
+                className="w-full bg-gray-800/50 text-white px-6 py-4 rounded-2xl border border-gray-600/50 focus:border-blue-500/50 transition-all duration-300 resize-none min-h-[120px] text-lg backdrop-blur-sm shadow-xl"
+                disabled={isLoading}
+                whileFocus={{
+                  scale: 1.02,
+                  boxShadow: '0 0 0 1px rgba(59, 130, 246, 0.5)',
+                  transition: { duration: 0.2 },
+                }}
               />
-            ))}
-            {isLoading && <TypingIndicator mode={currentMode} />}
-          </AnimatePresence>
-        )}
-        <div ref={messagesEndRef} />
+
+              <motion.button
+                onClick={sendMessage}
+                disabled={!inputValue.trim() || isLoading}
+                className={`
+                  absolute bottom-4 right-4 px-8 py-3 rounded-xl font-medium transition-all duration-300
+                  ${
+                    currentMode === 'roast'
+                      ? 'bg-red-500 hover:bg-red-600'
+                      : currentMode === 'calculator'
+                        ? 'bg-green-500 hover:bg-green-600'
+                        : 'bg-blue-500 hover:bg-blue-600'
+                  }
+                  text-white disabled:opacity-50 disabled:cursor-not-allowed
+                  shadow-lg hover:shadow-xl
+                `}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {isLoading ? (
+                  <motion.div
+                    className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 1,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
+                ) : (
+                  'Start Chat'
+                )}
+              </motion.button>
+            </div>
+
+            {/* Input hint */}
+            <div className="text-xs text-gray-500 mt-3 text-center">
+              Press Enter to send, Shift+Enter for new line
+            </div>
+          </div>
+        </motion.div>
       </div>
+    );
+  }
+
+  // Chat started - Show full interface
+  return (
+    <motion.div
+      className={`max-w-4xl mx-auto ${className}`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      {/* Chat Messages Area */}
+      <motion.div
+        initial={{ height: 0, opacity: 0 }}
+        animate={{ height: 'auto', opacity: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="h-96 overflow-y-auto mb-4 px-4 space-y-2 bg-gray-900/20 rounded-lg border border-gray-700/50 backdrop-blur-sm"
+      >
+        <AnimatePresence>
+          {messages.map(message => (
+            <ChatMessage
+              key={message.id}
+              message={message}
+              animate="slide"
+              enableGlitch={true}
+            />
+          ))}
+          {isLoading && <TypingIndicator mode={currentMode} />}
+        </AnimatePresence>
+        <div ref={messagesEndRef} />
+      </motion.div>
 
       {/* Error Display */}
       {error && (
@@ -227,6 +339,6 @@ export default function ChatInterface({
           Press Enter to send, Shift+Enter for new line
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

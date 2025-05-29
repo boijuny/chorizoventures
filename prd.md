@@ -241,8 +241,8 @@ interface MessageProps {
 // Framer Motion variants for liquid animations
 const liquidVariants = {
   initial: { scale: 1, borderRadius: '8px' },
-  hover: {
-    scale: 1.05,
+  hover: { 
+    scale: 1.05, 
     borderRadius: '16px',
     transition: { type: 'spring', stiffness: 300 },
   },
@@ -251,7 +251,7 @@ const liquidVariants = {
 
 const glitchVariants = {
   normal: { filter: 'none' },
-  glitch: {
+  glitch: { 
     filter: 'hue-rotate(180deg) saturate(200%)',
     transition: { duration: 0.1 },
   },
@@ -329,7 +329,7 @@ const glitchVariants = {
 ### Feature 1: Homepage with Rotating Taglines
 
 **Priority:** P0 (Critical)  
-**Effort:** 2 story points
+**Effort:** 2 story points  
 
 **Acceptance Criteria:**
 
@@ -352,7 +352,7 @@ interface TaglineProps {
 ### Feature 2: AI Chat Interface
 
 **Priority:** P0 (Critical)  
-**Effort:** 8 story points
+**Effort:** 8 story points  
 
 **Acceptance Criteria:**
 
@@ -385,7 +385,7 @@ interface ChatState {
 ### Feature 3: Multi-timezone Clocks
 
 **Priority:** P1 (Important)  
-**Effort:** 1 story point
+**Effort:** 1 story point  
 
 **Acceptance Criteria:**
 
@@ -511,6 +511,51 @@ interface ChatState {
 - Performance metrics achieved
 - No critical bugs or security issues
 - Ready for deployment
+
+#### 🎨 **UI Improvement: OpenAI-Style Chat Interface**
+
+**Priority:** P1 (High Impact UX Enhancement)  
+**Inspiration:** OpenAI ChatGPT interface pattern  
+**Goal:** Hide chat message area initially, reveal on first user interaction
+
+**Implementation Checklist:**
+
+- [x] **State Management**: Add `hasStartedChat` boolean state to ChatInterface
+- [x] **Conditional Rendering**: Hide message area when `hasStartedChat` is false
+- [x] **Initial UI**: Show large centered input with mode selector above
+- [x] **Transition Animation**: Smooth reveal animation when chat starts
+- [x] **Input Redesign**: Large prominent input field for first message
+- [x] **Welcome Content**: Enhanced welcome message per mode
+- [x] **Responsive Design**: Ensure mobile compatibility for new layout
+- [ ] **Testing**: Verify smooth transition across all modes
+
+**Detailed Steps:**
+
+1. **Modify ChatInterface State:**
+   - [x] Add `hasStartedChat` state (default: false)
+   - [x] Set to true on first message send
+   - [ ] Reset when mode changes (optional)
+
+2. **Create Two UI Layouts:**
+   - [x] **Before Chat**: Large input, prominent mode selector
+   - [x] **During Chat**: Current message area + input
+
+3. **Animation Implementation:**
+   - [x] Smooth height transition for message area reveal
+   - [x] Input field position/size animation
+   - [x] Mode selector repositioning
+
+4. **Visual Design Updates:**
+   - [x] Larger input field for initial state
+   - [x] Enhanced welcome icons/text per mode
+   - [x] Better visual hierarchy
+
+**Acceptance Criteria:**
+- [x] Message area completely hidden on page load
+- [x] Smooth transition when user sends first message
+- [x] No layout jumps or visual glitches
+- [x] Works consistently across all three modes
+- [x] Mobile responsive design maintained
 
 ## 🧪 Testing Strategy
 

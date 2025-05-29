@@ -7,19 +7,17 @@ import { shouldGlitch } from '@/utils/helpers';
 
 export default function FloatingShape({
   type = 'cube',
-  size = 'medium',
-  position = { x: 0, y: 0, z: 0 },
-  rotationSpeed = 20,
-  glitchChance = 1,
+  size = 'md',
+  color,
   className = '',
-}: Partial<FloatingShapeProps> & { className?: string }) {
+}: FloatingShapeProps) {
   const [isGlitching, setIsGlitching] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const sizeClasses = {
-    small: 'w-12 h-12',
-    medium: 'w-16 h-16',
-    large: 'w-20 h-20',
+    sm: 'w-12 h-12',
+    md: 'w-16 h-16',
+    lg: 'w-20 h-20',
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -32,7 +30,7 @@ export default function FloatingShape({
   };
 
   const handleClick = () => {
-    if (Math.random() * 100 < glitchChance) {
+    if (shouldGlitch(5)) {
       setIsGlitching(true);
       setTimeout(() => setIsGlitching(false), 100);
     }
@@ -50,7 +48,7 @@ export default function FloatingShape({
     rotating: {
       rotate: 360,
       transition: {
-        duration: rotationSpeed,
+        duration: 20,
         repeat: Infinity,
         ease: 'linear',
       },
@@ -74,12 +72,13 @@ export default function FloatingShape({
 
   const getShapeComponent = () => {
     const baseClasses = `${sizeClasses[size]} cursor-pointer transition-all duration-300`;
+    const customColor = color || '';
 
     switch (type) {
       case 'sphere':
         return (
           <div
-            className={`${baseClasses} rounded-full bg-gradient-to-br from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-blue-500/20 shadow-lg shadow-blue-500/10`}
+            className={`${baseClasses} rounded-full bg-gradient-to-br from-blue-500/30 to-purple-500/30 backdrop-blur-sm border border-blue-500/20 shadow-lg shadow-blue-500/10 ${customColor}`}
             style={{
               background: isGlitching
                 ? 'linear-gradient(45deg, #ff00ff, #00ffff, #ffff00)'
@@ -96,7 +95,7 @@ export default function FloatingShape({
             }}
           >
             <div
-              className="w-full h-full bg-gradient-to-br from-green-500/30 to-teal-500/30 backdrop-blur-sm border border-green-500/20 shadow-lg shadow-green-500/10"
+              className={`w-full h-full bg-gradient-to-br from-green-500/30 to-teal-500/30 backdrop-blur-sm border border-green-500/20 shadow-lg shadow-green-500/10 ${customColor}`}
               style={{
                 clipPath: 'polygon(50% 0%, 0% 100%, 100% 100%)',
                 background: isGlitching
@@ -110,7 +109,7 @@ export default function FloatingShape({
       default:
         return (
           <div
-            className={`${baseClasses} bg-gradient-to-br from-blue-500/20 to-indigo-500/20 backdrop-blur-sm border border-blue-500/20 shadow-lg shadow-blue-500/10 rounded-lg`}
+            className={`${baseClasses} bg-gradient-to-br from-blue-500/20 to-indigo-500/20 backdrop-blur-sm border border-blue-500/20 shadow-lg shadow-blue-500/10 rounded-lg ${customColor}`}
             style={{
               background: isGlitching
                 ? 'linear-gradient(45deg, #ff00ff, #00ffff, #ffff00)'
@@ -128,11 +127,6 @@ export default function FloatingShape({
   return (
     <motion.div
       className={`inline-block ${className}`}
-      style={{
-        x: position.x,
-        y: position.y,
-        z: position.z,
-      }}
       variants={shapeVariants}
       animate={['floating', 'rotating', ...(isGlitching ? ['glitch'] : [])]}
       whileHover={{

@@ -21,6 +21,9 @@ export interface TaglineProps {
   taglines?: string[];
   interval?: number;
   className?: string;
+  rotationSpeed?: number;
+  pauseOnHover?: boolean;
+  enableGlitch?: boolean;
 }
 
 export interface ButtonProps {
@@ -49,30 +52,45 @@ export interface AnalyticsEvent {
 }
 
 // API types
-export interface ChatApiRequest {
+export interface ChatRequest {
   message: string;
   mode: ChatMode;
-  conversation_id?: string;
+  conversation_id: string;
 }
 
-export interface ChatApiResponse {
+export interface ChatResponse {
   response: string;
-  conversation_id: string;
   mode: ChatMode;
+  tokens_used?: number;
+  conversation_id: string;
 }
 
 // Timezone clock types
 export interface TimezoneData {
-  city: string;
   timezone: string;
+  city: string;
   time: string;
+  offset: string;
 }
 
 // 3D element types for floating shapes
 export interface FloatingShapeProps {
-  type: 'cube' | 'sphere' | 'pyramid';
-  size: 'small' | 'medium' | 'large';
-  position: { x: number; y: number; z: number };
-  rotationSpeed?: number;
-  glitchChance?: number;
+  type?: 'cube' | 'sphere' | 'pyramid';
+  size?: 'sm' | 'md' | 'lg';
+  color?: string;
+  className?: string;
+}
+
+export interface MistralConfig {
+  apiKey: string;
+  model: string;
+  temperature: number;
+  maxTokens: number;
+}
+
+// Error types
+export interface ApiError {
+  error: string;
+  details?: string;
+  code?: number;
 }

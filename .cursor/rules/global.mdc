@@ -1,0 +1,10 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+refer the prd.md rules,
+stick to proposed elements,
+update prd.md after step is done,
+verify if the implementation respect prd.md,
+ask user for improvements.

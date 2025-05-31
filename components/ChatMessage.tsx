@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ChatMessage as ChatMessageType } from '@/types';
+import { cn } from '@/lib/utils';
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -19,15 +20,22 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     >
       <div className={`max-w-[80%] ${isUser ? 'ml-12' : 'mr-12'}`}>
         <div
-          className={`p-3 rounded-sm border text-sm ${
+          className={cn(
+            'p-4 rounded-xl text-sm',
             isUser
-              ? 'bg-primary text-primary-foreground ml-auto'
-              : 'bg-muted text-foreground'
-          }`}
+              ? {
+                  'border': true,
+                  'ml-auto': true,
+                  'bg-mode-normal-12 text-mode-normal border-mode-normal-12': message.mode === 'normal',
+                  'bg-mode-roast-12 text-mode-roast border-mode-roast-12': message.mode === 'roast',
+                  'bg-mode-stonks-12 text-mode-stonks border-mode-stonks-12': message.mode === 'stonks',
+                }
+              : 'bg-transparent text-foreground'
+          )}
         >
           {message.content}
         </div>
-        <div className="text-xs text-muted-foreground mt-1 px-1">
+        <div className="text-xs text-muted-foreground mt-2 px-2">
           {new Date(message.timestamp).toLocaleTimeString([], {
             hour: '2-digit',
             minute: '2-digit',

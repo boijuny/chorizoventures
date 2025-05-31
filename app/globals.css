@@ -4,81 +4,106 @@
 
 @layer base {
   :root {
-    /* Enhanced color system with OLED optimization */
+    /* Enhanced color system with Chorizo Ventures theme */
     --background: 0 0% 4%; /* #0a0a0a - True dark for OLED */
-    --foreground: 0 0% 98%;
+    --foreground: 30 8% 98%; /* Warm white with subtle paprika tint */
 
     --card: 0 0% 4%;
-    --card-foreground: 0 0% 98%;
+    --card-foreground: 30 8% 98%;
 
     --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: 30 8% 98%;
 
-    --primary: 214 100% 59%; /* #3b82f6 */
+    /* Chorizo Ventures primary - sophisticated paprika red */
+    --primary: 12 76% 58%; /* #d97543 - Elegant chorizo orange-red */
     --primary-foreground: 0 0% 4%;
+    --primary-4: 12 76% 58% / 0.04; /* Subtle hover background */
+    --primary-12: 12 76% 58% / 0.12; /* Refined border */
+    --primary-60: 12 76% 58% / 0.6; /* Text opacity */
 
     --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: 30 8% 98%;
 
     --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 65%;
+    --muted-foreground: 30 5% 65%; /* Subtle warm undertone */
 
     --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 30 8% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 214 100% 59%;
+    --border: 30 4% 15%; /* Subtle warm border */
+    --input: 30 4% 15%;
+    --ring: 12 76% 58%; /* Chorizo focus ring */
 
-    --radius: 0.25rem;
+    --radius: 0.5rem;
 
-    /* Mode-specific accents with elite color theory */
-    --accent-normal: 214 100% 59%;    /* Blue - Trust & reliability */
-    --accent-roast: 0 84% 60%;        /* Red - Urgency & attention */
-    --accent-calculator: 142 71% 45%; /* Green - Success & growth */
+    /* Chorizo Ventures Mode Colors - Enhanced Contrast & Distinction */
+    
+    /* NORMAL MODE - Professional blue (sophisticated, trustworthy) */
+    --mode-normal: 217 91% 60%; /* #3b82f6 - Professional blue */
+    --mode-normal-4: 217 91% 60% / 0.04;
+    --mode-normal-12: 217 91% 60% / 0.12;
+    --mode-normal-60: 217 91% 60% / 0.6;
+    
+    /* ROAST MODE - Fiery red (aggressive, intense) */
+    --mode-roast: 0 84% 60%; /* #ef4444 - Bold red */
+    --mode-roast-4: 0 84% 60% / 0.04;
+    --mode-roast-12: 0 84% 60% / 0.12;
+    --mode-roast-60: 0 84% 60% / 0.6;
+    
+    /* STONKS MODE - Success green (financial, growth) */
+    --mode-stonks: 142 76% 36%; /* #16a34a - Success green */
+    --mode-stonks-4: 142 76% 36% / 0.04;
+    --mode-stonks-12: 142 76% 36% / 0.12;
+    --mode-stonks-60: 142 76% 36% / 0.6;
 
-    /* Semantic color system */
-    --success: 142 71% 45%;
+    /* Semantic colors with chorizo theme */
+    --success: 35 91% 55%; /* Matches saffron/stonks */
     --success-foreground: 0 0% 98%;
-    --warning: 38 92% 50%;
+    --warning: 35 91% 55%; /* Saffron for warnings */
     --warning-foreground: 0 0% 4%;
-    --error: 0 84% 60%;
+    --error: 8 85% 62%; /* Matches roast red */
     --error-foreground: 0 0% 98%;
-    --info: 214 100% 59%;
+    --info: 18 70% 50%; /* Matches paprika/normal */
     --info-foreground: 0 0% 98%;
+
+    /* Elite chorizo accent colors */
+    --accent-paprika: 18 70% 50%; /* #cc5a33 - Deep paprika */
+    --accent-saffron: 35 91% 55%; /* #f2a234 - Golden saffron */
+    --accent-cumin: 25 45% 35%; /* #7a5c42 - Earthy cumin */
+    --accent-black-pepper: 0 0% 25%; /* #404040 - Sophisticated pepper */
   }
 
   .dark {
     --background: 0 0% 4%;
-    --foreground: 0 0% 98%;
+    --foreground: 30 8% 98%;
 
     --card: 0 0% 4%;
-    --card-foreground: 0 0% 98%;
+    --card-foreground: 30 8% 98%;
 
     --popover: 0 0% 4%;
-    --popover-foreground: 0 0% 98%;
+    --popover-foreground: 30 8% 98%;
 
-    --primary: 214 100% 59%;
+    --primary: 12 76% 58%;
     --primary-foreground: 0 0% 4%;
 
     --secondary: 0 0% 10%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary-foreground: 30 8% 98%;
 
     --muted: 0 0% 10%;
-    --muted-foreground: 0 0% 65%;
+    --muted-foreground: 30 5% 65%;
 
     --accent: 0 0% 10%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 30 8% 98%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 8 85% 62%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 214 100% 59%;
+    --border: 30 4% 15%;
+    --input: 30 4% 15%;
+    --ring: 12 76% 58%;
   }
 }
 
@@ -162,16 +187,16 @@
 
   /* Enhanced mode-specific styling */
   .mode-normal {
-    --mode-accent: var(--accent-normal);
-    @apply border-blue-500/20;
+    --mode-accent: var(--mode-normal);
+    @apply border-mode-normal-12;
   }
   .mode-roast {
-    --mode-accent: var(--accent-roast);
-    @apply border-red-500/20;
+    --mode-accent: var(--mode-roast);
+    @apply border-mode-roast-12;
   }
-  .mode-calculator {
-    --mode-accent: var(--accent-calculator);
-    @apply border-green-500/20;
+  .mode-stonks {
+    --mode-accent: var(--mode-stonks);
+    @apply border-mode-stonks-12;
   }
 
   /* Performance-optimized animations */

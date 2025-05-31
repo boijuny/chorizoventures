@@ -6,7 +6,8 @@ import { ChatMode, ChatMessage as ChatMessageType } from '@/types';
 import { generateId } from '@/utils/helpers';
 import ChatMessage from './ChatMessage';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 interface ChatInterfaceProps {
   currentMode: ChatMode;
@@ -17,7 +18,7 @@ interface ChatInterfaceProps {
 const MODE_CONFIG = {
   normal: { label: 'Normal' },
   roast: { label: 'Roast' },
-  calculator: { label: 'Calculator' },
+  stonks: { label: 'Stonks' },
 } as const;
 
 export default function ChatInterface({
@@ -88,37 +89,166 @@ export default function ChatInterface({
   const placeholderText = {
     normal: 'What startup idea needs our expert guidance?',
     roast: 'Drop your startup idea here for some brutal honesty...',
-    calculator: "Tell us your business model and we'll run the numbers...",
+    stonks: "Tell us your business model and we'll run the numbers...",
   };
 
-  return (
-    <div className={`w-full max-w-3xl mx-auto ${className}`}>
-      {/* Mode Selector */}
-      <div className="flex justify-center mb-8">
-        <Tabs
-          value={currentMode}
-          onValueChange={value => onModeChange(value as ChatMode)}
-        >
-          <TabsList>
-            {(Object.keys(MODE_CONFIG) as ChatMode[]).map(mode => (
-              <TabsTrigger key={mode} value={mode}>
+  const suggestionButtons = {
+    normal: [
+      'Search with ChatGPT',
+      'Talk with ChatGPT',
+      'Research',
+      'Sora',
+      'More',
+    ],
+    roast: [
+      'Roast my pitch deck',
+      'Why will this fail?',
+      'Market reality check',
+      'Honest feedback',
+      'More',
+    ],
+    stonks: [
+      'Calculate runway',
+      'Unit economics',
+      'Market size',
+      'Revenue model',
+      'More',
+    ],
+  };
+
+  const renderInputArea = () => (
+    <div className={`flex flex-col gap-0.5 ${hasStartedChat ? '' : 'mb-6'}`}>
+      <div className="self-start">
+        <Select value={currentMode} onValueChange={(value: ChatMode) => onModeChange(value)}>
+          <SelectTrigger
+            className={cn(
+              "h-auto p-1 rounded-md",
+              "bg-transparent border-none",
+              "text-xs font-medium",
+              {
+                'text-mode-normal-60 hover:text-mode-normal': currentMode === 'normal',
+                'text-mode-roast-60 hover:text-mode-roast': currentMode === 'roast',
+                'text-mode-stonks-60 hover:text-mode-stonks': currentMode === 'stonks',
+              },
+              "focus:ring-1 focus:ring-ring ring-offset-background focus:outline-none data-[state=open]:bg-accent/5"
+            )}
+            aria-label="Select chat mode"
+          >
+            <SelectValue placeholder="Mode" />
+          </SelectTrigger>
+          <SelectContent>
+            {(Object.keys(MODE_CONFIG) as ChatMode[]).map((mode) => (
+              <SelectItem key={mode} value={mode} className="text-xs">
                 {MODE_CONFIG[mode].label}
-              </TabsTrigger>
+              </SelectItem>
             ))}
-          </TabsList>
-        </Tabs>
+          </SelectContent>
+        </Select>
       </div>
 
-      {/* Messages */}
+      <div className="flex-grow relative">
+        <textarea
+          ref={inputRef}
+          value={inputValue}
+          onChange={e => setInputValue(e.target.value)}
+          onKeyPress={handleKeyPress}
+          placeholder={placeholderText[currentMode]}
+          className={cn(
+            'w-full p-4 pr-12 border rounded-xl resize-none min-h-[100px] text-base focus:outline-none focus:ring-1 transition-all duration-200 bg-secondary',
+            {
+              'border-mode-normal-12 focus:ring-mode-normal-60 focus:border-mode-normal-60':
+                currentMode === 'normal',
+              'border-mode-roast-12 focus:ring-mode-roast-60 focus:border-mode-roast-60':
+                currentMode === 'roast',
+              'border-mode-stonks-12 focus:ring-mode-stonks-60 focus:border-mode-stonks-60':
+                currentMode === 'stonks',
+            }
+          )}
+          disabled={isLoading}
+        />
+        <Button
+          onClick={sendMessage}
+          disabled={!inputValue.trim() || isLoading}
+          className={cn(
+            'absolute bottom-3 right-3 rounded-full w-8 h-8 p-0 transition-all duration-200',
+            {
+              'hover:bg-mode-normal-12 hover:text-mode-normal-60':
+                currentMode === 'normal',
+              'hover:bg-mode-roast-12 hover:text-mode-roast-60':
+                currentMode === 'roast',
+              'hover:bg-mode-stonks-12 hover:text-mode-stonks-60':
+                currentMode === 'stonks',
+            },
+            inputValue.trim() && {
+              'bg-mode-normal-12 text-mode-normal-60': currentMode === 'normal',
+              'bg-mode-roast-12 text-mode-roast-60': currentMode === 'roast',
+              'bg-mode-stonks-12 text-mode-stonks-60': currentMode === 'stonks',
+            }
+          )}
+          variant="ghost"
+          size="sm"
+        >
+          ↑
+        </Button>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className={`w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+      {!hasStartedChat && (
+        <div className="text-center mb-6">
+          <h1 className="text-4xl font-semibold mb-6">What can I help with?</h1>
+          {renderInputArea()}
+          <div className="flex flex-wrap gap-2 justify-center mt-6">
+            {suggestionButtons[currentMode].map(
+              (suggestion: string, index: number) => (
+                <Button
+                  key={index}
+                  variant="minimal"
+                  size="default"
+                  className={cn(
+                    'rounded-full border transition-all duration-200',
+                    {
+                      'border-mode-normal-12 hover:border-mode-normal-60 hover:bg-mode-normal-4 hover:text-mode-normal-60':
+                        currentMode === 'normal',
+                      'border-mode-roast-12 hover:border-mode-roast-60 hover:bg-mode-roast-4 hover:text-mode-roast-60':
+                        currentMode === 'roast',
+                      'border-mode-stonks-12 hover:border-mode-stonks-60 hover:bg-mode-stonks-4 hover:text-mode-stonks-60':
+                        currentMode === 'stonks',
+                    }
+                  )}
+                  onClick={() => {
+                    setInputValue(suggestion);
+                    inputRef.current?.focus();
+                  }}
+                >
+                  {suggestion}
+                </Button>
+              )
+            )}
+          </div>
+        </div>
+      )}
+
       {hasStartedChat && (
-        <div className="mb-6 space-y-4 max-h-96 overflow-y-auto">
+        <div className="mb-6 space-y-4 max-h-[60vh] overflow-y-auto">
           <AnimatePresence>
             {messages.map(message => (
               <ChatMessage key={message.id} message={message} />
             ))}
             {isLoading && (
               <div className="flex justify-start">
-                <div className="bg-muted p-3 rounded-sm">
+                <div
+                  className={cn(
+                    'bg-muted p-4 rounded-xl border transition-all duration-200',
+                    {
+                      'border-mode-normal-12': currentMode === 'normal',
+                      'border-mode-roast-12': currentMode === 'roast',
+                      'border-mode-stonks-12': currentMode === 'stonks',
+                    }
+                  )}
+                >
                   <div className="flex space-x-1">
                     <div className="w-2 h-2 bg-current rounded-full animate-bounce" />
                     <div
@@ -137,30 +267,16 @@ export default function ChatInterface({
         </div>
       )}
 
-      {/* Input Area */}
-      <div className="relative">
-        <textarea
-          ref={inputRef}
-          value={inputValue}
-          onChange={e => setInputValue(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder={placeholderText[currentMode]}
-          className="w-full p-4 border rounded-sm resize-none min-h-[100px] text-base focus:outline-none focus:ring-1 focus:ring-ring"
-          disabled={isLoading}
-        />
-        <Button
-          onClick={sendMessage}
-          disabled={!inputValue.trim() || isLoading}
-          className="absolute bottom-3 right-3"
-          size="sm"
-        >
-          Send
-        </Button>
-      </div>
+      {hasStartedChat && renderInputArea()}
 
-      {/* Mode indicator */}
       <div className="mt-2 text-center">
-        <span className="text-xs text-muted-foreground">
+        <span
+          className={cn('text-xs transition-all duration-200', {
+            'text-mode-normal-60': currentMode === 'normal',
+            'text-mode-roast-60': currentMode === 'roast',
+            'text-mode-stonks-60': currentMode === 'stonks',
+          })}
+        >
           Mode: <span className="capitalize">{currentMode}</span>
         </span>
       </div>

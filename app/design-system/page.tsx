@@ -24,7 +24,8 @@ export default function DesignSystemPage() {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-4">🎨 Design System</h1>
           <p className="text-lg text-muted-foreground">
-            OpenAI-inspired minimal components with geometric precision
+            OpenAI-inspired components with pill-shaped buttons and rounded
+            corners
           </p>
         </div>
       </header>
@@ -73,7 +74,7 @@ export default function DesignSystemPage() {
           {/* Buttons */}
           <section>
             <h2 className="text-2xl font-semibold mb-6">
-              Buttons (OpenAI Style)
+              Buttons (Minimalist Design)
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <Card>
@@ -94,6 +95,9 @@ export default function DesignSystemPage() {
                   </Button>
                   <Button variant="ghost" className="w-full">
                     Ghost
+                  </Button>
+                  <Button variant="minimal" className="w-full">
+                    Minimal
                   </Button>
                 </CardContent>
               </Card>
@@ -120,22 +124,23 @@ export default function DesignSystemPage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="text-sm font-medium text-muted-foreground">
-                    STATES
+                    AESTHETIC STATES
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <Button
                     onClick={handleLoadingDemo}
                     disabled={loading}
+                    variant="secondary"
                     className="w-full"
                   >
-                    {loading ? 'Loading...' : 'Click Me'}
+                    {loading ? 'Loading...' : 'Hover Me'}
                   </Button>
-                  <Button disabled className="w-full">
+                  <Button disabled variant="outline" className="w-full">
                     Disabled
                   </Button>
-                  <Button variant="outline" className="w-full">
-                    🚀 With Icon
+                  <Button variant="ghost" className="w-full">
+                    🎯 With Icon
                   </Button>
                 </CardContent>
               </Card>
@@ -143,25 +148,19 @@ export default function DesignSystemPage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="text-sm font-medium text-muted-foreground">
-                    LOADING
+                    MINIMALIST SET
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                    <span className="text-sm">Spinner</span>
-                  </div>
-                  <div className="flex gap-1">
-                    <div className="w-2 h-2 bg-current rounded-full animate-bounce" />
-                    <div
-                      className="w-2 h-2 bg-current rounded-full animate-bounce"
-                      style={{ animationDelay: '0.1s' }}
-                    />
-                    <div
-                      className="w-2 h-2 bg-current rounded-full animate-bounce"
-                      style={{ animationDelay: '0.2s' }}
-                    />
-                  </div>
+                  <Button variant="minimal" size="sm" className="w-full">
+                    Subtle Action
+                  </Button>
+                  <Button variant="ghost" size="sm" className="w-full">
+                    Ghost Action
+                  </Button>
+                  <Button variant="outline" size="sm" className="w-full">
+                    Outline Action
+                  </Button>
                 </CardContent>
               </Card>
             </div>
@@ -169,11 +168,13 @@ export default function DesignSystemPage() {
 
           {/* Mode Selector */}
           <section>
-            <h2 className="text-2xl font-semibold mb-6">Mode Selector</h2>
+            <h2 className="text-2xl font-semibold mb-6">
+              Chorizo Ventures Mode Selector
+            </h2>
             <Card>
               <CardHeader>
                 <CardTitle className="text-sm font-medium text-muted-foreground">
-                  CHAT MODES
+                  SATIRICAL CHAT MODES
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -181,11 +182,82 @@ export default function DesignSystemPage() {
                   <TabsList>
                     <TabsTrigger value="normal">Normal</TabsTrigger>
                     <TabsTrigger value="roast">Roast</TabsTrigger>
-                    <TabsTrigger value="calculator">Calculator</TabsTrigger>
+                    <TabsTrigger value="stonks">Stonks</TabsTrigger>
                   </TabsList>
                 </Tabs>
               </CardContent>
             </Card>
+          </section>
+
+          {/* Chorizo Ventures Color System */}
+          <section>
+            <h2 className="text-2xl font-semibold mb-6">
+              Mode Colors - Enhanced Contrast
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="w-full h-20 bg-mode-normal rounded-lg mb-4"></div>
+                  <h3 className="font-semibold mb-2">💼 Professional (Normal)</h3>
+                  <p className="text-xs font-mono mb-2">mode-normal (#3b82f6)</p>
+                  <p className="text-sm text-muted-foreground">
+                    Professional blue for trustworthy business advice with sophisticated authority
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="w-full h-20 bg-mode-roast rounded-lg mb-4"></div>
+                  <h3 className="font-semibold mb-2">🔥 Aggressive (Roast)</h3>
+                  <p className="text-xs font-mono mb-2">mode-roast (#ef4444)</p>
+                  <p className="text-sm text-muted-foreground">
+                    Bold red for intense feedback and aggressive honesty with no mercy
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="pt-6">
+                  <div className="w-full h-20 bg-mode-stonks rounded-lg mb-4"></div>
+                  <h3 className="font-semibold mb-2">💚 Financial (Stonks)</h3>
+                  <p className="text-xs font-mono mb-2">mode-stonks (#16a34a)</p>
+                  <p className="text-sm text-muted-foreground">
+                    Success green for financial analysis and growth-focused insights
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Color Usage Examples */}
+            <div className="mt-8 grid md:grid-cols-3 gap-4">
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Professional Blue Examples</h4>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 bg-mode-normal rounded-full"></div>
+                  <div className="w-8 h-8 bg-mode-normal-4 border border-mode-normal-12 rounded-full"></div>
+                  <div className="w-8 h-8 border border-mode-normal-12 rounded-full"></div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Aggressive Red Examples</h4>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 bg-mode-roast rounded-full"></div>
+                  <div className="w-8 h-8 bg-mode-roast-4 border border-mode-roast-12 rounded-full"></div>
+                  <div className="w-8 h-8 border border-mode-roast-12 rounded-full"></div>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Financial Green Examples</h4>
+                <div className="flex gap-2">
+                  <div className="w-8 h-8 bg-mode-stonks rounded-full"></div>
+                  <div className="w-8 h-8 bg-mode-stonks-4 border border-mode-stonks-12 rounded-full"></div>
+                  <div className="w-8 h-8 border border-mode-stonks-12 rounded-full"></div>
+                </div>
+              </div>
+            </div>
           </section>
 
           {/* Design Principles */}
@@ -195,31 +267,31 @@ export default function DesignSystemPage() {
               <Card>
                 <CardContent className="pt-6">
                   <h3 className="font-semibold mb-2">
-                    🔸 Minimal Border Radius
+                    🌶️ Chorizo Ventures Theme
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    2px (rounded-sm) for crisp, geometric edges instead of
-                    rounded blobs
+                    Sophisticated spice-inspired palette with satirical VC
+                    colors for elegant parody
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold mb-2">📏 Compact Spacing</h3>
+                  <h3 className="font-semibold mb-2">🎯 Mode-Based Colors</h3>
                   <p className="text-sm text-muted-foreground">
-                    Tight padding and gaps (4-8px) for professional, text-like
-                    appearance
+                    Each mode (Normal, Roast, Stonks) has dedicated colors that
+                    convey mood and purpose
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold mb-2">🎯 OpenAI Inspired</h3>
+                  <h3 className="font-semibold mb-2">⚡ Elegant Satire</h3>
                   <p className="text-sm text-muted-foreground">
-                    Clean, functional design prioritizing usability over visual
-                    flair
+                    Professional aesthetics with playful chorizo-themed accents
+                    for sophisticated humor
                   </p>
                 </CardContent>
               </Card>

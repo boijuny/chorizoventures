@@ -77,10 +77,13 @@ export const spacing = {
   96: '384px', // 24rem
 } as const;
 
-// Color System (Semantic naming with accessibility-first approach)
+// Color System (OpenAI-inspired with semantic naming)
 export const colors = {
-  // Core brand colors
+  // Core brand colors matching OpenAI's actual usage
   primary: {
+    4: 'rgba(59, 130, 246, 0.04)', // hover background
+    12: 'rgba(59, 130, 246, 0.12)', // border
+    60: 'rgba(59, 130, 246, 0.6)', // text
     50: '#eff6ff',
     100: '#dbeafe',
     200: '#bfdbfe',
@@ -142,7 +145,7 @@ export const colors = {
   },
 } as const;
 
-// Border Radius (Consistent scale)
+// Border Radius (OpenAI-style with pill buttons)
 export const borderRadius = {
   none: '0',
   xs: '2px',
@@ -152,7 +155,29 @@ export const borderRadius = {
   xl: '12px',
   '2xl': '16px',
   '3xl': '24px',
-  full: '9999px',
+  full: '9999px', // OpenAI uses fully rounded buttons
+} as const;
+
+// Button sizing to match OpenAI's actual implementation
+export const buttonSizing = {
+  sm: {
+    height: '32px',
+    padding: 'px-2.5',
+    text: 'text-sm',
+    gap: 'gap-1',
+  },
+  md: {
+    height: '40px', // OpenAI standard height
+    padding: 'px-3', // OpenAI standard padding
+    text: 'text-sm',
+    gap: 'gap-1.5',
+  },
+  lg: {
+    height: '48px',
+    padding: 'px-4',
+    text: 'text-base',
+    gap: 'gap-2',
+  },
 } as const;
 
 // Shadows (Layered shadow system)

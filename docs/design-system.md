@@ -2,173 +2,137 @@
 
 ## 🎯 Core Principles
 
-- **OpenAI-Inspired Minimalism:** Clean, functional design prioritizing usability over visual flair
-- **Geometric Precision:** Minimal border radius (2px), crisp edges, tight spacing
-- **Component Consistency:** All elements use the same design tokens and styling approach
-- **Accessibility First:** Proper focus states, ARIA attributes, and keyboard navigation
+- **Minimalist Aesthetic:** Subtle borders, refined opacity, and gentle interactions
+- **Visual Hierarchy:** Clear distinction between variants while maintaining consistency
+- **Smooth Interactions:** 200ms transitions with polished hover states and focus management
+- **Accessibility First:** Proper contrast ratios, focus states, and 40px touch targets
 
 ## 🏗 Architecture
 
 ### **Shadcn/ui Foundation**
-Built on Shadcn/ui components with custom styling:
-- **Button**: Compact sizing with minimal border radius
-- **Tabs**: Clean mode selector with geometric precision  
-- **Card**: Simple containers with consistent spacing
-- **Input**: Minimal styling with proper focus states
+Built on Shadcn/ui components with minimalist aesthetic refinements:
+- **Button**: Five elegant variants from solid to subtle with pill-shaped design
+- **Interactions**: Refined hover states with semantic color transitions
+- **Typography**: Balanced font weights and subtle opacity variations
+- **Spacing**: Comfortable proportions with visual breathing room
 
-### **Design Tokens**
+### **Button Variants**
 ```css
-/* Border Radius - Minimal approach */
---radius: 0.25rem; /* 4px base */
-rounded-sm: 2px    /* Primary for buttons, cards */
-rounded-md: 4px    /* Secondary elements */
+/* Minimalist Button System */
+default: bg-foreground text-background     /* Bold primary actions */
+secondary: border border-border/50         /* Subtle secondary actions */
+outline: border border-border/30           /* Minimal outlined actions */
+ghost: hover:bg-accent/20                  /* Invisible until hover */
+minimal: text-foreground/70                /* Ultra-subtle actions */
 
-/* Button Sizing - Compact & professional */
-sm: h-6 px-2 text-xs     /* 24px height */
-default: h-7 px-2.5      /* 28px height */  
-lg: h-8 px-3             /* 32px height */
-
-/* Spacing - Tight but touchable */
-gap-1: 4px               /* Internal spacing */
-p-3: 12px                /* Card padding */
-space-y-3: 12px          /* Vertical rhythm */
+/* Refined Transitions */
+transition-all duration-200                /* Smooth 200ms transitions */
+hover:border-border/60                     /* Progressive border opacity */
+focus-visible:ring-2                       /* Clear focus indication */
 ```
 
-## 🎨 Components
+## 🎨 Component Variants
 
-### **Buttons**
+### **Button Hierarchy**
 ```tsx
-<Button variant="default" size="sm">
-  Compact Action
+{/* Primary Action - Most prominent */}
+<Button variant="default">Save Changes</Button>
+
+{/* Secondary Action - Balanced prominence */}
+<Button variant="secondary">Cancel</Button>
+
+{/* Tertiary Action - Subtle presence */}
+<Button variant="outline">Learn More</Button>
+
+{/* Utility Action - Nearly invisible */}
+<Button variant="ghost">Settings</Button>
+
+{/* Minimal Action - Ultra-subtle */}
+<Button variant="minimal">Close</Button>
+```
+
+### **Suggestion Pills**
+```tsx
+<Button 
+  variant="minimal" 
+  className="rounded-full border border-border/20 hover:border-border/40"
+>
+  Search with ChatGPT
 </Button>
 ```
 
-**Variants:**
-- `default` - Primary actions (blue background)
-- `secondary` - Secondary actions (muted background)
-- `outline` - Subtle actions (border only)
-- `ghost` - Minimal actions (hover only)
-
-**Sizes:**
-- `sm` - 24px height, tight padding
-- `default` - 28px height, balanced padding
-- `lg` - 32px height, comfortable padding
-
-### **Mode Selector**
+### **Interactive States**
 ```tsx
-<Tabs value={mode} onValueChange={setMode}>
-  <TabsList>
-    <TabsTrigger value="normal">Normal</TabsTrigger>
-    <TabsTrigger value="roast">Roast</TabsTrigger>
-    <TabsTrigger value="calculator">Calculator</TabsTrigger>
-  </TabsList>
-</Tabs>
+{/* Normal state */}
+text-muted-foreground
+
+{/* Hover state */}
+hover:text-foreground hover:bg-accent/20
+
+{/* Disabled state */}
+disabled:opacity-60 disabled:pointer-events-none
+
+{/* Focus state */}
+focus-visible:ring-2 focus-visible:ring-ring
 ```
 
-### **Messages**
-```tsx
-<div className="p-3 rounded-sm border text-sm">
-  Message content
-</div>
-```
+## 🎯 Design Philosophy
 
-## 📐 Layout Patterns
+### **Minimalist Principles**
+1. **Progressive Disclosure**: Elements reveal themselves on interaction
+2. **Subtle Boundaries**: Borders use low opacity for gentle definition
+3. **Semantic Opacity**: Text opacity conveys importance hierarchy
+4. **Gentle Transitions**: All changes happen smoothly over 200ms
 
-### **Chat Interface**
-```tsx
-<div className="w-full max-w-3xl mx-auto">
-  {/* Mode selector */}
-  <Tabs />
-  
-  {/* Messages area */}
-  <div className="space-y-4 max-h-96 overflow-y-auto">
-    {messages.map(message => <ChatMessage />)}
-  </div>
-  
-  {/* Input area */}
-  <textarea className="rounded-sm" />
-</div>
-```
-
-### **Design System Page**
-```tsx
-<div className="max-w-4xl mx-auto space-y-12">
-  <section>
-    <h2>Section Title</h2>
-    <div className="grid gap-6">
-      <Card>
-        <CardHeader>
-          <CardTitle>Component Group</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {/* Examples */}
-        </CardContent>
-      </Card>
-    </div>
-  </section>
-</div>
-```
-
-## 🎯 Key Differences from Standard Shadcn/ui
-
-### **Border Radius**
-- **Standard**: `rounded-md` (6px) - too rounded
-- **Our approach**: `rounded-sm` (2px) - crisp, geometric
-
-### **Button Spacing**
-- **Standard**: `gap-2` (8px) - too loose
-- **Our approach**: `gap-1` (4px) - tight, professional
-
-### **Sizing Scale**
-- **Standard**: h-9, h-10, h-11 - too large
-- **Our approach**: h-6, h-7, h-8 - compact, text-like
+### **Visual Refinements**
+- **Border Opacity**: `/20`, `/30`, `/50`, `/60` for progressive prominence
+- **Text Opacity**: `/70` for subtle text, full opacity for emphasis
+- **Background Opacity**: `/10`, `/20`, `/30` for gentle hover states
+- **Focus Management**: Ring-based focus with proper offset
 
 ## ✅ Implementation Status
 
 ### **✅ Completed**
-- [x] Shadcn/ui Button with minimal styling
-- [x] Tabs component for mode selection
-- [x] Card components with consistent spacing
-- [x] ChatInterface with simplified layout
-- [x] ChatMessage with minimal bubbles
-- [x] Design system showcase page
-- [x] OpenAI-style border radius throughout
-- [x] Compact spacing and sizing
-- [x] Clean typography hierarchy
+- [x] Five-tier button variant system (default → minimal)
+- [x] Refined opacity system for borders and backgrounds
+- [x] 200ms transition timing for smooth interactions
+- [x] Progressive hover states with semantic meaning
+- [x] Pill-shaped suggestion buttons with subtle borders
+- [x] Minimalist send button with ghost styling
+- [x] Accessible focus management with ring indicators
+- [x] Consistent 40px height standard maintained
 
-### **🎨 Visual Examples**
-Visit `/design-system` to see:
-- Typography hierarchy
-- Button variants and sizes
-- Mode selector tabs
-- Color system
-- Design principles
-- Loading states
+### **🎨 Aesthetic Features**
+- ✨ Subtle border animations on hover
+- ✨ Progressive opacity system for visual hierarchy  
+- ✨ Ghost-style utility buttons
+- ✨ Refined color transitions
+- ✨ Minimal suggestion pill styling
 
 ## 📋 Usage Guidelines
 
 ### **Do's**
-✅ Use `rounded-sm` for most elements  
-✅ Keep buttons compact and text-like  
-✅ Maintain consistent spacing (4px, 8px, 12px)  
-✅ Use semantic color tokens  
-✅ Include proper focus states  
+✅ Use `variant="minimal"` for suggestion buttons and subtle actions
+✅ Apply progressive border opacity (`/20` → `/40` on hover)
+✅ Maintain 200ms transition timing across all interactions
+✅ Use semantic opacity to convey element importance
+✅ Keep focus rings visible for accessibility
 
 ### **Don'ts**
-❌ Don't use large border radius (`rounded-lg`, `rounded-xl`)  
-❌ Don't make buttons too prominent or "pillowy"  
-❌ Don't use excessive padding or spacing  
-❌ Don't override design tokens with hardcoded values  
-❌ Don't sacrifice accessibility for aesthetics  
+❌ Don't use harsh color transitions or abrupt state changes
+❌ Don't override the opacity system with hardcoded values
+❌ Don't make interactive elements too subtle to discover
+❌ Don't sacrifice accessibility for aesthetic minimalism
+❌ Don't mix transition timings (stick to 200ms standard)
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-1. **View Components**: Visit `/design-system` 
-2. **Use in Code**: Import from `@/components/ui/`
-3. **Follow Patterns**: Reference existing implementations
-4. **Test Responsively**: Ensure mobile compatibility
-5. **Maintain Consistency**: Use design tokens consistently
+1. **Browse Variants**: Visit `/design-system` to see all button styles
+2. **Choose Hierarchy**: Select variant based on action importance
+3. **Apply Consistently**: Use same variants for similar action types
+4. **Test Interactions**: Verify hover and focus states work smoothly
+5. **Maintain Minimalism**: Keep visual noise low, interactions smooth
 
 ---
 
-*This design system achieves the clean, professional aesthetic of OpenAI's interface while maintaining full accessibility and component flexibility.*
+*This minimalist design system prioritizes elegant subtlety and refined interactions while maintaining full accessibility and visual clarity.*

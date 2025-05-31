@@ -35,31 +35,12 @@ function checkRateLimit(ip: string): boolean {
 
 // AI Personality Prompts
 const PERSONALITY_PROMPTS = {
-  normal: `You are a satirical VC advisor for "Guez VC", a parody venture capital firm. Your responses should be:
-- Witty and slightly sarcastic but helpful
-- Use startup buzzwords ironically but genuinely assess ideas
-- Reference current tech trends with subtle humor
-- Professional yet playful tone
-- Give actual helpful business advice wrapped in satire
-- Keep responses under 150 words`,
-
-  roast: `You are a brutal VC roaster for "Guez VC". Your mission is to deliver savage but constructive criticism:
-- Be hilariously harsh but ultimately helpful
-- Point out obvious flaws with dark humor
-- Use startup clichés to mock bad ideas
-- Reference famous startup failures as warnings
-- End with one genuinely useful insight
-- Be brutally honest about market realities
-- Keep responses under 150 words`,
-
-  calculator: `You are a numbers-focused VC analyst for "Guez VC". Your responses should be:
-- Focus on metrics, revenue models, and unit economics
-- Ask specific questions about business model
-- Provide realistic projections and calculations
-- Point out financial assumptions that seem unrealistic
-- Use actual numbers and ratios when possible
-- Be analytical but maintain some dry humor
-- Keep responses under 150 words`,
+  normal:
+    'You are a helpful and professional assistant for Chorizo Ventures, a satirical VC firm. Provide thoughtful, balanced responses while maintaining a subtle sense of humor about startup culture.',
+  roast:
+    'You are a brutally honest but professional assistant for Chorizo Ventures. Provide sharp, satirical feedback about startup ideas with wit and humor, but keep it constructive and clever rather than mean-spirited.',
+  stonks:
+    'You are a financial analysis expert at Chorizo Ventures with a keen eye for numbers and market reality. Provide detailed financial insights with a touch of satirical commentary about startup economics and market dynamics.',
 };
 
 async function callMistralAPI(
@@ -84,7 +65,7 @@ async function callMistralAPI(
         { role: 'system', content: systemPrompt },
         { role: 'user', content: message },
       ],
-      temperature: mode === 'roast' ? 0.8 : mode === 'calculator' ? 0.3 : 0.6,
+      temperature: mode === 'roast' ? 0.8 : mode === 'stonks' ? 0.3 : 0.6,
       max_tokens: 200,
     }),
   });
@@ -132,24 +113,23 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(error, { status: 400 });
     }
 
+    const mode: ChatMode = body.mode;
+
     // Validate mode
-    const validModes: ChatMode[] = ['normal', 'roast', 'calculator'];
-    if (!validModes.includes(body.mode)) {
-      const error: ApiError = {
-        error: 'Invalid mode',
-        details: 'Mode must be one of: normal, roast, calculator',
-        code: 400,
-      };
-      return NextResponse.json(error, { status: 400 });
+    if (!mode || !['normal', 'roast', 'stonks'].includes(mode)) {
+      return NextResponse.json(
+        { error: 'Invalid mode. Must be normal, roast, or stonks.' },
+        { status: 400 }
+      );
     }
 
     // Call MistralAI
-    const aiResponse = await callMistralAPI(body.message, body.mode);
+    const aiResponse = await callMistralAPI(body.message, mode);
 
     // Prepare response
     const response: ChatResponse = {
       response: aiResponse,
-      mode: body.mode,
+      mode: mode,
       conversation_id: body.conversation_id,
       tokens_used: aiResponse.length, // Rough estimate
     };

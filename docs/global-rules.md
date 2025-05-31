@@ -25,47 +25,47 @@ components/
 ## 🎨 Design System Rules
 
 ### **OpenAI-Inspired Principles**
-1. **Geometric Precision**: 2px border radius (`rounded-sm`) throughout
-2. **Compact Spacing**: Minimal padding, professional proportions
+1. **Comfortable Rounded Corners**: 8px border radius (`rounded-lg`) for primary elements
+2. **Balanced Spacing**: Comfortable padding, professional proportions
 3. **Clean Typography**: Standard font weights, clear hierarchy
-4. **Functional Design**: Usability over visual flair
+4. **Functional Design**: Usability with approachable aesthetics
 
 ### **Component Standards**
 ```tsx
-// ✅ Correct: Minimal, professional
-<Button variant="default" size="sm" className="rounded-sm">
+// ✅ Correct: Comfortable, OpenAI-style
+<Button variant="default" size="default" className="rounded-lg">
   Action
 </Button>
 
-// ❌ Avoid: Oversized, decorative
-<Button size="lg" className="rounded-xl px-8 py-4">
-  Big Action
+// ❌ Avoid: Too minimal or too rounded
+<Button size="sm" className="rounded-sm">
+  Minimal Action
 </Button>
 ```
 
 ### **Spacing Scale**
-- **Internal gaps**: `gap-1` (4px)
-- **Component padding**: `p-3` (12px) 
+- **Internal gaps**: `gap-2` (8px)
+- **Component padding**: `p-4` (16px) 
 - **Section spacing**: `space-y-4` (16px)
 - **Layout margins**: `mb-6` (24px)
 
 ## 🧩 Component Guidelines
 
 ### **Button Design**
-- **Sizes**: `sm` (24px), `default` (28px), `lg` (32px)
+- **Sizes**: `sm` (32px), `default` (36px), `lg` (40px)
 - **Variants**: `default`, `secondary`, `outline`, `ghost`
-- **Radius**: Always `rounded-sm` (2px)
-- **Internal spacing**: `gap-1` between icon and text
+- **Radius**: Always `rounded-lg` (8px)
+- **Internal spacing**: `gap-2` between icon and text
 
 ### **Chat Interface**
 - **Max width**: `max-w-3xl` for optimal reading
 - **Message spacing**: `space-y-4` between messages
-- **Input height**: Auto-resize textarea
-- **Mode selector**: Persistent tabs at top
+- **Input height**: Auto-resize textarea with `rounded-lg`
+- **Mode selector**: Persistent tabs at top with `rounded-lg`
 
 ### **Cards & Containers**
-- **Border radius**: `rounded-sm` consistently
-- **Padding**: `p-3` for compact feel
+- **Border radius**: `rounded-lg` for cards, `rounded-xl` for message bubbles
+- **Padding**: `p-4` for comfortable feel
 - **Borders**: Use semantic border colors
 - **Shadows**: Minimal or none
 
@@ -85,8 +85,8 @@ components/
 - **Testing**: Manual testing across breakpoints
 
 ### **Design Consistency Checklist**
-- [ ] Uses `rounded-sm` for border radius
-- [ ] Follows spacing scale (4px, 8px, 12px, 16px, 24px)
+- [ ] Uses `rounded-lg` for primary elements, `rounded-xl` for containers
+- [ ] Follows spacing scale (8px, 12px, 16px, 24px)
 - [ ] Implements proper focus states
 - [ ] Works on mobile (responsive design)
 - [ ] Maintains readable contrast ratios

@@ -49,6 +49,31 @@ export const CHAT_MODES = {
   },
 } as const;
 
+// OpenAI design system constants
+export const OPENAI_DESIGN = {
+  BUTTON: {
+    HEIGHT: '40px', // Standard OpenAI button height
+    PADDING: 'px-3', // Standard OpenAI horizontal padding
+    BORDER_RADIUS: 'rounded-full', // Pill-shaped buttons
+    TEXT_SIZE: 'text-sm',
+    GAP: 'gap-1.5',
+  },
+  INPUT: {
+    BORDER_RADIUS: 'rounded-xl', // Large rounded corners for inputs
+    PADDING: 'px-4 py-3',
+    TEXT_SIZE: 'text-sm',
+  },
+  MESSAGE_BUBBLE: {
+    BORDER_RADIUS: 'rounded-xl', // Rounded message bubbles
+    PADDING: 'p-4',
+  },
+  COLORS: {
+    PRIMARY_HOVER: 'hover:bg-primary-4', // OpenAI's 4% opacity hover
+    PRIMARY_BORDER: 'border-primary-12', // OpenAI's 12% opacity border
+    PRIMARY_TEXT: 'text-primary-60', // OpenAI's 60% opacity text
+  },
+} as const;
+
 // Performance constants from PRD
 export const PERFORMANCE_TARGETS = {
   INITIAL_LOAD: 2000, // 2 seconds

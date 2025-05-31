@@ -21,12 +21,55 @@ export type VariantProps<T> = {
   loading?: boolean;
 };
 
-// Component size mappings following design tokens
+// Component size mappings following OpenAI design tokens
 export const sizeVariants = {
-  sm: 'text-xs px-2 py-0.5 h-6',
-  md: 'text-sm px-2.5 py-1 h-7',
-  lg: 'text-sm px-3 py-1.5 h-8',
-  xl: 'text-base px-4 py-2 h-9',
+  sm: 'text-sm px-2.5 h-8 rounded-full', // 32px height, pill-shaped
+  md: 'text-sm px-3 h-10 rounded-full', // 40px height (OpenAI standard), pill-shaped
+  lg: 'text-base px-4 h-12 rounded-full', // 48px height, pill-shaped
+  xl: 'text-base px-6 h-14 rounded-full', // 56px height, pill-shaped
+} as const;
+
+// Minimalist OpenAI-style button variants
+export const buttonVariants = {
+  primary: {
+    base: 'bg-foreground text-background hover:bg-foreground/90 transition-all duration-200',
+    disabled: 'bg-neutral-300 text-neutral-500 cursor-not-allowed',
+    loading: 'bg-foreground text-background cursor-wait',
+  },
+  secondary: {
+    base: 'bg-background text-foreground border border-border/50 hover:border-border hover:bg-accent/30 transition-all duration-200',
+    disabled:
+      'bg-background text-muted-foreground border border-border/30 cursor-not-allowed',
+    loading:
+      'bg-background text-foreground border border-border/50 cursor-wait',
+  },
+  outline: {
+    base: 'bg-transparent text-muted-foreground border border-border/30 hover:text-foreground hover:border-border/60 transition-all duration-200',
+    disabled:
+      'bg-transparent text-muted-foreground/50 border border-border/20 cursor-not-allowed',
+    loading:
+      'bg-transparent text-muted-foreground border border-border/30 cursor-wait',
+  },
+  ghost: {
+    base: 'bg-transparent text-muted-foreground hover:text-foreground hover:bg-accent/20 transition-all duration-200',
+    disabled: 'bg-transparent text-muted-foreground/50 cursor-not-allowed',
+    loading: 'bg-transparent text-muted-foreground cursor-wait',
+  },
+  minimal: {
+    base: 'bg-transparent text-foreground/70 hover:text-foreground hover:bg-accent/10 transition-all duration-300',
+    disabled: 'bg-transparent text-muted-foreground/40 cursor-not-allowed',
+    loading: 'bg-transparent text-foreground/70 cursor-wait',
+  },
+} as const;
+
+// OpenAI-style input variants
+export const inputVariants = {
+  default:
+    'rounded-xl border border-input bg-background px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-1 focus:ring-ring',
+  error:
+    'rounded-xl border border-error-500 bg-background px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-1 focus:ring-error-500',
+  success:
+    'rounded-xl border border-success-500 bg-background px-4 py-3 text-sm transition-colors focus:outline-none focus:ring-1 focus:ring-success-500',
 } as const;
 
 // Touch target utilities for accessibility
@@ -77,13 +120,13 @@ export function responsive(breakpoint: string, classes: string) {
 }
 
 // Mode-specific utilities
-export type AppMode = 'normal' | 'roast' | 'calculator';
+export type AppMode = 'normal' | 'roast' | 'stonks';
 
 export function getModeClasses(mode: AppMode) {
   const modeMap = {
-    normal: 'mode-normal text-blue-500 border-blue-500/20',
-    roast: 'mode-roast text-red-500 border-red-500/20',
-    calculator: 'mode-calculator text-green-500 border-green-500/20',
+    normal: 'mode-normal text-mode-normal-60 border-mode-normal-12',
+    roast: 'mode-roast text-mode-roast-60 border-mode-roast-12',
+    stonks: 'mode-stonks text-mode-stonks-60 border-mode-stonks-12',
   };
 
   return modeMap[mode];
@@ -91,9 +134,9 @@ export function getModeClasses(mode: AppMode) {
 
 export function getModeAccent(mode: AppMode) {
   const accentMap = {
-    normal: '#3b82f6',
-    roast: '#ef4444',
-    calculator: '#10b981',
+    normal: 'hsl(var(--mode-normal))',
+    roast: 'hsl(var(--mode-roast))',
+    stonks: 'hsl(var(--mode-stonks))',
   };
 
   return accentMap[mode];
@@ -205,4 +248,61 @@ export function usePrefersReducedMotion() {
   }, []);
 
   return prefersReducedMotion;
+}
+
+// OpenAI-style button utility function
+export function createOpenAIButton(options: {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'minimal';
+  size?: 'sm' | 'md' | 'lg';
+  disabled?: boolean;
+  loading?: boolean;
+}) {
+  const {
+    variant = 'secondary',
+    size = 'md',
+    disabled = false,
+    loading = false,
+  } = options;
+
+  const baseClasses =
+    'inline-flex items-center justify-center whitespace-nowrap rounded-full font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50';
+
+  const sizeClasses = {
+    sm: 'h-8 px-2.5 text-sm gap-1',
+    md: 'h-10 px-3 text-sm gap-1.5', // OpenAI standard
+    lg: 'h-12 px-4 text-base gap-2',
+  }[size];
+
+  const variantClasses = {
+    primary: 'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+    secondary:
+      'bg-transparent text-primary-60 border border-primary-12 hover:bg-primary-4',
+    outline:
+      'border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground',
+    ghost: 'hover:bg-accent hover:text-accent-foreground',
+    minimal: 'hover:bg-accent hover:text-accent-foreground',
+  }[variant];
+
+  const stateClasses = cn({
+    'cursor-not-allowed opacity-50': disabled,
+    'cursor-wait': loading,
+  });
+
+  return cn(baseClasses, sizeClasses, variantClasses, stateClasses);
+}
+
+// Utility to generate OpenAI-style component classes
+export function openAIClasses(
+  component: 'button' | 'input' | 'message',
+  variant?: string
+) {
+  const componentMap = {
+    button:
+      'h-10 px-3 rounded-full text-sm border border-primary-12 bg-transparent text-primary-60 hover:bg-primary-4 transition-colors',
+    input:
+      'rounded-xl border border-input bg-background px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-ring',
+    message: 'rounded-xl p-4 border text-sm',
+  };
+
+  return componentMap[component];
 }

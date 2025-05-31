@@ -26,6 +26,9 @@ module.exports = {
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
+          4: 'hsl(var(--primary-4))', // OpenAI hover background
+          12: 'hsl(var(--primary-12))', // OpenAI border
+          60: 'hsl(var(--primary-60))', // OpenAI text
           50: '#eff6ff',
           100: '#dbeafe',
           200: '#bfdbfe',
@@ -63,28 +66,28 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
         // Mode-specific colors
-        'accent-normal': '#3b82f6',
-        'accent-roast': '#ef4444',
-        'accent-calculator': '#10b981',
-        // Semantic colors
+        'accent-normal': '#3b82f6', // Professional blue
+        'accent-roast': '#ef4444',  // Bold red  
+        'accent-calculator': '#16a34a', // Success green
+        // Semantic colors with Chorizo Ventures theme
         success: {
           50: '#f0fdf4',
-          500: '#10b981',
+          500: 'hsl(var(--mode-stonks))', // Use saffron/stonks for success
           900: '#14532d',
         },
         warning: {
           50: '#fffbeb',
-          500: '#f59e0b',
+          500: 'hsl(var(--mode-stonks))', // Use saffron for warnings
           900: '#92400e',
         },
         error: {
           50: '#fef2f2',
-          500: '#ef4444',
+          500: 'hsl(var(--mode-roast))', // Use roast red for errors
           900: '#7f1d1d',
         },
         info: {
           50: '#eff6ff',
-          500: '#3b82f6',
+          500: 'hsl(var(--mode-normal))', // Use paprika/normal for info
           900: '#1e3a8a',
         },
         // Enhanced neutral scale (OLED optimized)
@@ -102,6 +105,27 @@ module.exports = {
           900: '#f5f5f5',
           1000: '#ffffff',
         },
+        // Chorizo Ventures mode-specific colors
+        'mode-normal': 'hsl(var(--mode-normal))',
+        'mode-normal-4': 'hsl(var(--mode-normal-4))',
+        'mode-normal-12': 'hsl(var(--mode-normal-12))',
+        'mode-normal-60': 'hsl(var(--mode-normal-60))',
+        
+        'mode-roast': 'hsl(var(--mode-roast))',
+        'mode-roast-4': 'hsl(var(--mode-roast-4))',
+        'mode-roast-12': 'hsl(var(--mode-roast-12))',
+        'mode-roast-60': 'hsl(var(--mode-roast-60))',
+        
+        'mode-stonks': 'hsl(var(--mode-stonks))',
+        'mode-stonks-4': 'hsl(var(--mode-stonks-4))',
+        'mode-stonks-12': 'hsl(var(--mode-stonks-12))',
+        'mode-stonks-60': 'hsl(var(--mode-stonks-60))',
+
+        // Elite chorizo accent colors
+        'accent-paprika': 'hsl(var(--accent-paprika))',
+        'accent-saffron': 'hsl(var(--accent-saffron))',
+        'accent-cumin': 'hsl(var(--accent-cumin))',
+        'accent-black-pepper': 'hsl(var(--accent-black-pepper))',
       },
       // Modular typography scale (Major Third: 1.250)
       fontSize: {
@@ -157,15 +181,15 @@ module.exports = {
         46: '184px',
         47: '188px',
       },
-      // Enhanced border radius scale - OpenAI minimal approach
+      // Enhanced border radius scale - OpenAI-style approach
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 1px)',
-        sm: 'calc(var(--radius) - 2px)',
-        xs: '1px',
-        xl: '8px',
-        '2xl': '12px',
-        '3xl': '16px',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+        xs: '2px',
+        xl: '12px',
+        '2xl': '16px',
+        '3xl': '24px',
       },
       // Professional shadow system
       boxShadow: {

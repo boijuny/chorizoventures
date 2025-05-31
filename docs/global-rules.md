@@ -1,111 +1,212 @@
-# 🌐 Global Rules
+# 🌍 Global Rules & Development Standards
 
-## 📋 Project Overview
+## 🎯 Project Vision
 
-- **Project:** Guez VC - Satirical VC Website
-- **Version:** 2.0 (Ultra-Minimalist)
-- **Status:** Shadcn/ui Implementation
-- **Environment:** `guezvc` conda environment
+**Guez VC** is a satirical AI chat application that balances sophisticated humor with professional UX design, featuring multiple AI personalities in a clean, OpenAI-inspired interface.
 
-## 🎯 Objectives
+## 🏗 Architecture Overview
 
-- Ultra-minimalist interface with corner-anchored layout
-- Professional satirical balance
-- Lighthouse score > 95, sub-2s load times
-- Progressive disclosure chat interface
+### **Simplified Stack**
+- **Framework**: Next.js 14 (App Router only)
+- **Components**: Shadcn/ui with minimal customization
+- **Styling**: Tailwind CSS with design tokens
+- **State**: React useState (no complex state management)
+- **TypeScript**: Strict mode, proper typing
 
-## 🛠 Tech Stack Standards
+### **Core Components**
+```
+app/page.tsx              # Main chat interface
+components/
+├── ui/                   # Shadcn/ui components (Button, Tabs, Card)
+├── ChatInterface.tsx     # Primary chat component
+└── ChatMessage.tsx       # Message display component
+```
 
-### ✅ Required Technologies
+## 🎨 Design System Rules
 
-- [ ] Shadcn/ui components (dark theme, #0a0a0a background)
-- [ ] TypeScript strict mode, path aliases (@/components, @/lib)
-- [ ] Next.js 14 App Router
-- [ ] Tailwind CSS with corner positioning utilities
-- [ ] Framer Motion (minimal animations only)
+### **OpenAI-Inspired Principles**
+1. **Geometric Precision**: 2px border radius (`rounded-sm`) throughout
+2. **Compact Spacing**: Minimal padding, professional proportions
+3. **Clean Typography**: Standard font weights, clear hierarchy
+4. **Functional Design**: Usability over visual flair
 
-### ✅ Performance Requirements
+### **Component Standards**
+```tsx
+// ✅ Correct: Minimal, professional
+<Button variant="default" size="sm" className="rounded-sm">
+  Action
+</Button>
 
+// ❌ Avoid: Oversized, decorative
+<Button size="lg" className="rounded-xl px-8 py-4">
+  Big Action
+</Button>
+```
+
+### **Spacing Scale**
+- **Internal gaps**: `gap-1` (4px)
+- **Component padding**: `p-3` (12px) 
+- **Section spacing**: `space-y-4` (16px)
+- **Layout margins**: `mb-6` (24px)
+
+## 🧩 Component Guidelines
+
+### **Button Design**
+- **Sizes**: `sm` (24px), `default` (28px), `lg` (32px)
+- **Variants**: `default`, `secondary`, `outline`, `ghost`
+- **Radius**: Always `rounded-sm` (2px)
+- **Internal spacing**: `gap-1` between icon and text
+
+### **Chat Interface**
+- **Max width**: `max-w-3xl` for optimal reading
+- **Message spacing**: `space-y-4` between messages
+- **Input height**: Auto-resize textarea
+- **Mode selector**: Persistent tabs at top
+
+### **Cards & Containers**
+- **Border radius**: `rounded-sm` consistently
+- **Padding**: `p-3` for compact feel
+- **Borders**: Use semantic border colors
+- **Shadows**: Minimal or none
+
+## 📋 Development Workflow
+
+### **Before Starting Any Task**
+1. ✅ Activate conda environment: `conda activate guezvc`
+2. ✅ Review relevant documentation files
+3. ✅ Check existing component patterns
+4. ✅ Verify build passes: `npm run build`
+
+### **Code Quality Standards**
+- **TypeScript**: No `any` types allowed
+- **Components**: Proper props interfaces
+- **Accessibility**: ARIA attributes where needed
+- **Performance**: Lazy loading for non-critical components
+- **Testing**: Manual testing across breakpoints
+
+### **Design Consistency Checklist**
+- [ ] Uses `rounded-sm` for border radius
+- [ ] Follows spacing scale (4px, 8px, 12px, 16px, 24px)
+- [ ] Implements proper focus states
+- [ ] Works on mobile (responsive design)
+- [ ] Maintains readable contrast ratios
+- [ ] Uses semantic HTML elements
+
+## 🚨 Critical Requirements
+
+### **Performance**
 - [ ] Page load < 2 seconds
-- [ ] Lighthouse score > 95
-- [ ] API response < 1 second
-- [ ] Respect prefers-reduced-motion
+- [ ] First Contentful Paint < 1 second
+- [ ] No layout shift (CLS = 0)
+- [ ] Efficient bundle size
 
-## 🎨 Design Standards
+### **Accessibility**
+- [ ] Keyboard navigation works
+- [ ] Screen reader compatible
+- [ ] Proper focus management
+- [ ] WCAG AA contrast compliance
 
-### ✅ Corner Layout Requirements
+### **Browser Support**
+- [ ] Chrome/Edge (latest 2 versions)
+- [ ] Safari (latest 2 versions)
+- [ ] Firefox (latest 2 versions)
+- [ ] Mobile browsers (iOS Safari, Chrome Android)
 
-- [ ] **Top-Left:** Logo + breathing taglines
-- [ ] **Top-Right:** 3D mesh with fallback
-- [ ] **Bottom-Left:** Timezone clocks (SF/NYC/LON/TKY)
-- [ ] **Bottom-Right:** Mode selector (Normal/Roast/Calculator)
-- [ ] **Center:** Progressive chat interface
+## 🎭 Brand Guidelines
 
-### ✅ Responsive Strategy
+### **Satirical Tone**
+- **Professional execution** with **humorous content**
+- **Corporate parody** without sacrificing usability
+- **Family-friendly** humor that's clever, not offensive
+- **Self-aware** about VC culture and AI trends
 
-- [ ] Desktop: Fixed corner positioning
-- [ ] Mobile: Grid layout (logo+mode / chat / timezone+mesh)
-- [ ] Touch targets ≥ 44px
+### **Content Strategy**
+- Keep UI text minimal and functional
+- Let AI responses carry the satirical tone
+- Maintain professional interface design
+- Balance humor with genuine utility
 
-### ✅ Mode-Specific Styling
+## 🔧 Technical Standards
 
-- [ ] Normal: Blue accents (#3b82f6)
-- [ ] Roast: Red accents (#ef4444)
-- [ ] Calculator: Green accents (#10b981)
+### **File Organization**
+```
+├── app/                   # Next.js pages and API routes
+├── components/           # Reusable UI components
+│   └── ui/              # Shadcn/ui components
+├── lib/                 # Utility functions
+├── types/               # TypeScript definitions
+└── docs/                # Documentation
+```
 
-## 🧪 Quality Standards
+### **Import Conventions**
+```tsx
+// External libraries first
+import React from 'react';
+import { motion } from 'framer-motion';
 
-### ✅ Component Requirements
+// Internal imports
+import { Button } from '@/components/ui/button';
+import { ChatMode } from '@/types';
+```
 
-- [ ] Each corner element self-contained
-- [ ] Mode switching preserves state
-- [ ] Accessibility compliant (WCAG AA)
-- [ ] Error boundaries and loading states
-- [ ] TypeScript interfaces for all props
+### **Component Structure**
+```tsx
+// 1. Interface definition
+interface ComponentProps {
+  // Properly typed props
+}
 
-### ✅ Testing Checklist
+// 2. Component implementation
+export default function Component({ prop }: ComponentProps) {
+  // 3. Local state and hooks
+  const [state, setState] = useState();
 
-- [ ] Corner positioning on all breakpoints
-- [ ] Mode switching functionality
-- [ ] Chat interface progressive disclosure
-- [ ] Performance impact measurement
-- [ ] Cross-browser compatibility
+  // 4. Event handlers
+  const handleEvent = () => {
+    // Handle event
+  };
 
-## 📝 Content Guidelines
+  // 5. Render
+  return (
+    <div className="rounded-sm p-3">
+      {/* Component JSX */}
+    </div>
+  );
+}
+```
 
-### ✅ Satirical Tone
+## ✅ Quality Assurance
 
-- [ ] Professional presentation with subtle VC parody
-- [ ] Breathing taglines: "Revolutionizing synergy", "Disrupting disruption"
-- [ ] Family-friendly content
-- [ ] Mode-appropriate AI personalities
+### **Pre-Commit Checklist**
+- [ ] `npm run build` passes
+- [ ] `npm run lint` has no errors
+- [ ] All TypeScript types are properly defined
+- [ ] Component works on mobile
+- [ ] Follows design system guidelines
+- [ ] No console errors in browser
 
-## 🔄 Development Workflow
+### **Manual Testing**
+- [ ] Desktop: Chrome, Safari, Firefox
+- [ ] Mobile: iOS Safari, Android Chrome
+- [ ] Keyboard navigation works
+- [ ] Screen reader announces properly
+- [ ] Performance is acceptable
 
-### ✅ Implementation Process
+## 🚀 Deployment Guidelines
 
-1. [ ] Install Shadcn/ui with dark theme
-2. [ ] Set up corner positioning utilities
-3. [ ] Build corner components independently
-4. [ ] Integrate chat interface with mode switching
-5. [ ] Test responsive transitions and performance
+### **Production Readiness**
+- [ ] All environment variables configured
+- [ ] Error boundaries implemented
+- [ ] Loading states handled gracefully
+- [ ] 404 and error pages exist
+- [ ] SEO meta tags included
 
-### ✅ Deployment Checklist
-
-- [ ] All corner elements positioned correctly
-- [ ] Mode switching works across components
-- [ ] Responsive layout tested on devices
-- [ ] Performance benchmarks met
-- [ ] Accessibility audit passed
-
-## 🚨 Critical Rules
-
-1. **Performance First:** No animations compromising 60fps
-2. **Corner Anchoring:** Fixed positioning creates focus hierarchy
-3. **Shadcn/ui Standards:** Extend, don't override defaults
-4. **Accessibility:** Never sacrifice for aesthetics
-5. **Satirical Balance:** Professional veneer with subtle comedy
+### **Performance Monitoring**
+- [ ] Core Web Vitals meet thresholds
+- [ ] Bundle size is optimized
+- [ ] Images are properly optimized
+- [ ] No memory leaks
 
 ---
 
-_Ultra-minimalist design that commands respect while delivering entertainment._
+**🎯 Remember**: This project prioritizes **clean, functional design** over flashy features. Every component should feel purposeful and professionally executed, even when the content is satirical.

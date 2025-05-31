@@ -1,42 +1,80 @@
-# 📋 Guez VC - Documentation Structure
+# 🚀 Guez VC - AI Chat Interface
 
-This directory contains all project documentation split into logical components for better maintainability.
+A satirical AI chat application with multiple modes, built with Next.js 14 and an OpenAI-inspired minimal design system.
 
-## 📂 Structure Overview
+## ✨ Features
+
+- **🎯 Three Chat Modes**: Normal, Roast, and Calculator
+- **🎨 OpenAI-Style Design**: Minimal border radius, compact spacing, geometric precision
+- **📱 Responsive**: Works seamlessly on desktop and mobile
+- **⚡ Fast**: Built with Next.js 14 App Router for optimal performance
+- **🎪 Design System**: Comprehensive component showcase at `/design-system`
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS + Shadcn/ui components
+- **Animations**: Framer Motion
+- **TypeScript**: Strict mode enabled
+- **Package Manager**: npm
+
+## 🚀 Quick Start
+
+1. **Install dependencies:**
+   ```bash
+   conda activate guezvc
+   npm install
+   ```
+
+2. **Start development server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **View the app:** `http://localhost:3001`
+
+4. **Explore design system:** `http://localhost:3001/design-system`
+
+## 📁 Project Structure
 
 ```
-docs/
-├── README.md                 # This index file
-├── global-rules.md           # Global project rules and checklists
-├── design-system.md          # Complete design system and UI guidelines
-├── technical-specs.md        # Technical requirements and architecture
-├── testing-strategy.md       # Testing approach and quality assurance
-├── deployment.md            # Launch criteria and deployment guidelines
-└── features/                # Individual feature specifications
-    ├── homepage.md           # Homepage with rotating taglines
-    ├── chat-interface.md     # AI chat system
-    ├── timezone-clocks.md    # Multi-timezone display
-    └── ai-personalities.md   # AI mode specifications
+├── app/                    # Next.js 14 App Router
+│   ├── page.tsx           # Main chat interface
+│   └── design-system/     # Component showcase
+├── components/
+│   ├── ui/                # Shadcn/ui components (Button, Tabs, Card)
+│   ├── ChatInterface.tsx  # Main chat component
+│   └── ChatMessage.tsx    # Message bubble component
+├── docs/                  # Documentation
+│   ├── design-system.md   # Design system guide
+│   └── technical-specs.md # Technical specifications
+└── types/                 # TypeScript definitions
 ```
 
-## 🎯 How to Use This Documentation
+## 🎨 Design System
 
-1. **Start with `global-rules.md`** - Contains project-wide rules and standards
-2. **Review feature files** in `features/` for specific implementation details
-3. **Check `design-system.md`** for UI/UX guidelines
-4. **Reference `technical-specs.md`** for architecture decisions
+The app uses an **OpenAI-inspired minimal design approach**:
 
-## 📋 Quick Links
+- **Geometric Precision**: 2px border radius (`rounded-sm`) 
+- **Compact Spacing**: Tight padding and gaps (4-8px)
+- **Professional Aesthetics**: Clean, functional over decorative
+- **Accessibility First**: Proper focus states and keyboard navigation
 
-- [Global Rules & Checklists](./global-rules.md)
-- [Design System](./design-system.md)
-- [Technical Specifications](./technical-specs.md)
-- [Feature: Homepage](./features/homepage.md)
-- [Feature: Chat Interface](./features/chat-interface.md)
-- [Feature: AI Personalities](./features/ai-personalities.md)
-- [Testing Strategy](./testing-strategy.md)
-- [Deployment Guide](./deployment.md)
+Visit `/design-system` to explore all components and patterns.
 
----
+## 📋 Available Scripts
 
-> **Note:** Always refer to `global-rules.md` when implementing any feature to ensure consistency across the project.
+- `npm run dev` - Start development server
+- `npm run build` - Build for production  
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint issues
+
+## 🎯 Design Philosophy
+
+This project demonstrates how to achieve **sophisticated satirical design** while maintaining:
+- Professional user experience
+- Accessibility standards (WCAG AA)
+- Performance optimization
+- Component consistency
+- Mobile responsiveness

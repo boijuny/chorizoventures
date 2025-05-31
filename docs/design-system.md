@@ -2,162 +2,173 @@
 
 ## 🎯 Core Principles
 
-- **Ultra-Minimalism:** #0a0a0a background, strategic negative space
-- **Corner Anchoring:** Fixed positioning with center focus
-- **Progressive Disclosure:** OpenAI-inspired clean interface
-- **Micro-Interactions:** Subtle animations (scale 1.0 → 1.02)
+- **OpenAI-Inspired Minimalism:** Clean, functional design prioritizing usability over visual flair
+- **Geometric Precision:** Minimal border radius (2px), crisp edges, tight spacing
+- **Component Consistency:** All elements use the same design tokens and styling approach
+- **Accessibility First:** Proper focus states, ARIA attributes, and keyboard navigation
 
-## 🎨 Colors
+## 🏗 Architecture
 
+### **Shadcn/ui Foundation**
+Built on Shadcn/ui components with custom styling:
+- **Button**: Compact sizing with minimal border radius
+- **Tabs**: Clean mode selector with geometric precision  
+- **Card**: Simple containers with consistent spacing
+- **Input**: Minimal styling with proper focus states
+
+### **Design Tokens**
 ```css
-/* Core Palette */
---background: #0a0a0a;
---foreground: #fafafa;
---border: #27272a;
---muted: #a1a1aa;
+/* Border Radius - Minimal approach */
+--radius: 0.25rem; /* 4px base */
+rounded-sm: 2px    /* Primary for buttons, cards */
+rounded-md: 4px    /* Secondary elements */
 
-/* Mode Accents */
---accent-normal: #3b82f6; /* Blue */
---accent-roast: #ef4444; /* Red */
---accent-calculator: #10b981; /* Green */
+/* Button Sizing - Compact & professional */
+sm: h-6 px-2 text-xs     /* 24px height */
+default: h-7 px-2.5      /* 28px height */  
+lg: h-8 px-3             /* 32px height */
+
+/* Spacing - Tight but touchable */
+gap-1: 4px               /* Internal spacing */
+p-3: 12px                /* Card padding */
+space-y-3: 12px          /* Vertical rhythm */
 ```
 
-## ✍️ Typography
+## 🎨 Components
 
-```css
---font-sans: 'Inter', ui-sans-serif, system-ui;
---text-sm: 0.875rem;
---text-base: 1rem;
---text-lg: 1.125rem;
---text-xl: 1.25rem;
+### **Buttons**
+```tsx
+<Button variant="default" size="sm">
+  Compact Action
+</Button>
 ```
 
-### Taglines Animation
+**Variants:**
+- `default` - Primary actions (blue background)
+- `secondary` - Secondary actions (muted background)
+- `outline` - Subtle actions (border only)
+- `ghost` - Minimal actions (hover only)
 
-```typescript
-const breathingAnimation = {
-  opacity: [0.7, 1, 0.7],
-  transition: { duration: 4, ease: 'easeInOut' },
-};
+**Sizes:**
+- `sm` - 24px height, tight padding
+- `default` - 28px height, balanced padding
+- `lg` - 32px height, comfortable padding
+
+### **Mode Selector**
+```tsx
+<Tabs value={mode} onValueChange={setMode}>
+  <TabsList>
+    <TabsTrigger value="normal">Normal</TabsTrigger>
+    <TabsTrigger value="roast">Roast</TabsTrigger>
+    <TabsTrigger value="calculator">Calculator</TabsTrigger>
+  </TabsList>
+</Tabs>
 ```
 
-## 📏 Layout
+### **Messages**
+```tsx
+<div className="p-3 rounded-sm border text-sm">
+  Message content
+</div>
+```
 
-### Chat Interface Structure
+## 📐 Layout Patterns
 
-```typescript
-// Persistent Layout Pattern
-interface ChatLayoutStructure {
-  // Always visible at top
-  modeSelector: 'persistent across all states';
+### **Chat Interface**
+```tsx
+<div className="w-full max-w-3xl mx-auto">
+  {/* Mode selector */}
+  <Tabs />
   
-  // Initial state
-  initialView: 'title → input';
+  {/* Messages area */}
+  <div className="space-y-4 max-h-96 overflow-y-auto">
+    {messages.map(message => <ChatMessage />)}
+  </div>
   
-  // Chat state  
-  chatView: 'messages → input';
-  
-  // Consistent styling
-  inputStyling: 'same across all states';
-}
+  {/* Input area */}
+  <textarea className="rounded-sm" />
+</div>
 ```
 
-### Component Hierarchy
-
-```css
-.chat-interface {
-  /* Persistent mode selector */
-  .mode-selector {
-    position: relative;
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  /* State-specific content */
-  .welcome-state {
-    text-align: center;
-    /* Title + Input */
-  }
-  
-  .chat-state {
-    /* Messages + Input */
-  }
-  
-  /* Consistent input styling */
-  .input-area {
-    background: var(--secondary-50);
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    min-height: 100px;
-    font-size: 1.125rem;
-  }
-}
+### **Design System Page**
+```tsx
+<div className="max-w-4xl mx-auto space-y-12">
+  <section>
+    <h2>Section Title</h2>
+    <div className="grid gap-6">
+      <Card>
+        <CardHeader>
+          <CardTitle>Component Group</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {/* Examples */}
+        </CardContent>
+      </Card>
+    </div>
+  </section>
+</div>
 ```
 
-## 🧩 Components
+## 🎯 Key Differences from Standard Shadcn/ui
 
-### Corner Elements
+### **Border Radius**
+- **Standard**: `rounded-md` (6px) - too rounded
+- **Our approach**: `rounded-sm` (2px) - crisp, geometric
 
-```typescript
-// Logo Corner (Top-Left)
-interface LogoCornerProps {
-  variant: 'full' | 'minimal';
-  showTaglines: boolean;
-}
+### **Button Spacing**
+- **Standard**: `gap-2` (8px) - too loose
+- **Our approach**: `gap-1` (4px) - tight, professional
 
-// Mode Corner (Bottom-Right)
-interface ModeCornerProps {
-  currentMode: 'normal' | 'roast' | 'calculator';
-  onModeChange: (mode: string) => void;
-}
+### **Sizing Scale**
+- **Standard**: h-9, h-10, h-11 - too large
+- **Our approach**: h-6, h-7, h-8 - compact, text-like
 
-// Timezone Corner (Bottom-Left)
-interface TimezoneCornerProps {
-  zones: Array<{ label: string; timezone: string }>;
-  format: '12h' | '24h';
-}
+## ✅ Implementation Status
 
-// Mesh Corner (Top-Right)
-interface MeshCornerProps {
-  meshData?: CustomMeshData;
-  fallback: 'geometric' | 'minimal';
-}
-```
+### **✅ Completed**
+- [x] Shadcn/ui Button with minimal styling
+- [x] Tabs component for mode selection
+- [x] Card components with consistent spacing
+- [x] ChatInterface with simplified layout
+- [x] ChatMessage with minimal bubbles
+- [x] Design system showcase page
+- [x] OpenAI-style border radius throughout
+- [x] Compact spacing and sizing
+- [x] Clean typography hierarchy
 
-### Shadcn/ui Extensions
+### **🎨 Visual Examples**
+Visit `/design-system` to see:
+- Typography hierarchy
+- Button variants and sizes
+- Mode selector tabs
+- Color system
+- Design principles
+- Loading states
 
-```typescript
-// Button with mode support
-interface ButtonProps {
-  variant: 'default' | 'outline' | 'ghost';
-  mode?: 'normal' | 'roast' | 'calculator';
-}
+## 📋 Usage Guidelines
 
-// Mode-specific styling
-.mode-normal { --accent-color: #3b82f6; }
-.mode-roast { --accent-color: #ef4444; }
-.mode-calculator { --accent-color: #10b981; }
-```
+### **Do's**
+✅ Use `rounded-sm` for most elements  
+✅ Keep buttons compact and text-like  
+✅ Maintain consistent spacing (4px, 8px, 12px)  
+✅ Use semantic color tokens  
+✅ Include proper focus states  
 
-## 🎬 Animations
+### **Don'ts**
+❌ Don't use large border radius (`rounded-lg`, `rounded-xl`)  
+❌ Don't make buttons too prominent or "pillowy"  
+❌ Don't use excessive padding or spacing  
+❌ Don't override design tokens with hardcoded values  
+❌ Don't sacrifice accessibility for aesthetics  
 
-```typescript
-// Micro-interactions only
-const hover = { scale: 1.02, transition: { duration: 0.2 } };
-const tap = { scale: 0.98, transition: { duration: 0.1 } };
+## 🚀 Getting Started
 
-// Respect reduced motion
-const useReducedMotion = () => {
-  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-};
-```
+1. **View Components**: Visit `/design-system` 
+2. **Use in Code**: Import from `@/components/ui/`
+3. **Follow Patterns**: Reference existing implementations
+4. **Test Responsively**: Ensure mobile compatibility
+5. **Maintain Consistency**: Use design tokens consistently
 
-## ✅ Implementation Checklist
+---
 
-- [ ] Install Shadcn/ui with dark theme
-- [ ] Configure corner positioning utilities
-- [ ] Implement mode-specific styling
-- [ ] Add breathing animation for taglines
-- [ ] Test responsive corner → grid transition
-- [ ] Verify WCAG AA contrast compliance
+*This design system achieves the clean, professional aesthetic of OpenAI's interface while maintaining full accessibility and component flexibility.*

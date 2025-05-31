@@ -2,58 +2,35 @@
 
 import { useState } from 'react';
 import { ChatMode } from '@/types';
-import { TimezoneCorner, ModeCorner, MeshCorner } from '@/components/corners';
 import ChatInterface from '@/components/ChatInterface';
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<ChatMode>('normal');
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="flex items-center justify-between px-8 py-6 border-b border-border/20">
-        <div className="flex items-center space-x-8">
-          {/* Logo and Navigation */}
-          <div className="flex items-center space-x-10">
-            <div className="text-xl font-bold text-foreground tracking-tight">
-              Guez VC
-            </div>
-            <nav className="hidden md:flex items-center space-x-6">
-              <span className="text-sm text-muted-foreground">
-                Disrupting disruption
-              </span>
-            </nav>
+      <header className="border-b border-border px-6 py-4">
+        <div className="flex items-center justify-between max-w-4xl mx-auto">
+          <div className="text-xl font-bold">Guez VC</div>
+          <div className="text-sm text-muted-foreground">
+            Disrupting disruption
           </div>
-        </div>
-
-        {/* Header Right - Mesh/Visual Element */}
-        <div className="flex items-center space-x-4">
-          <MeshCorner
-            interactive={true}
-            fallback="geometric"
-            className="relative top-0 right-0"
-          />
         </div>
       </header>
 
-      {/* Main Content Area */}
-      <main className="flex-1 flex items-center justify-center px-8 py-16">
-        <div className="w-full max-w-3xl">
-          <ChatInterface
-            currentMode={currentMode}
-            onModeChange={setCurrentMode}
-          />
-        </div>
+      {/* Main Content */}
+      <main className="flex-1 py-16 px-6">
+        <ChatInterface
+          currentMode={currentMode}
+          onModeChange={setCurrentMode}
+        />
       </main>
 
       {/* Footer */}
-      <footer className="flex items-center justify-between px-8 py-6 border-t border-border/20">
-        <div className="flex items-center space-x-6">
-          <TimezoneCorner format="24h" className="relative bottom-0 left-0" />
-        </div>
-
-        <div className="flex items-center space-x-4">
-          {/* Footer right side - could add other elements here */}
+      <footer className="border-t border-border px-6 py-4">
+        <div className="text-center text-xs text-muted-foreground max-w-4xl mx-auto">
+          © 2024 Guez VC - Professional parody
         </div>
       </footer>
     </div>

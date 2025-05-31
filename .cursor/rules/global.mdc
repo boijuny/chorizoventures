@@ -3,8 +3,68 @@ description:
 globs: 
 alwaysApply: true
 ---
-refer the prd.md rules,
-stick to proposed elements,
-update prd.md after step is done,
-verify if the implementation respect prd.md,
-ask user for improvements.
+# Global AI-Assisted Development Rules
+
+## 📋 Documentation & Planning
+
+- Always reference `docs/global-rules.md` before starting any task
+- Review relevant feature documentation in `docs/features/` for specific requirements
+- Follow the design system guidelines in `docs/design-system.md`
+- Check technical specifications in `docs/technical-specs.md` for implementation details
+- Update relevant documentation after completing each implementation step
+
+## 🔍 Code Analysis & Understanding
+
+- Use `codebase_search` to understand existing patterns before implementing new features
+- Read existing component implementations to maintain consistency
+- Analyze project structure to determine appropriate file placement
+- Check for similar functionality before creating new components
+
+## 🛠 Implementation Best Practices
+
+- Run all commands in the `guezvc` conda environment
+- Follow TypeScript strict mode requirements (no `any` types)
+- Implement proper error handling with typed exceptions
+- Add loading states and error boundaries for all components
+- Include accessibility attributes (ARIA) for interactive elements
+- Ensure mobile-responsive design for all new components
+
+## 🧪 Quality Assurance
+
+- Write unit tests for new functionality
+- Test responsive design on multiple breakpoints
+- Verify accessibility standards (WCAG AA compliance)
+- Check performance impact of new implementations
+- Validate cross-browser compatibility
+
+## 🎨 Design Consistency
+
+- Use defined color palette from design system
+- Implement proper spacing using design tokens
+- Follow typography scale and font guidelines
+- Add smooth animations respecting `prefers-reduced-motion`
+- Maintain sophisticated-satirical brand balance
+
+## 📝 Communication & Iteration
+
+- Explain implementation decisions and trade-offs
+- Ask clarifying questions when requirements are unclear
+- Suggest improvements and alternative approaches
+- Provide progress updates for complex implementations
+- Request user feedback before finalizing major changes
+
+## 🚨 Critical Requirements
+
+- Never compromise on user privacy or security
+- Maintain sub-2-second page load times
+- Ensure full functionality on mobile devices
+- Follow rate limiting guidelines for API calls
+- Keep satirical tone professional and family-friendly
+
+## 🔄 Workflow Integration
+
+- Use parallel tool calls for maximum efficiency
+- Gather complete context before making changes
+- Verify implementation against all relevant documentation
+- Update multiple related files simultaneously when needed
+- Follow the feature development process outlined in global rules

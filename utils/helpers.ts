@@ -73,4 +73,3 @@ export function getFromLocalStorage<T>(key: string, defaultValue: T): T {
   }
   return defaultValue;
 }
- 

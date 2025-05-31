@@ -39,4 +39,4 @@ docs/
 
 ---
 
-> **Note:** Always refer to `global-rules.md` when implementing any feature to ensure consistency across the project. 
+> **Note:** Always refer to `global-rules.md` when implementing any feature to ensure consistency across the project.

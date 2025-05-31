@@ -5,17 +5,20 @@
 **Feature ID:** F003  
 **Priority:** P1 (Important)  
 **Effort:** 1 story point  
-**Status:** ✅ Complete  
+**Status:** ✅ Complete
 
 ### Description
+
 Display real-time clocks for major VC hubs (San Francisco, New York, Paris) to reinforce the "global VC presence" parody and provide functional utility for users across different time zones.
 
 ## 🎯 User Stories
 
 ### Primary User Story
+
 **US-005:** As a user, I want to see global time zones so I can feel the "international VC presence" ✅
 
 **Acceptance Criteria:**
+
 - [x] Shows current time in SF, NYC, Paris
 - [x] Updates every minute
 - [x] Formatted consistently (12-hour format)
@@ -24,6 +27,7 @@ Display real-time clocks for major VC hubs (San Francisco, New York, Paris) to r
 ## 🎨 Design Specifications
 
 ### Layout & Positioning
+
 ```
 ┌─────────────────────────────────────────────┐
 │                   ...                       │
@@ -33,6 +37,7 @@ Display real-time clocks for major VC hubs (San Francisco, New York, Paris) to r
 ```
 
 ### Visual Elements
+
 - **Position:** Bottom of homepage/header area
 - **Typography:** Small, subtle text (`text-sm`)
 - **Color:** Muted text color for non-intrusive presence
@@ -42,6 +47,7 @@ Display real-time clocks for major VC hubs (San Francisco, New York, Paris) to r
 ## 🛠 Technical Implementation
 
 ### Component Structure
+
 ```typescript
 // components/shared/TimezoneClock.tsx
 interface TimezoneClockProps {
@@ -55,10 +61,10 @@ export default function TimezoneClock({
   timezone,
   city,
   format = '12h',
-  className
+  className,
 }: TimezoneClockProps) {
   const [currentTime, setCurrentTime] = useState<Date>(new Date());
-  
+
   // Update time every minute
   // Format time based on timezone
   // Handle edge cases and errors
@@ -66,6 +72,7 @@ export default function TimezoneClock({
 ```
 
 ### Multi-Clock Container
+
 ```typescript
 // components/shared/TimezoneClocks.tsx
 const TIMEZONE_CONFIG = [
@@ -91,6 +98,7 @@ export default function TimezoneClocks() {
 ```
 
 ### Time Formatting
+
 ```typescript
 // lib/utils/time.ts
 export function formatTimeForTimezone(
@@ -102,9 +110,9 @@ export function formatTimeForTimezone(
     timeZone: timezone,
     hour: 'numeric',
     minute: '2-digit',
-    hour12: format === '12h'
+    hour12: format === '12h',
   };
-  
+
   return new Intl.DateTimeFormat('en-US', options).format(date);
 }
 
@@ -112,9 +120,9 @@ export function getCityAbbreviation(city: string): string {
   const abbreviations: Record<string, string> = {
     'San Francisco': 'SF',
     'New York': 'NYC',
-    'Paris': 'PARIS'
+    Paris: 'PARIS',
   };
-  
+
   return abbreviations[city] || city.toUpperCase();
 }
 ```
@@ -122,25 +130,28 @@ export function getCityAbbreviation(city: string): string {
 ## 🔧 Core Features
 
 ### Real-Time Updates
+
 ```typescript
 // Update mechanism with cleanup
 useEffect(() => {
   const interval = setInterval(() => {
     setCurrentTime(new Date());
   }, 60000); // Update every minute
-  
+
   // Clean up interval on unmount
   return () => clearInterval(interval);
 }, []);
 ```
 
 #### ✅ Update Logic
+
 - [ ] Updates every 60 seconds
 - [ ] Handles timezone changes (DST)
 - [ ] Efficient re-rendering
 - [ ] Memory leak prevention
 
 ### Error Handling
+
 ```typescript
 // Graceful fallback for timezone errors
 const formatTime = (timezone: string) => {
@@ -154,22 +165,25 @@ const formatTime = (timezone: string) => {
 ```
 
 #### ✅ Error States
+
 - [ ] Invalid timezone handling
 - [ ] Browser compatibility fallbacks
 - [ ] Network-related issues
 - [ ] Graceful degradation
 
 ### Responsive Design
+
 ```typescript
 // Mobile-optimized layout
 const isMobile = useMediaQuery('(max-width: 640px)');
 
 const containerClass = isMobile
-  ? "flex flex-col space-y-2 text-center"
-  : "flex justify-center space-x-8";
+  ? 'flex flex-col space-y-2 text-center'
+  : 'flex justify-center space-x-8';
 ```
 
 #### ✅ Mobile Adaptations
+
 - [ ] Stack vertically on small screens
 - [ ] Maintain readability
 - [ ] Appropriate touch targets
@@ -178,6 +192,7 @@ const containerClass = isMobile
 ## 🧪 Testing Requirements
 
 ### Unit Tests
+
 ```typescript
 // __tests__/components/TimezoneClock.test.tsx
 describe('TimezoneClock', () => {
@@ -198,32 +213,33 @@ describe('TimezoneClock', () => {
         format="12h"
       />
     );
-    
+
     expect(screen.getByText(/NYC/)).toBeInTheDocument();
     expect(screen.getByText(/3:00 PM/)).toBeInTheDocument();
   });
 
   it('updates time every minute', () => {
     render(<TimezoneClock city="SF" timezone="America/Los_Angeles" />);
-    
+
     const initialTime = screen.getByTestId('clock-time').textContent;
-    
+
     // Advance time by 1 minute
     jest.advanceTimersByTime(60000);
-    
+
     const updatedTime = screen.getByTestId('clock-time').textContent;
     expect(updatedTime).not.toBe(initialTime);
   });
 
   it('handles invalid timezone gracefully', () => {
     render(<TimezoneClock city="TEST" timezone="Invalid/Timezone" />);
-    
+
     expect(screen.getByText('--:--')).toBeInTheDocument();
   });
 });
 ```
 
 ### Integration Tests
+
 - [ ] Test with different system locales
 - [ ] Verify DST transitions
 - [ ] Check browser compatibility
@@ -232,12 +248,14 @@ describe('TimezoneClock', () => {
 ## 📊 Performance Metrics
 
 ### Target Metrics
+
 - **Update Performance:** < 1ms per clock update
 - **Memory Usage:** < 1MB for component
 - **Bundle Size:** < 5KB
 - **Render Time:** < 10ms initial render
 
 ### Optimization Strategies
+
 ```typescript
 // Memoized formatting function
 const formattedTime = useMemo(() => {
@@ -251,12 +269,14 @@ const debouncedUpdate = useDeferredValue(currentTime);
 ## 🎭 Humor & Branding
 
 ### VC Parody Elements
+
 - **Global Presence:** Emphasizes "international reach"
 - **City Selection:** Major financial/tech hubs
 - **Professional Touch:** Subtle but functional
 - **Self-Aware:** Part of the "serious VC" aesthetic
 
 ### Content Strategy
+
 - Keep city names short and recognizable
 - Maintain professional appearance
 - Subtle contribution to overall parody
@@ -265,12 +285,14 @@ const debouncedUpdate = useDeferredValue(currentTime);
 ## 🔄 Future Enhancements
 
 ### Phase 2 Features
+
 - [ ] Additional cities (London, Tokyo, Sydney)
 - [ ] User-configurable timezone selection
 - [ ] Meeting time calculator
 - [ ] Time zone conversion tooltip
 
 ### Advanced Features
+
 - [ ] Market hours indicators
 - [ ] Holiday/weekend markers
 - [ ] Weather integration for each city
@@ -279,6 +301,7 @@ const debouncedUpdate = useDeferredValue(currentTime);
 ## 📱 Mobile Considerations
 
 ### Layout Adaptations
+
 ```css
 /* Mobile-first responsive design */
 .timezone-clocks {
@@ -291,6 +314,7 @@ const debouncedUpdate = useDeferredValue(currentTime);
 ```
 
 #### ✅ Mobile Features
+
 - [ ] Readable font size on small screens
 - [ ] Proper spacing between elements
 - [ ] No horizontal scroll required
@@ -299,6 +323,7 @@ const debouncedUpdate = useDeferredValue(currentTime);
 ## 📋 Implementation Checklist
 
 ### Development Phase
+
 - [x] Create TimezoneClock component
 - [x] Implement time formatting utilities
 - [x] Add real-time update mechanism
@@ -306,6 +331,7 @@ const debouncedUpdate = useDeferredValue(currentTime);
 - [x] Add error handling
 
 ### Testing Phase
+
 - [x] Unit tests for component logic
 - [x] Timezone calculation accuracy
 - [x] Update mechanism testing
@@ -313,6 +339,7 @@ const debouncedUpdate = useDeferredValue(currentTime);
 - [x] Cross-browser compatibility
 
 ### Integration Phase
+
 - [x] Homepage integration
 - [x] Design system compliance
 - [x] Performance optimization
@@ -324,18 +351,21 @@ const debouncedUpdate = useDeferredValue(currentTime);
 ## 🏆 Success Criteria
 
 ### User Experience
+
 - Immediate understanding of global presence
 - Subtle but valuable functional utility
 - Non-intrusive visual presence
 - Professional appearance
 
 ### Technical Quality
+
 - Accurate time display
 - Reliable updates
 - Minimal performance impact
 - Zero accessibility issues
 
 ### Business Impact
+
 - Reinforces "international VC" parody
 - Adds perceived professionalism
 - Functional value for global users
@@ -343,4 +373,4 @@ const debouncedUpdate = useDeferredValue(currentTime);
 
 ---
 
-> **🌍 Feature Goal:** Provide functional timezone utility while subtly reinforcing the "global VC presence" parody theme through professional presentation of international time zones. 
+> **🌍 Feature Goal:** Provide functional timezone utility while subtly reinforcing the "global VC presence" parody theme through professional presentation of international time zones.

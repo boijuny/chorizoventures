@@ -76,10 +76,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className={`${inter.variable} font-primary antialiased`}>
-        <div className="min-h-screen bg-bg-primary text-text-primary">
-          {children}
-        </div>
+      <body className={`${inter.variable} font-sans antialiased`}>
+        {children}
       </body>
     </html>
   );

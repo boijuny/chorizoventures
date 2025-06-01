@@ -4,24 +4,17 @@ import { useState } from 'react';
 import { ChatMode } from '@/types';
 import ChatInterface from '@/components/ChatInterface';
 import { TimezoneCorner } from '@/components/corners';
+import FixedTitle from '@/components/FixedTitle';
 
 export default function Home() {
-  const [currentMode, setCurrentMode] = useState<ChatMode>('normal');
+  const [currentMode, setCurrentMode] = useState<ChatMode>('roast');
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="border-b border-border px-4 sm:px-6 py-4">
-        <div className="flex items-center justify-between max-w-6xl mx-auto">
-          <div className="text-xl font-bold">Chorizo Ventures</div>
-          <div className="text-sm text-muted-foreground">
-            Disrupting disruption with spice
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <FixedTitle />
 
       {/* Main Content */}
-      <main className="flex-1 py-8">
+      <main className="flex-1 py-8 flex justify-center items-center">
         <ChatInterface
           currentMode={currentMode}
           onModeChange={setCurrentMode}

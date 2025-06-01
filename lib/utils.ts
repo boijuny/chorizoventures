@@ -14,13 +14,12 @@ export const cornerClasses = {
 } as const;
 
 // Mode-specific utilities
-export type ChatMode = 'normal' | 'roast' | 'calculator';
+export type ChatMode = 'roast' | 'stonks';
 
 export function getModeAccent(mode: ChatMode): string {
   const accents = {
-    normal: 'accent-normal',
     roast: 'accent-roast',
-    calculator: 'accent-calculator',
+    stonks: 'accent-stonks',
   };
   return accents[mode];
 }

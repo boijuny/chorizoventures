@@ -3,6 +3,9 @@
 import { motion } from 'framer-motion';
 import { ChatMessage as ChatMessageType } from '@/types';
 import { cn } from '@/lib/utils';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -33,7 +36,17 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               : 'bg-transparent text-foreground'
           )}
         >
-          {message.content}
+          <div className="prose dark:prose-invert prose-sm max-w-none">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={{
+                a: (props) => <a {...props} target="_blank" rel="noopener noreferrer" />
+              }}
+            >
+              {message.content}
+            </ReactMarkdown>
+          </div>
         </div>
         <div className="text-xs text-muted-foreground mt-2 px-2">
           {new Date(message.timestamp).toLocaleTimeString([], {

@@ -42,10 +42,10 @@
     /* Chorizo Ventures Mode Colors - Enhanced Contrast & Distinction */
     
     /* NORMAL MODE - Professional blue (sophisticated, trustworthy) */
-    --mode-normal: 217 91% 60%; /* #3b82f6 - Professional blue */
-    --mode-normal-4: 217 91% 60% / 0.04;
-    --mode-normal-12: 217 91% 60% / 0.12;
-    --mode-normal-60: 217 91% 60% / 0.6;
+    /* --mode-normal: 217 91% 60%; */ /* #3b82f6 - Professional blue */
+    /* --mode-normal-4: 217 91% 60% / 0.04; */
+    /* --mode-normal-12: 217 91% 60% / 0.12; */
+    /* --mode-normal-60: 217 91% 60% / 0.6; */
     
     /* ROAST MODE - Fiery red (aggressive, intense) */
     --mode-roast: 0 84% 60%; /* #ef4444 - Bold red */
@@ -186,10 +186,10 @@
   }
 
   /* Enhanced mode-specific styling */
-  .mode-normal {
-    --mode-accent: var(--mode-normal);
-    @apply border-mode-normal-12;
-  }
+  /* .mode-normal { */
+  /*   --mode-accent: var(--mode-normal); */
+  /*   @apply border-mode-normal-12; */
+  /* } */
   .mode-roast {
     --mode-accent: var(--mode-roast);
     @apply border-mode-roast-12;

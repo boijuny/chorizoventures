@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import FixedTitle from '@/components/FixedTitle';
 
 export default function DesignSystemPage() {
   const [loading, setLoading] = useState(false);
@@ -18,20 +19,11 @@ export default function DesignSystemPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border px-6 py-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-bold mb-4">🎨 Design System</h1>
-          <p className="text-lg text-muted-foreground">
-            OpenAI-inspired components with pill-shaped buttons and rounded
-            corners
-          </p>
-        </div>
-      </header>
+    <div className="min-h-screen bg-background flex flex-col">
+      <FixedTitle />
 
-      <main className="px-6 py-8">
-        <div className="max-w-4xl mx-auto space-y-12">
+      <main className="px-6 py-8 flex-1 flex flex-col items-center">
+        <div className="max-w-4xl w-full space-y-12">
           {/* Typography */}
           <section>
             <h2 className="text-2xl font-semibold mb-6">Typography</h2>
@@ -178,9 +170,8 @@ export default function DesignSystemPage() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <Tabs defaultValue="normal">
+                <Tabs defaultValue="roast">
                   <TabsList>
-                    <TabsTrigger value="normal">Normal</TabsTrigger>
                     <TabsTrigger value="roast">Roast</TabsTrigger>
                     <TabsTrigger value="stonks">Stonks</TabsTrigger>
                   </TabsList>
@@ -194,7 +185,7 @@ export default function DesignSystemPage() {
             <h2 className="text-2xl font-semibold mb-6">
               Mode Colors - Enhanced Contrast
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card>
                 <CardContent className="pt-6">
                   <div className="w-full h-20 bg-mode-normal rounded-lg mb-4"></div>
@@ -230,16 +221,7 @@ export default function DesignSystemPage() {
             </div>
 
             {/* Color Usage Examples */}
-            <div className="mt-8 grid md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <h4 className="text-sm font-medium">Professional Blue Examples</h4>
-                <div className="flex gap-2">
-                  <div className="w-8 h-8 bg-mode-normal rounded-full"></div>
-                  <div className="w-8 h-8 bg-mode-normal-4 border border-mode-normal-12 rounded-full"></div>
-                  <div className="w-8 h-8 border border-mode-normal-12 rounded-full"></div>
-                </div>
-              </div>
-
+            <div className="mt-8 grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <h4 className="text-sm font-medium">Aggressive Red Examples</h4>
                 <div className="flex gap-2">

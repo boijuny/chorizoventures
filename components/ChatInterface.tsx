@@ -16,7 +16,6 @@ interface ChatInterfaceProps {
 }
 
 const MODE_CONFIG = {
-  normal: { label: 'Normal' },
   roast: { label: 'Roast' },
   stonks: { label: 'Stonks' },
 } as const;
@@ -31,6 +30,46 @@ export default function ChatInterface({
   const [isLoading, setIsLoading] = useState(false);
   const [hasStartedChat, setHasStartedChat] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  const getWelcomeMessage = (mode: ChatMode): React.ReactNode => {
+    const commonClasses = "font-bold cursor-pointer transition-all duration-200 hover:brightness-125";
+    const roastSpan = (
+      <span
+        className={`${commonClasses} text-mode-roast`}
+        onClick={() => onModeChange('roast')}
+      >
+        roast
+      </span>
+    );
+    const stonksSpan = (
+      <span
+        className={`${commonClasses} text-mode-stonks`}
+        onClick={() => onModeChange('stonks')}
+      >
+        stonks
+      </span>
+    );
+
+    switch (mode) {
+      case 'roast':
+        return <>Built to {roastSpan} your idea</>;
+      case 'stonks':
+        return <>Built to {stonksSpan} your idea</>;
+      default:
+        return "Ready for some spicy advice?";
+    }
+  };
+
+  const getPlaceholderText = (mode: ChatMode): string => {
+    switch (mode) {
+      case 'roast':
+        return 'Prepare for a brutal reality check...';
+      case 'stonks':
+        return 'Even dumb ideas can be worth billions...';
+      default:
+        return 'Send a message...';
+    }
+  };
 
   const sendMessage = async () => {
     if (!inputValue.trim() || isLoading) return;
@@ -86,33 +125,16 @@ export default function ChatInterface({
     }
   };
 
-  const placeholderText = {
-    normal: 'What startup idea needs our expert guidance?',
-    roast: 'Drop your startup idea here for some brutal honesty...',
-    stonks: "Tell us your business model and we'll run the numbers...",
-  };
-
   const suggestionButtons = {
-    normal: [
-      'Search with ChatGPT',
-      'Talk with ChatGPT',
-      'Research',
-      'Sora',
-      'More',
-    ],
     roast: [
-      'Roast my pitch deck',
-      'Why will this fail?',
-      'Market reality check',
-      'Honest feedback',
-      'More',
+      'Blockchain-powered socks that mine crypto while you walk',
+      'Dating app that matches people based on their browser history',
+      'AI therapist for plants with imposter syndrome'
     ],
     stonks: [
-      'Calculate runway',
-      'Unit economics',
-      'Market size',
-      'Revenue model',
-      'More',
+      'NFTs of your future regrets (pre-mint discount)',
+      'Uber for introverts - drivers promise not to talk',
+      'Web5 protocol for transmitting dreams to the cloud (raising $80M seed)'
     ],
   };
 
@@ -126,7 +148,6 @@ export default function ChatInterface({
               "bg-transparent border-none",
               "text-xs font-medium",
               {
-                'text-mode-normal-60 hover:text-mode-normal': currentMode === 'normal',
                 'text-mode-roast-60 hover:text-mode-roast': currentMode === 'roast',
                 'text-mode-stonks-60 hover:text-mode-stonks': currentMode === 'stonks',
               },
@@ -152,12 +173,10 @@ export default function ChatInterface({
           value={inputValue}
           onChange={e => setInputValue(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder={placeholderText[currentMode]}
+          placeholder={getPlaceholderText(currentMode)}
           className={cn(
             'w-full p-4 pr-12 border rounded-xl resize-none min-h-[100px] text-base focus:outline-none focus:ring-1 transition-all duration-200 bg-secondary',
             {
-              'border-mode-normal-12 focus:ring-mode-normal-60 focus:border-mode-normal-60':
-                currentMode === 'normal',
               'border-mode-roast-12 focus:ring-mode-roast-60 focus:border-mode-roast-60':
                 currentMode === 'roast',
               'border-mode-stonks-12 focus:ring-mode-stonks-60 focus:border-mode-stonks-60':
@@ -172,15 +191,12 @@ export default function ChatInterface({
           className={cn(
             'absolute bottom-3 right-3 rounded-full w-8 h-8 p-0 transition-all duration-200',
             {
-              'hover:bg-mode-normal-12 hover:text-mode-normal-60':
-                currentMode === 'normal',
               'hover:bg-mode-roast-12 hover:text-mode-roast-60':
                 currentMode === 'roast',
               'hover:bg-mode-stonks-12 hover:text-mode-stonks-60':
                 currentMode === 'stonks',
             },
             inputValue.trim() && {
-              'bg-mode-normal-12 text-mode-normal-60': currentMode === 'normal',
               'bg-mode-roast-12 text-mode-roast-60': currentMode === 'roast',
               'bg-mode-stonks-12 text-mode-stonks-60': currentMode === 'stonks',
             }
@@ -198,7 +214,7 @@ export default function ChatInterface({
     <div className={`w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
       {!hasStartedChat && (
         <div className="text-center mb-6">
-          <h1 className="text-4xl font-semibold mb-6">What can I help with?</h1>
+          <h1 className="text-4xl font-semibold mb-6">{getWelcomeMessage(currentMode)}</h1>
           {renderInputArea()}
           <div className="flex flex-wrap gap-2 justify-center mt-6">
             {suggestionButtons[currentMode].map(
@@ -210,8 +226,6 @@ export default function ChatInterface({
                   className={cn(
                     'rounded-full border transition-all duration-200',
                     {
-                      'border-mode-normal-12 hover:border-mode-normal-60 hover:bg-mode-normal-4 hover:text-mode-normal-60':
-                        currentMode === 'normal',
                       'border-mode-roast-12 hover:border-mode-roast-60 hover:bg-mode-roast-4 hover:text-mode-roast-60':
                         currentMode === 'roast',
                       'border-mode-stonks-12 hover:border-mode-stonks-60 hover:bg-mode-stonks-4 hover:text-mode-stonks-60':
@@ -243,7 +257,6 @@ export default function ChatInterface({
                   className={cn(
                     'bg-muted p-4 rounded-xl border transition-all duration-200',
                     {
-                      'border-mode-normal-12': currentMode === 'normal',
                       'border-mode-roast-12': currentMode === 'roast',
                       'border-mode-stonks-12': currentMode === 'stonks',
                     }
@@ -268,18 +281,6 @@ export default function ChatInterface({
       )}
 
       {hasStartedChat && renderInputArea()}
-
-      <div className="mt-2 text-center">
-        <span
-          className={cn('text-xs transition-all duration-200', {
-            'text-mode-normal-60': currentMode === 'normal',
-            'text-mode-roast-60': currentMode === 'roast',
-            'text-mode-stonks-60': currentMode === 'stonks',
-          })}
-        >
-          Mode: <span className="capitalize">{currentMode}</span>
-        </span>
-      </div>
     </div>
   );
 }

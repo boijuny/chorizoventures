@@ -87,7 +87,7 @@ module.exports = {
         },
         info: {
           50: '#eff6ff',
-          500: 'hsl(var(--mode-normal))', // Use paprika/normal for info
+          500: 'hsl(var(--primary))', // Changed from mode-normal to primary
           900: '#1e3a8a',
         },
         // Enhanced neutral scale (OLED optimized)
@@ -106,11 +106,6 @@ module.exports = {
           1000: '#ffffff',
         },
         // Chorizo Ventures mode-specific colors
-        'mode-normal': 'hsl(var(--mode-normal))',
-        'mode-normal-4': 'hsl(var(--mode-normal-4))',
-        'mode-normal-12': 'hsl(var(--mode-normal-12))',
-        'mode-normal-60': 'hsl(var(--mode-normal-60))',
-        
         'mode-roast': 'hsl(var(--mode-roast))',
         'mode-roast-4': 'hsl(var(--mode-roast-4))',
         'mode-roast-12': 'hsl(var(--mode-roast-12))',
@@ -314,6 +309,7 @@ module.exports = {
   },
   plugins: [
     require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
     // Custom utilities plugin
     function({ addUtilities }) {
       addUtilities({
@@ -333,4 +329,6 @@ module.exports = {
       });
     },
   ],
+  // Safelist for dynamic classes (if any)
+  // safelist: [],
 };

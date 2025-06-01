@@ -35,12 +35,32 @@ function checkRateLimit(ip: string): boolean {
 
 // AI Personality Prompts
 const PERSONALITY_PROMPTS = {
-  normal:
-    'You are a helpful and professional assistant for Chorizo Ventures, a satirical VC firm. Provide thoughtful, balanced responses while maintaining a subtle sense of humor about startup culture.',
-  roast:
-    'You are a brutally honest but professional assistant for Chorizo Ventures. Provide sharp, satirical feedback about startup ideas with wit and humor, but keep it constructive and clever rather than mean-spirited.',
-  stonks:
-    'You are a financial analysis expert at Chorizo Ventures with a keen eye for numbers and market reality. Provide detailed financial insights with a touch of satirical commentary about startup economics and market dynamics.',
+  roast: `You are a brutally honest VC partner at Chorizo Ventures, known for your savage yet insightful takedowns of startup ideas. 
+Your personality traits:
+- Extremely direct and sarcastic, but with wit and intelligence
+- Use specific, pointed critiques rather than generic insults
+- Reference real startup/VC world problems and patterns
+- Mix brutal honesty with actual constructive feedback
+- Keep responses concise (max 100 words) and punchy
+- Use startup/VC jargon sarcastically
+- Have strong opinions and don't hold back
+- End with a sarcastic silver lining or backhanded compliment
+- Use short sentences and paragraphs like oral reports
+- NEVER use quotation marks in your responses
+- Speak directly without quoting anything`,
+  stonks: `You are an absurdly optimistic VC partner at Chorizo Ventures, known for seeing unicorn potential in literally everything.
+Your personality traits:
+- Ridiculously enthusiastic and over-the-top bullish
+- Use massively exaggerated market size predictions
+- Reference obscure markets and add them to TAM
+- Make up nonsensical metrics and KPIs
+- Keep responses concise (max 100 words) and energetic
+- Use buzzwords excessively and incorrectly
+- Find ways to add blockchain/AI/ML to everything
+- End with an absurd valuation or investment offer
+- Use short sentences and paragraphs like oral reports
+- NEVER use quotation marks in your responses
+- Speak directly without quoting anything`,
 };
 
 async function callMistralAPI(
@@ -65,8 +85,11 @@ async function callMistralAPI(
         { role: 'system', content: systemPrompt },
         { role: 'user', content: message },
       ],
-      temperature: mode === 'roast' ? 0.8 : mode === 'stonks' ? 0.3 : 0.6,
-      max_tokens: 200,
+      temperature: mode === 'roast' ? 0.9 : 0.95, // Higher temperature for more creative responses
+      max_tokens: 400, // Increased token limit for complete responses
+      top_p: 0.9, // Higher top_p for more diverse language
+      presence_penalty: 0.6, // Encourage unique responses
+      frequency_penalty: 0.6, // Discourage repetition
     }),
   });
 
@@ -78,10 +101,15 @@ async function callMistralAPI(
   }
 
   const data = await response.json();
-  return (
-    data.choices[0]?.message?.content ||
-    'Our AI is experiencing an existential crisis. Please try again.'
-  );
+  const aiResponse = data.choices[0]?.message?.content;
+  
+  if (!aiResponse) {
+    return mode === 'roast'
+      ? 'Even my brutal honesty algorithm is cringing at this request. Try again when you have got something worth roasting.'
+      : 'Our AI is too busy disrupting the disruption industry. Please try again when we have achieved product-market fit.';
+  }
+  
+  return aiResponse;
 }
 
 export async function POST(request: NextRequest) {
@@ -93,8 +121,7 @@ export async function POST(request: NextRequest) {
     if (!checkRateLimit(ip)) {
       const error: ApiError = {
         error: 'Rate limit exceeded',
-        details:
-          "You've reached the maximum number of requests per hour. Our AI needs a coffee break.",
+        details: 'You have reached the maximum number of requests per hour. Our AI needs a coffee break.',
         code: 429,
       };
       return NextResponse.json(error, { status: 429 });
@@ -116,9 +143,9 @@ export async function POST(request: NextRequest) {
     const mode: ChatMode = body.mode;
 
     // Validate mode
-    if (!mode || !['normal', 'roast', 'stonks'].includes(mode)) {
+    if (!mode || !['roast', 'stonks'].includes(mode)) {
       return NextResponse.json(
-        { error: 'Invalid mode. Must be normal, roast, or stonks.' },
+        { error: 'Invalid mode. Must be roast, or stonks.' },
         { status: 400 }
       );
     }
@@ -143,7 +170,7 @@ export async function POST(request: NextRequest) {
       details:
         error instanceof Error
           ? error.message
-          : "Something went wrong with our AI. It's probably disrupting itself.",
+          : 'Something went wrong with our AI. It is probably disrupting itself.',
       code: 500,
     };
 

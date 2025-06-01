@@ -41,8 +41,9 @@
   "approach": "Copy-paste components",
   "theming": "CSS Variables + Dark mode",
   "customization": "Tailwind CSS classes",
-  "variants": "Mode-specific styling",
-  "accessibility": "ARIA compliant"
+  "variants": "Mode-specific styling (Roast/Stonks)",
+  "accessibility": "ARIA compliant",
+  "layout": "Fixed title + Centered content"
 }
 ```
 
@@ -92,21 +93,22 @@ guezvc/
 │   │   └── chat/                 # Chat endpoint
 │   ├── globals.css               # Global styles + Shadcn/ui
 │   ├── layout.tsx                # Root layout
-│   └── page.tsx                  # Homepage (Corner layout)
+│   └── page.tsx                  # Homepage (Fixed title + Centered)
 ├── components/                   # React components
 │   ├── ui/                       # Shadcn/ui components
 │   │   ├── button.tsx            # Base button component
 │   │   ├── card.tsx              # Card component
 │   │   ├── input.tsx             # Input component
 │   │   └── ...                   # Other Shadcn/ui components
-│   ├── corners/                  # Corner-specific components
-│   │   ├── logo-corner.tsx       # Top-left logo & taglines
-│   │   ├── mesh-corner.tsx       # Top-right 3D mesh
-│   │   ├── timezone-corner.tsx   # Bottom-left timezone
-│   │   └── mode-corner.tsx       # Bottom-right mode selector
+│   ├── layout/                   # Layout components
+│   │   ├── fixed-title.tsx       # Fixed "Chorizo Ventures" title
+│   │   └── centered-content.tsx  # Centered content wrapper
 │   ├── chat/                     # Chat interface components
 │   │   ├── chat-interface.tsx    # Main chat component
 │   │   ├── message.tsx           # Message component
+│   │   ├── mode-selector.tsx     # Roast/Stonks mode selector
+│   │   ├── welcome-message.tsx   # Interactive welcome message
+│   │   ├── suggestion-pills.tsx  # Satirical suggestion buttons
 │   │   └── input.tsx             # Chat input
 │   └── shared/                   # Shared components
 ├── lib/                          # Utility libraries
@@ -218,9 +220,8 @@ module.exports = {
           foreground: 'hsl(var(--card-foreground))',
         },
         // Mode-specific colors
-        'accent-normal': '#3b82f6',
         'accent-roast': '#ef4444',
-        'accent-calculator': '#10b981',
+        'accent-stonks': '#10b981',
       },
       borderRadius: {
         lg: 'var(--radius)',

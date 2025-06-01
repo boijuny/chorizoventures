@@ -2,7 +2,7 @@
 
 ## 🎯 Project Vision
 
-**Guez VC** is a satirical AI chat application that balances sophisticated humor with professional UX design, featuring multiple AI personalities in a clean, OpenAI-inspired interface.
+**Guez VC** is a satirical AI chat application that balances sophisticated humor with professional UX design, featuring two distinct AI personalities (Roast and Stonks) in a clean, modern interface with a fixed title and centered content layout.
 
 ## 🏗 Architecture Overview
 
@@ -18,56 +18,79 @@
 app/page.tsx              # Main chat interface
 components/
 ├── ui/                   # Shadcn/ui components (Button, Tabs, Card)
-├── ChatInterface.tsx     # Primary chat component
-└── ChatMessage.tsx       # Message display component
+├── layout/              # Layout components
+│   ├── FixedTitle.tsx   # Fixed "Chorizo Ventures" title
+│   └── CenteredContent.tsx # Centered content wrapper
+├── chat/               # Chat components
+│   ├── ChatInterface.tsx # Primary chat component
+│   ├── ChatMessage.tsx  # Message display component
+│   ├── ModeSelector.tsx # Roast/Stonks mode selector
+│   ├── WelcomeMessage.tsx # Interactive welcome message
+│   └── SuggestionPills.tsx # Satirical suggestion buttons
 ```
 
 ## 🎨 Design System Rules
 
-### **OpenAI-Inspired Principles**
-1. **Comfortable Rounded Corners**: 8px border radius (`rounded-lg`) for primary elements
-2. **Balanced Spacing**: Comfortable padding, professional proportions
-3. **Clean Typography**: Standard font weights, clear hierarchy
-4. **Functional Design**: Usability with approachable aesthetics
+### **Layout Principles**
+1. **Fixed Title**: "Chorizo Ventures" positioned on left side
+2. **Centered Content**: Core components vertically centered
+3. **Interactive Elements**: Mode words and suggestion pills
+4. **Mode-Specific Colors**: Red for Roast, Green for Stonks
 
 ### **Component Standards**
 ```tsx
-// ✅ Correct: Comfortable, OpenAI-style
-<Button variant="default" size="default" className="rounded-lg">
-  Action
+// ✅ Correct: Mode-specific styling
+<Button 
+  variant="ghost"
+  className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
+>
+  Roast
 </Button>
 
-// ❌ Avoid: Too minimal or too rounded
-<Button size="sm" className="rounded-sm">
-  Minimal Action
+// ❌ Avoid: Mixing mode colors or using non-mode colors
+<Button className="text-blue-500">
+  Action
 </Button>
 ```
 
 ### **Spacing Scale**
-- **Internal gaps**: `gap-2` (8px)
+- **Title spacing**: Fixed position with proper margins
+- **Content centering**: Flexbox with min-height: 100vh
 - **Component padding**: `p-4` (16px) 
 - **Section spacing**: `space-y-4` (16px)
 - **Layout margins**: `mb-6` (24px)
 
 ## 🧩 Component Guidelines
 
-### **Button Design**
-- **Sizes**: `sm` (32px), `default` (36px), `lg` (40px)
-- **Variants**: `default`, `secondary`, `outline`, `ghost`
-- **Radius**: Always `rounded-lg` (8px)
-- **Internal spacing**: `gap-2` between icon and text
+### **Fixed Title**
+- **Position**: Fixed on left side
+- **Font**: Inter, bold weight
+- **Color**: Text foreground
+- **Spacing**: Proper margin from content
+
+### **Welcome Message**
+- **Format**: "Built to <mode> your idea"
+- **Mode Words**: Interactive with mode-specific colors
+- **Animations**: Smooth hover transitions
+- **Spacing**: Comfortable vertical margin
+
+### **Mode Selector**
+- **Variants**: Roast (Red) and Stonks (Green)
+- **Styling**: Ghost variant with mode colors
+- **Hover**: Color intensity increase with background
+- **Position**: Top of chat interface
+
+### **Suggestion Pills**
+- **Style**: Minimal variant with rounded full
+- **Content**: Satirical startup ideas
+- **Hover**: Border opacity increase
+- **Layout**: Horizontal scroll with proper spacing
 
 ### **Chat Interface**
 - **Max width**: `max-w-3xl` for optimal reading
 - **Message spacing**: `space-y-4` between messages
-- **Input height**: Auto-resize textarea with `rounded-lg`
-- **Mode selector**: Persistent tabs at top with `rounded-lg`
-
-### **Cards & Containers**
-- **Border radius**: `rounded-lg` for cards, `rounded-xl` for message bubbles
-- **Padding**: `p-4` for comfortable feel
-- **Borders**: Use semantic border colors
-- **Shadows**: Minimal or none
+- **Input height**: Auto-resize textarea
+- **Mode colors**: Applied to relevant elements
 
 ## 📋 Development Workflow
 
@@ -85,10 +108,10 @@ components/
 - **Testing**: Manual testing across breakpoints
 
 ### **Design Consistency Checklist**
-- [ ] Uses `rounded-lg` for primary elements, `rounded-xl` for containers
-- [ ] Follows spacing scale (8px, 12px, 16px, 24px)
-- [ ] Implements proper focus states
-- [ ] Works on mobile (responsive design)
+- [ ] Fixed title properly positioned
+- [ ] Content vertically centered
+- [ ] Mode-specific colors used correctly
+- [ ] Interactive elements have proper animations
 - [ ] Maintains readable contrast ratios
 - [ ] Uses semantic HTML elements
 
@@ -115,16 +138,16 @@ components/
 ## 🎭 Brand Guidelines
 
 ### **Satirical Tone**
-- **Professional execution** with **humorous content**
-- **Corporate parody** without sacrificing usability
+- **Professional execution** with **playful interactions**
+- **Corporate parody** through mode-specific personalities
 - **Family-friendly** humor that's clever, not offensive
-- **Self-aware** about VC culture and AI trends
+- **Self-aware** about VC culture and startup trends
 
 ### **Content Strategy**
-- Keep UI text minimal and functional
-- Let AI responses carry the satirical tone
-- Maintain professional interface design
-- Balance humor with genuine utility
+- Fixed title establishes brand presence
+- Interactive mode words engage users
+- Satirical suggestions provide entertainment
+- Balance sophistication with satire
 
 ## 🔧 Technical Standards
 
@@ -132,7 +155,9 @@ components/
 ```
 ├── app/                   # Next.js pages and API routes
 ├── components/           # Reusable UI components
-│   └── ui/              # Shadcn/ui components
+│   ├── ui/              # Shadcn/ui components
+│   ├── layout/          # Layout components
+│   └── chat/            # Chat interface components
 ├── lib/                 # Utility functions
 ├── types/               # TypeScript definitions
 └── docs/                # Documentation
@@ -168,7 +193,7 @@ export default function Component({ prop }: ComponentProps) {
 
   // 5. Render
   return (
-    <div className="rounded-sm p-3">
+    <div className="p-4">
       {/* Component JSX */}
     </div>
   );
@@ -209,4 +234,4 @@ export default function Component({ prop }: ComponentProps) {
 
 ---
 
-**🎯 Remember**: This project prioritizes **clean, functional design** over flashy features. Every component should feel purposeful and professionally executed, even when the content is satirical.
+**🎯 Remember**: This project balances sophisticated design with satirical content. Every component should maintain professional execution while delivering playful interactions and mode-specific personality.

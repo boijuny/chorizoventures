@@ -1,11 +1,13 @@
 # 🚀 Guez VC - AI Chat Interface
 
-A satirical AI chat application with multiple modes, built with Next.js 14 and an OpenAI-inspired minimal design system.
+A satirical AI chat application with two distinct modes (Roast and Stonks), built with Next.js 14 and a sophisticated-satirical design system.
 
 ## ✨ Features
 
-- **🎯 Three Chat Modes**: Normal, Roast, and Calculator
-- **🎨 OpenAI-Style Design**: Minimal border radius, compact spacing, geometric precision
+- **🎯 Two Chat Modes**: Roast mode for brutal honesty, Stonks mode for absurd optimism
+- **🎨 Fixed Title Layout**: "Chorizo Ventures" fixed on the left, content centered
+- **💬 Interactive Welcome**: "Built to <mode> your idea" with animated mode words
+- **🎯 Satirical Suggestions**: Curated list of absurd startup ideas
 - **📱 Responsive**: Works seamlessly on desktop and mobile
 - **⚡ Fast**: Built with Next.js 14 App Router for optimal performance
 - **🎪 Design System**: Comprehensive component showcase at `/design-system`
@@ -43,8 +45,13 @@ A satirical AI chat application with multiple modes, built with Next.js 14 and a
 │   └── design-system/     # Component showcase
 ├── components/
 │   ├── ui/                # Shadcn/ui components (Button, Tabs, Card)
-│   ├── ChatInterface.tsx  # Main chat component
-│   └── ChatMessage.tsx    # Message bubble component
+│   ├── layout/            # Layout components (FixedTitle, CenteredContent)
+│   ├── chat/             # Chat components
+│   │   ├── ChatInterface.tsx  # Main chat component
+│   │   ├── ChatMessage.tsx    # Message bubble component
+│   │   ├── ModeSelector.tsx   # Roast/Stonks mode selector
+│   │   ├── WelcomeMessage.tsx # Interactive welcome message
+│   │   └── SuggestionPills.tsx # Satirical suggestion buttons
 ├── docs/                  # Documentation
 │   ├── design-system.md   # Design system guide
 │   └── technical-specs.md # Technical specifications
@@ -53,11 +60,13 @@ A satirical AI chat application with multiple modes, built with Next.js 14 and a
 
 ## 🎨 Design System
 
-The app uses an **OpenAI-inspired minimal design approach**:
+The app uses a **sophisticated-satirical design approach**:
 
-- **Geometric Precision**: 2px border radius (`rounded-sm`) 
-- **Compact Spacing**: Tight padding and gaps (4-8px)
-- **Professional Aesthetics**: Clean, functional over decorative
+- **Fixed Branding**: Clear brand presence with fixed title
+- **Centered Content**: Vertically centered core components
+- **Mode-Specific Colors**: Red for Roast, Green for Stonks
+- **Interactive Elements**: Playful animations on mode words and suggestions
+- **Professional Aesthetics**: Clean, functional with a touch of satire
 - **Accessibility First**: Proper focus states and keyboard navigation
 
 Visit `/design-system` to explore all components and patterns.
@@ -73,7 +82,9 @@ Visit `/design-system` to explore all components and patterns.
 ## 🎯 Design Philosophy
 
 This project demonstrates how to achieve **sophisticated satirical design** while maintaining:
-- Professional user experience
+- Professional user experience with playful interactions
+- Clear brand presence and visual hierarchy
+- Mode-specific color schemes and animations
 - Accessibility standards (WCAG AA)
 - Performance optimization
 - Component consistency

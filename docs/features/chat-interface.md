@@ -9,7 +9,7 @@
 
 ### Description
 
-The core chat interface provides users with an AI-powered conversation experience that parodies VC culture through three distinct personality modes, delivering satirical responses while maintaining a professional ChatGPT-style interface.
+The core chat interface provides users with an AI-powered conversation experience that parodies VC culture through two distinct personality modes, delivering satirical responses while maintaining a professional ChatGPT-style interface with a sophisticated-satirical brand balance.
 
 ## 🎯 User Stories
 
@@ -22,26 +22,27 @@ The core chat interface provides users with an AI-powered conversation experienc
 ### Acceptance Criteria
 
 - [x] ChatGPT-style interface with message history
-- [x] Three distinct AI modes (Normal, Roast, Calculator)
+- [x] Two distinct AI modes (Roast, Stonks)
 - [x] Streaming response animation
 - [x] Message persistence across sessions
 - [x] Error handling with humorous messages
 - [x] Mobile-optimized input area
-- [x] OpenAI-style progressive disclosure (hidden messages until first interaction)
+- [x] Fixed "Chorizo Ventures" title on the left side
+- [x] Centered core components vertically
 
 ## 🎨 Design Specifications
 
 ### Interface Layout
 
-#### Before First Message (OpenAI Style)
+#### Before First Message
 
 ```
 ┌─────────────────────────────────────────────┐
 │                                             │
-│               GUEZ VC                       │
-│         [Rotating Tagline]                  │
+│ CHORIZO                                     │
+│ VENTURES    Built to <mode> your idea       │
 │                                             │
-│      [Normal] [Roast] [Calculator]         │
+│            [Roast] [Stonks]                │
 │                                             │
 │  ┌─────────────────────────────────────┐   │
 │  │ What can we disrupt for you?        │   │
@@ -55,7 +56,8 @@ The core chat interface provides users with an AI-powered conversation experienc
 
 ```
 ┌─────────────────────────────────────────────┐
-│ [Mode Selector] [Normal] [Roast] [Calc]    │
+│ CHORIZO     [Mode Selector] [Roast][Stonks]│
+│ VENTURES                                    │
 │                                             │
 │ ┌─────────────────────────────────────────┐ │
 │ │ [Message History Area]                  │ │
@@ -86,7 +88,7 @@ The core chat interface provides users with an AI-powered conversation experienc
 #### Mode Selector
 
 - **Design:** Segmented control with liquid animations
-- **Colors:** Blue (Normal), Red (Roast), Green (Calculator)
+- **Colors:** Red (Roast), Green (Stonks)
 - **States:** Active, inactive, hover, disabled
 - **Transitions:** Smooth color and shape changes
 
@@ -98,28 +100,6 @@ The core chat interface provides users with an AI-powered conversation experienc
 - **Features:** Auto-resize, character limit, enter-to-send
 
 ## 🤖 AI Personality Modes
-
-### Normal Mode 💼
-
-**Personality:** Satirical VC advisor with professional veneer
-**Color Scheme:** Blue (#3b82f6)
-**Response Style:** Professional buzzwords with subtle mockery
-
-**Example Prompts:**
-
-```typescript
-const NORMAL_PROMPT = `You are a satirical VC advisor who speaks in startup buzzwords
-while subtly mocking the pretentious VC culture. Be professional yet absurd, using
-real VC terminology in exaggerated ways. Keep responses under 150 words.`;
-```
-
-**Sample Response:**
-
-> "Absolutely fascinating! Your startup is clearly disrupting the status quo in a
-> post-digital landscape. I'm seeing tremendous synergies with our portfolio's
-> vertical integration strategies. Have you considered pivoting to a blockchain-
-> enabled AI solution? We'd love to discuss a Series A round where we take 40%
-> equity for maximum value creation."
 
 ### Roast Mode 🔥
 
@@ -137,33 +117,33 @@ out obvious flaws while maintaining a professional tone. Keep responses under 15
 
 **Sample Response:**
 
-> "Oh, another 'Uber for X' idea? How refreshingly original! Let me guess - you
-> haven't validated the market, you have no technical background, and your business
+> "Oh, another 'social network for pet rocks'? How refreshingly original! Let me guess - 
+> you haven't validated the market, you have no technical background, and your business
 > model is 'we'll figure it out later.' Your TAM calculation looks like it was done
 > on a napkin during a coffee binge. But hey, at least you're passionate about
 > disrupting a market that doesn't need disrupting!"
 
-### Calculator Mode 📊
+### Stonks Mode 📈
 
-**Personality:** Numbers-focused analyst with dry humor
+**Personality:** Overly optimistic VC with unrealistic projections
 **Color Scheme:** Green (#10b981)
-**Response Style:** Data-driven analysis with financial reality checks
+**Response Style:** Exaggerated market potential with absurd valuations
 
 **Example Prompts:**
 
 ```typescript
-const CALCULATOR_PROMPT = `You are a numbers-focused VC analyst with dry humor who 
-focuses on metrics and financial reality. Use specific numbers, percentages, and 
-financial terms while maintaining satirical edge. Keep responses under 150 words.`;
+const STONKS_PROMPT = `You are an overly enthusiastic VC who sees unicorn potential 
+in every idea, no matter how absurd. Use grandiose market projections, buzzwords, 
+and unrealistic valuations while maintaining satirical edge. Keep responses under 150 words.`;
 ```
 
 **Sample Response:**
 
-> "Let's run the numbers: 0.1% market penetration of a $1B TAM = $1M revenue.
-> Minus 80% burn rate for 'growth hacking' = $200K actual revenue. Factor in your
-> 3x engineer salary premium and kombucha budget, you're looking at a solid -$2M
-> runway. But don't worry, we can always blame the market timing when this becomes
-> a 'learning experience.'"
+> "A DAO for Chia Pet farming? This is EXACTLY what Web3 needs! Your TAM is clearly
+> the entire global agriculture market ($12T), plus the pet industry ($200B), plus
+> the blockchain market ($3T). Conservative estimates show you capturing just 1% in
+> year 1, scaling to 120% by year 3. At a modest 50x revenue multiple, we're looking
+> at a $75T valuation. Let's fast-track your Series Z!"
 
 ## 🛠 Technical Implementation
 
@@ -199,7 +179,24 @@ interface ChatMessage {
   isStreaming?: boolean;
 }
 
-type ChatMode = 'normal' | 'roast' | 'calculator';
+type ChatMode = 'roast' | 'stonks';
+```
+
+### Suggestion Buttons
+
+```typescript
+// components/chat/SuggestionButtons.tsx
+const ROAST_SUGGESTIONS = [
+  "A social network for pet rocks",
+  "Subscription box for existential dread",
+  "LinkedIn for Babies"
+];
+
+const STONKS_SUGGESTIONS = [
+  "DAO for Chia Pet farming",
+  "AI to disrupt disruption itself",
+  "Zero-click air delivery (Pre-revenue, $500M valuation)"
+];
 ```
 
 ### API Integration

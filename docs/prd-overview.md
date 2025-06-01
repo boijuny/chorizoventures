@@ -2,10 +2,10 @@
 
 ## 📋 Document Information
 
-- **Version:** 1.3 (Restructured)
+- **Version:** 1.4 (Layout Restructured)
 - **Created:** 2024-01-XX
 - **Owner:** [Your Name]
-- **Status:** Phase 3 Complete ✅
+- **Status:** Phase 4 Complete ✅
 - **Last Updated:** 2024-01-XX
 
 > **📁 Note:** This document has been restructured into modular components. See the [documentation index](./README.md) for the complete structure.
@@ -14,7 +14,7 @@
 
 ### Product Vision
 
-Create a satirical VC website that parodies the pretentious startup ecosystem through an AI-powered chat interface, providing entertainment for developers and startup community members.
+Create a satirical VC website that parodies the pretentious startup ecosystem through an AI-powered chat interface with two distinct personalities (Roast and Stonks), providing entertainment for developers and startup community members.
 
 ### Business Objectives
 
@@ -42,23 +42,17 @@ This PRD has been split into focused modules for better maintainability:
 
 ### 🎯 Feature Specifications
 
-- **[Homepage](./features/homepage.md)** - Rotating taglines and welcome experience
+- **[Homepage](./features/homepage.md)** - Fixed title and welcome message
 - **[Chat Interface](./features/chat-interface.md)** - AI-powered conversation system
-- **[Timezone Clocks](./features/timezone-clocks.md)** - Multi-timezone display
-- **[AI Personalities](./features/ai-personalities.md)** - Mode-specific behavior
-
-### 📋 Quality & Deployment
-
-- **[Testing Strategy](./testing-strategy.md)** - Quality assurance approach
-- **[Deployment Guide](./deployment.md)** - Launch criteria and processes
+- **[AI Personalities](./features/ai-personalities.md)** - Roast and Stonks modes
 
 ## 🏗 High-Level Architecture
 
 ```
 Frontend (Next.js 14)
-├── Homepage with rotating taglines
-├── AI chat interface (3 modes)
-├── Timezone clocks
+├── Fixed "Chorizo Ventures" title
+├── Centered content layout
+├── AI chat interface (2 modes)
 └── Responsive design system
 
 Backend (API Routes)
@@ -84,9 +78,9 @@ Infrastructure
 
 ### ✅ Phase 2: Core UI (Complete)
 
-- [x] Rotating taglines component
+- [x] Fixed title component
+- [x] Centered content layout
 - [x] Chat message components
-- [x] Timezone clocks
 - [x] Responsive layout
 - [x] Loading states
 
@@ -98,13 +92,13 @@ Infrastructure
 - [x] Streaming responses
 - [x] Rate limiting
 
-### 🔄 Phase 4: Polish & Testing (Current)
+### ✅ Phase 4: Polish & Testing (Complete)
 
-- [ ] Comprehensive error handling
-- [ ] Message persistence
-- [ ] Performance optimization
-- [ ] Cross-browser testing
-- [ ] Documentation completion
+- [x] Interactive mode words
+- [x] Satirical suggestion buttons
+- [x] Performance optimization
+- [x] Cross-browser testing
+- [x] Documentation updates
 
 ## 👥 User Personas & Stories
 
@@ -117,26 +111,26 @@ Infrastructure
 ### Key User Stories
 
 - **US-001:** Chat with AI that parodies VC behavior ✅
-- **US-002:** Switch between different AI personalities ✅
+- **US-002:** Switch between Roast and Stonks modes ✅
 - **US-003:** Get startup ideas roasted with humor ✅
-- **US-004:** See rotating VC buzzwords immediately ✅
-- **US-005:** View global time zones for VC presence ✅
+- **US-004:** See interactive welcome message ✅
+- **US-005:** Try satirical startup suggestions ✅
 
 ## 🎨 Design Philosophy
 
 ### Core Principles
 
 - **Sophisticated Minimalism:** Professional layout with satirical content
-- **Strategic Chaos:** Intentional glitches and color pops
+- **Fixed Branding:** Clear brand presence with fixed title
 - **Liquid Animations:** Smooth, flowing micro-interactions
 - **Self-Aware Humor:** Professional veneer hiding absurd content
 
 ### Visual Identity
 
-- **Colors:** Dark theme with mode-specific accents
-- **Typography:** Inter font with occasional Comic Sans for humor
-- **Animations:** 60fps liquid motion with strategic chaos elements
-- **Layout:** OpenAI-inspired with VC parody elements
+- **Colors:** Dark theme with mode-specific accents (Red/Green)
+- **Typography:** Inter font for sophistication
+- **Animations:** 60fps liquid motion with playful interactions
+- **Layout:** Fixed title with vertically centered content
 
 ## 🛠 Technology Decisions
 
@@ -169,7 +163,7 @@ Infrastructure
 
 - Average session duration: Target > 3 minutes
 - Messages per session: Target > 5
-- Mode switching rate: Target > 50% users try multiple modes
+- Mode switching rate: Target > 50% users try both modes
 - Return visitor rate: Target > 20% within 7 days
 
 ### Technical Metrics
@@ -212,7 +206,7 @@ Infrastructure
 
 - Voice interaction capabilities
 - Advanced AI memory features
-- Community-generated content
+- Community-generated suggestions
 - Multi-language support
 
 ---

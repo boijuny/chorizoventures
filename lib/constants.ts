@@ -1,24 +1,25 @@
 // VC Taglines for rotating display (minimum 10 as per PRD)
 export const VC_TAGLINES = [
-  'Disrupting disruption since never',
-  "We're not just thinking outside the box, we're deconstructing the box",
-  "Unicorns are so last decade, we're hunting decacorns",
-  'Making the world a better place through synergistic blockchain solutions',
-  "We don't just scale businesses, we scale dreams",
-  'Where innovation meets exponential growth trajectory',
-  'Transforming paradigms with AI-powered vertical integrations',
-  'Building the future, one pitch deck at a time',
-  'Democratizing access to disruptive market inefficiencies',
-  'Your next billion-dollar exit starts here',
-  "We see what others can't: the next big thing",
-  'From stealth mode to unicorn status in 18 months',
-  'Making money while we sleep through automated disruption',
-  "We don't invest in companies, we invest in movements",
+  'Disrupting disruption™',
+  'Deconstructing boxes since 2024',
+  'Hunting decacorns daily',
+  'Synergistic blockchain solutions™',
+  'Scaling dreams, not businesses',
+  'Innovation × Growth = Us',
+  'AI-powered everything',
+  'Your pitch deck deserves better',
+  'Democratizing disruption',
+  'Exit or die trying™',
+  'We see unicorns everywhere',
+  'From stealth to wealth',
+  'Automating your FOMO',
+  'Moving fast, breaking banks',
 ];
 
 // Animation timing constants
 export const ANIMATION_INTERVALS = {
-  TAGLINE_ROTATION: 4000, // 4 seconds as per PRD
+  TAGLINE_ROTATION: 6000, // 6 seconds for better readability
+  TAGLINE_TRANSITION: 800, // 800ms smooth transition
   FLOATING_ELEMENTS: 6000, // 6 seconds float cycle
   GLITCH_FREQUENCY: 100, // 1% chance as per PRD
 } as const;

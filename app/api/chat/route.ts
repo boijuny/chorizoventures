@@ -169,8 +169,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log("Sending to Mistral -> User Message:", userMessage);
-    console.log("Sending to Mistral -> Formatted History:", JSON.stringify(formattedHistory, null, 2));
+    console.log('Sending to Mistral -> User Message:', userMessage);
+    console.log(
+      'Sending to Mistral -> Formatted History:',
+      JSON.stringify(formattedHistory, null, 2)
+    );
 
     // Call MistralAI
     const aiResponse = await callMistralAPI(

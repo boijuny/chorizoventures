@@ -4,7 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { VC_TAGLINES, ANIMATION_INTERVALS } from '@/lib/constants';
 
-const FixedTitle = () => {
+interface FixedTitleProps {
+  onReset: () => void;
+}
+
+const FixedTitle = ({ onReset }: FixedTitleProps) => {
   const [currentTaglineIndex, setCurrentTaglineIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
@@ -22,7 +26,14 @@ const FixedTitle = () => {
     <>
       {/* Left side title */}
       <div className="fixed top-6 left-6 z-50">
-        <h1 className="text-xl font-bold text-white">Chorizo Ventures</h1>
+        <button 
+          onClick={onReset} 
+          className="block text-left focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md p-1 -m-1"
+        >
+          <h1 className="text-xl font-bold text-white hover:text-white/80 transition-colors duration-200 cursor-pointer">
+            Chorizo Ventures
+          </h1>
+        </button>
       </div>
 
       {/* Right side tagline */}

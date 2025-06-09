@@ -8,14 +8,21 @@ import FixedTitle from '@/components/FixedTitle';
 
 export default function Home() {
   const [currentMode, setCurrentMode] = useState<ChatMode>('roast');
+  const [chatKey, setChatKey] = useState(0);
+
+  const resetChat = () => {
+    setCurrentMode('roast');
+    setChatKey(prev => prev + 1); // This will force ChatInterface to remount completely
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col">
-      <FixedTitle />
+      <FixedTitle onReset={resetChat} />
 
       {/* Main Content */}
       <main className="flex-1 py-8 flex justify-center items-center">
         <ChatInterface
+          key={chatKey}
           currentMode={currentMode}
           onModeChange={setCurrentMode}
         />

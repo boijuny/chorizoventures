@@ -2,6 +2,18 @@
 
 A satirical venture capital website that parodies the pretentious startup ecosystem through AI-powered interactions.
 
+## Live Demo
+
+🚀 **Try it out:** [Chorizo Ventures](https://chorizoventures.vercel.app/)
+
+Experience the satirical startup ecosystem firsthand through our AI-powered chat interface. Engage with our sophisticated-yet-satirical VC bot in two distinct modes:
+
+- **Roast Mode:** Brutal honesty about your "groundbreaking" startup idea
+- **Stonks Mode:** Over-the-top enthusiasm for even the most absurd concepts
+
+The live demo showcases our commitment to both technical excellence and satirical entertainment.
+
+
 ## Overview
 
 Guez VC provides entertainment for developers and startup community members through a sophisticated chat interface that embodies the most absurd aspects of venture capital culture.

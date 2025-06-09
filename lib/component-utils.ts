@@ -120,13 +120,13 @@ export function responsive(breakpoint: string, classes: string) {
 }
 
 // Mode-specific utilities
-export type AppMode = 'normal' | 'roast' | 'stonks';
+export type AppMode = 'normal' | 'roast' | 'stonk';
 
 export function getModeClasses(mode: AppMode) {
   const modeMap = {
     normal: 'mode-normal text-mode-normal-60 border-mode-normal-12',
     roast: 'mode-roast text-mode-roast-60 border-mode-roast-12',
-    stonks: 'mode-stonks text-mode-stonks-60 border-mode-stonks-12',
+    stonk: 'mode-stonk text-mode-stonk-60 border-mode-stonk-12',
   };
 
   return modeMap[mode];
@@ -136,7 +136,7 @@ export function getModeAccent(mode: AppMode) {
   const accentMap = {
     normal: 'hsl(var(--mode-normal))',
     roast: 'hsl(var(--mode-roast))',
-    stonks: 'hsl(var(--mode-stonks))',
+    stonk: 'hsl(var(--mode-stonk))',
   };
 
   return accentMap[mode];

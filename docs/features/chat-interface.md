@@ -117,7 +117,7 @@ out obvious flaws while maintaining a professional tone. Keep responses under 15
 
 **Sample Response:**
 
-> "Oh, another 'social network for pet rocks'? How refreshingly original! Let me guess - 
+> "Oh, another 'social network for pet rocks'? How refreshingly original! Let me guess -
 > you haven't validated the market, you have no technical background, and your business
 > model is 'we'll figure it out later.' Your TAM calculation looks like it was done
 > on a napkin during a coffee binge. But hey, at least you're passionate about
@@ -187,15 +187,15 @@ type ChatMode = 'roast' | 'stonks';
 ```typescript
 // components/chat/SuggestionButtons.tsx
 const ROAST_SUGGESTIONS = [
-  "A social network for pet rocks",
-  "Subscription box for existential dread",
-  "LinkedIn for Babies"
+  'A social network for pet rocks',
+  'Subscription box for existential dread',
+  'LinkedIn for Babies',
 ];
 
 const STONKS_SUGGESTIONS = [
-  "DAO for Chia Pet farming",
-  "AI to disrupt disruption itself",
-  "Zero-click air delivery (Pre-revenue, $500M valuation)"
+  'DAO for Chia Pet farming',
+  'AI to disrupt disruption itself',
+  'Zero-click air delivery (Pre-revenue, $500M valuation)',
 ];
 ```
 

@@ -1,5 +1,5 @@
 // Chat related types from PRD specifications
-export type ChatMode = 'roast' | 'stonks';
+export type ChatMode = 'roast' | 'stonk';
 
 export interface ChatMessage {
   id: string;
@@ -56,6 +56,7 @@ export interface ChatRequest {
   message: string;
   mode: ChatMode;
   conversation_id: string;
+  history?: { role: 'user' | 'assistant'; content: string }[];
 }
 
 export interface ChatResponse {

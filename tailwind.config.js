@@ -67,17 +67,17 @@ module.exports = {
         },
         // Mode-specific colors
         'accent-normal': '#3b82f6', // Professional blue
-        'accent-roast': '#ef4444',  // Bold red  
+        'accent-roast': '#ef4444', // Bold red
         'accent-calculator': '#16a34a', // Success green
         // Semantic colors with Chorizo Ventures theme
         success: {
           50: '#f0fdf4',
-          500: 'hsl(var(--mode-stonks))', // Use saffron/stonks for success
+          500: 'hsl(var(--mode-stonk))', // Use saffron/stonk for success
           900: '#14532d',
         },
         warning: {
           50: '#fffbeb',
-          500: 'hsl(var(--mode-stonks))', // Use saffron for warnings
+          500: 'hsl(var(--mode-stonk))', // Use saffron for warnings
           900: '#92400e',
         },
         error: {
@@ -110,11 +110,11 @@ module.exports = {
         'mode-roast-4': 'hsl(var(--mode-roast-4))',
         'mode-roast-12': 'hsl(var(--mode-roast-12))',
         'mode-roast-60': 'hsl(var(--mode-roast-60))',
-        
-        'mode-stonks': 'hsl(var(--mode-stonks))',
-        'mode-stonks-4': 'hsl(var(--mode-stonks-4))',
-        'mode-stonks-12': 'hsl(var(--mode-stonks-12))',
-        'mode-stonks-60': 'hsl(var(--mode-stonks-60))',
+
+        'mode-stonk': 'hsl(var(--mode-stonk))',
+        'mode-stonk-4': 'hsl(var(--mode-stonk-4))',
+        'mode-stonk-12': 'hsl(var(--mode-stonk-12))',
+        'mode-stonk-60': 'hsl(var(--mode-stonk-60))',
 
         // Elite chorizo accent colors
         'accent-paprika': 'hsl(var(--accent-paprika))',
@@ -226,7 +226,7 @@ module.exports = {
           'Fira Sans',
           'Droid Sans',
           'Helvetica Neue',
-          'sans-serif'
+          'sans-serif',
         ],
         mono: [
           'JetBrains Mono',
@@ -235,7 +235,7 @@ module.exports = {
           'Consolas',
           'Liberation Mono',
           'Courier New',
-          'monospace'
+          'monospace',
         ],
       },
       // Performance-optimized animations
@@ -311,7 +311,7 @@ module.exports = {
     require('tailwindcss-animate'),
     require('@tailwindcss/typography'),
     // Custom utilities plugin
-    function({ addUtilities }) {
+    function ({ addUtilities }) {
       addUtilities({
         '.text-balance': {
           'text-wrap': 'balance',
@@ -321,10 +321,12 @@ module.exports = {
           'min-width': '44px',
         },
         '.focus-ring': {
-          '@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background': {},
+          '@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background':
+            {},
         },
         '.focus-ring-inset': {
-          '@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset': {},
+          '@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-inset':
+            {},
         },
       });
     },

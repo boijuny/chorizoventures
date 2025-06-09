@@ -11,7 +11,7 @@ const FixedTitle = () => {
   useEffect(() => {
     if (!isPaused) {
       const interval = setInterval(() => {
-        setCurrentTaglineIndex((prev) => (prev + 1) % VC_TAGLINES.length);
+        setCurrentTaglineIndex(prev => (prev + 1) % VC_TAGLINES.length);
       }, ANIMATION_INTERVALS.TAGLINE_ROTATION);
 
       return () => clearInterval(interval);
@@ -26,7 +26,7 @@ const FixedTitle = () => {
       </div>
 
       {/* Right side tagline */}
-      <div 
+      <div
         className="fixed top-6 right-6 z-50"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -38,9 +38,9 @@ const FixedTitle = () => {
               initial={{ y: 30, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -30, opacity: 0 }}
-              transition={{ 
+              transition={{
                 duration: ANIMATION_INTERVALS.TAGLINE_TRANSITION / 1000,
-                ease: [0.22, 1, 0.36, 1]
+                ease: [0.22, 1, 0.36, 1],
               }}
               className="text-sm text-muted-foreground/80 absolute whitespace-nowrap font-medium text-right w-full"
             >
@@ -53,4 +53,4 @@ const FixedTitle = () => {
   );
 };
 
-export default FixedTitle; 
+export default FixedTitle;

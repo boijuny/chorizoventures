@@ -11,6 +11,7 @@
 ## 🏗 Architecture
 
 ### **Layout Foundation**
+
 - **Fixed Title:** "Chorizo Ventures" positioned on left side
 - **Vertical Centering:** Core components centered in viewport
 - **Welcome Message:** "Built to <mode> your idea" with interactive mode words
@@ -18,13 +19,16 @@
 - **Suggestion Pills:** Satirical startup ideas as interactive buttons
 
 ### **Shadcn/ui Foundation**
+
 Built on Shadcn/ui components with minimalist aesthetic refinements:
+
 - **Button**: Five elegant variants from solid to subtle with pill-shaped design
 - **Interactions**: Refined hover states with semantic color transitions
 - **Typography**: Balanced font weights and subtle opacity variations
 - **Spacing**: Comfortable proportions with visual breathing room
 
 ### **Button Variants**
+
 ```css
 /* Minimalist Button System */
 default: bg-foreground text-background     /* Bold primary actions */
@@ -46,25 +50,31 @@ focus-visible:ring-2                       /* Clear focus indication */
 ## 🎨 Component Variants
 
 ### **Mode Selector**
+
 ```tsx
-{/* Mode Toggle - Roast */}
-<Button 
+{
+  /* Mode Toggle - Roast */
+}
+<Button
   variant="ghost"
   className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
 >
   Roast
-</Button>
+</Button>;
 
-{/* Mode Toggle - Stonks */}
-<Button 
+{
+  /* Mode Toggle - Stonks */
+}
+<Button
   variant="ghost"
   className="text-green-500 hover:text-green-600 hover:bg-green-500/10"
 >
   Stonks
-</Button>
+</Button>;
 ```
 
 ### **Welcome Message**
+
 ```tsx
 <div className="flex items-center space-x-2">
   <span>Built to</span>
@@ -74,9 +84,10 @@ focus-visible:ring-2                       /* Clear focus indication */
 ```
 
 ### **Suggestion Pills**
+
 ```tsx
-<Button 
-  variant="minimal" 
+<Button
+  variant="minimal"
   className="rounded-full border border-border/20 hover:border-border/40"
 >
   A social network for pet rocks
@@ -84,6 +95,7 @@ focus-visible:ring-2                       /* Clear focus indication */
 ```
 
 ### **Interactive States**
+
 ```tsx
 {/* Normal state */}
 text-muted-foreground
@@ -101,6 +113,7 @@ focus-visible:ring-2 focus-visible:ring-ring
 ## 🎯 Design Philosophy
 
 ### **Minimalist Principles**
+
 1. **Fixed Branding**: Clear brand presence with fixed title positioning
 2. **Subtle Boundaries**: Borders use low opacity for gentle definition
 3. **Semantic Colors**: Mode-specific colors for clear context
@@ -108,6 +121,7 @@ focus-visible:ring-2 focus-visible:ring-ring
 5. **Playful Interactions**: Hover animations on mode words and suggestions
 
 ### **Visual Refinements**
+
 - **Border Opacity**: `/20`, `/30`, `/50`, `/60` for progressive prominence
 - **Text Opacity**: `/70` for subtle text, full opacity for emphasis
 - **Background Opacity**: `/10`, `/20`, `/30` for gentle hover states
@@ -117,6 +131,7 @@ focus-visible:ring-2 focus-visible:ring-ring
 ## ✅ Implementation Status
 
 ### **✅ Completed**
+
 - [x] Fixed "Chorizo Ventures" title positioning
 - [x] Vertically centered core components
 - [x] Interactive mode words in welcome message
@@ -127,6 +142,7 @@ focus-visible:ring-2 focus-visible:ring-ring
 - [x] Accessible focus management
 
 ### **🎨 Aesthetic Features**
+
 - ✨ Fixed title with brand presence
 - ✨ Interactive mode words
 - ✨ Mode-specific color accents
@@ -136,6 +152,7 @@ focus-visible:ring-2 focus-visible:ring-ring
 ## 📋 Usage Guidelines
 
 ### **Do's**
+
 ✅ Use mode-specific colors for interactive elements
 ✅ Maintain fixed title positioning
 ✅ Keep core components vertically centered
@@ -143,6 +160,7 @@ focus-visible:ring-2 focus-visible:ring-ring
 ✅ Maintain sophisticated-satirical balance
 
 ### **Don'ts**
+
 ❌ Don't use harsh color transitions
 ❌ Don't override mode-specific colors
 ❌ Don't make suggestion text too long
@@ -159,4 +177,4 @@ focus-visible:ring-2 focus-visible:ring-ring
 
 ---
 
-*This design system balances sophisticated minimalism with playful satire while maintaining full accessibility and visual clarity.*
+_This design system balances sophisticated minimalism with playful satire while maintaining full accessibility and visual clarity._

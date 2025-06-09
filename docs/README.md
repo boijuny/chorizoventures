@@ -23,12 +23,14 @@ A satirical AI chat application with two distinct modes (Roast and Stonks), buil
 ## 🚀 Quick Start
 
 1. **Install dependencies:**
+
    ```bash
    conda activate guezvc
    npm install
    ```
 
 2. **Start development server:**
+
    ```bash
    npm run dev
    ```
@@ -74,7 +76,7 @@ Visit `/design-system` to explore all components and patterns.
 ## 📋 Available Scripts
 
 - `npm run dev` - Start development server
-- `npm run build` - Build for production  
+- `npm run build` - Build for production
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm run lint:fix` - Fix ESLint issues
@@ -82,6 +84,7 @@ Visit `/design-system` to explore all components and patterns.
 ## 🎯 Design Philosophy
 
 This project demonstrates how to achieve **sophisticated satirical design** while maintaining:
+
 - Professional user experience with playful interactions
 - Clear brand presence and visual hierarchy
 - Mode-specific color schemes and animations

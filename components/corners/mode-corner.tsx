@@ -11,20 +11,15 @@ interface ModeCornerProps {
 }
 
 const MODE_CONFIG = {
-  normal: {
-    label: 'Normal',
-    description: 'Professional VC advice',
-    color: 'text-accent-normal',
-  },
   roast: {
-    label: 'Roast',
+    label: 'roast',
     description: 'Brutally honest feedback',
     color: 'text-accent-roast',
   },
-  calculator: {
-    label: 'Calculator',
-    description: 'Numbers-focused analysis',
-    color: 'text-accent-calculator',
+  stonk: {
+    label: 'stonk',
+    description: 'Absurdly optimistic analysis',
+    color: 'text-accent-stonk',
   },
 } as const;
 
@@ -40,6 +35,7 @@ export default function ModeCorner({
 
   // Use custom className if provided, otherwise use corner positioning
   const containerClass = className || cornerClasses.bottomRight;
+  const modeKeys = Object.keys(MODE_CONFIG) as ChatMode[];
 
   return (
     <div
@@ -54,22 +50,25 @@ export default function ModeCorner({
         onValueChange={handleModeChange}
         className="w-auto"
       >
-        <TabsList className="grid w-full grid-cols-3 bg-secondary/30 h-8 rounded-lg border border-border/30">
-          {(Object.keys(MODE_CONFIG) as ChatMode[]).map(mode => (
-            <TabsTrigger
-              key={mode}
-              value={mode}
-              className={cn(
-                'text-xs px-3 py-1 h-6 transition-all duration-200 rounded-md',
-                'data-[state=active]:text-foreground data-[state=active]:bg-secondary',
-                'hover:scale-105 active:scale-95 text-muted-foreground',
-                currentMode === mode && MODE_CONFIG[mode].color
-              )}
-              title={MODE_CONFIG[mode].description}
-            >
-              {MODE_CONFIG[mode].label}
-            </TabsTrigger>
-          ))}
+        <TabsList className="grid w-full grid-cols-2 bg-secondary/30 h-8 rounded-lg border border-border/30">
+          {modeKeys.map(modeInLoop => {
+            const configForMode = MODE_CONFIG[modeInLoop];
+            return (
+              <TabsTrigger
+                key={modeInLoop}
+                value={modeInLoop}
+                className={cn(
+                  'text-xs px-3 py-1 h-6 transition-all duration-200 rounded-md',
+                  'data-[state=active]:text-foreground data-[state=active]:bg-secondary',
+                  'hover:scale-105 active:scale-95 text-muted-foreground',
+                  currentMode === modeInLoop && configForMode.color
+                )}
+                title={configForMode.description}
+              >
+                {configForMode.label}
+              </TabsTrigger>
+            );
+          })}
         </TabsList>
       </Tabs>
     </div>

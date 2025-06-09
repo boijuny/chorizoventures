@@ -27,11 +27,12 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             'p-4 rounded-xl text-sm',
             isUser
               ? {
-                  'border': true,
+                  border: true,
                   'ml-auto': true,
-                  'bg-mode-normal-12 text-mode-normal border-mode-normal-12': message.mode === 'normal',
-                  'bg-mode-roast-12 text-mode-roast border-mode-roast-12': message.mode === 'roast',
-                  'bg-mode-stonks-12 text-mode-stonks border-mode-stonks-12': message.mode === 'stonks',
+                  'bg-mode-roast-12 text-mode-roast border-mode-roast-12':
+                    message.mode === 'roast',
+                  'bg-mode-stonk-12 text-mode-stonk border-mode-stonk-12':
+                    message.mode === 'stonk',
                 }
               : 'bg-transparent text-foreground'
           )}
@@ -41,7 +42,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeRaw]}
               components={{
-                a: (props) => <a {...props} target="_blank" rel="noopener noreferrer" />
+                a: props => (
+                  <a {...props} target="_blank" rel="noopener noreferrer" />
+                ),
               }}
             >
               {message.content}

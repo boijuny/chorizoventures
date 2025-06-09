@@ -62,7 +62,7 @@ const sizeStyles = {
 const modeStyles = {
   normal: 'border-mode-normal-12 text-mode-normal-60',
   roast: 'border-mode-roast-12 text-mode-roast-60',
-  stonks: 'border-mode-stonks-12 text-mode-stonks-60',
+  stonk: 'border-mode-stonk-12 text-mode-stonk-60',
 } as const;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

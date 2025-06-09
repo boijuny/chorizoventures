@@ -6,7 +6,13 @@ import { ChatMode, ChatMessage as ChatMessageType } from '@/types';
 import { generateId } from '@/utils/helpers';
 import ChatMessage from './ChatMessage';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 
 interface ChatInterfaceProps {
@@ -16,8 +22,8 @@ interface ChatInterfaceProps {
 }
 
 const MODE_CONFIG = {
-  roast: { label: 'Roast' },
-  stonks: { label: 'Stonks' },
+  roast: { label: 'roast' },
+  stonk: { label: 'stonk' },
 } as const;
 
 export default function ChatInterface({
@@ -31,41 +37,43 @@ export default function ChatInterface({
   const [hasStartedChat, setHasStartedChat] = useState(false);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
-  const getWelcomeMessage = (mode: ChatMode): React.ReactNode => {
-    const commonClasses = "font-bold cursor-pointer transition-all duration-200 hover:brightness-125";
-    const roastSpan = (
-      <span
-        className={`${commonClasses} text-mode-roast`}
-        onClick={() => onModeChange('roast')}
+  const getWelcomeMessageParts = (mode: ChatMode): React.ReactNode[] => {
+    const ModeSelectorInWelcome = (
+      <Select
+        value={mode}
+        onValueChange={(newMode: ChatMode) => onModeChange(newMode)}
       >
-        roast
-      </span>
-    );
-    const stonksSpan = (
-      <span
-        className={`${commonClasses} text-mode-stonks`}
-        onClick={() => onModeChange('stonks')}
-      >
-        stonks
-      </span>
+        <SelectTrigger
+          className={cn(
+            'inline-flex items-center justify-center p-0 mx-2 h-auto font-semibold border-none bg-transparent shadow-none focus:ring-0 focus:ring-offset-0 transition-all duration-200 hover:brightness-125 outline-none focus:outline-none align-baseline text-4xl md:text-5xl',
+            {
+              'text-mode-roast': mode === 'roast',
+              'text-mode-stonk': mode === 'stonk',
+            }
+          )}
+          aria-label="Select chat mode in welcome message"
+        >
+          <SelectValue placeholder="Mode" />
+        </SelectTrigger>
+        <SelectContent className="min-w-[auto]">
+          {(Object.keys(MODE_CONFIG) as ChatMode[]).map(m => (
+            <SelectItem key={m} value={m} className="text-xs md:text-sm">
+              {MODE_CONFIG[m].label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     );
 
-    switch (mode) {
-      case 'roast':
-        return <>Built to {roastSpan} your idea</>;
-      case 'stonks':
-        return <>Built to {stonksSpan} your idea</>;
-      default:
-        return "Ready for some spicy advice?";
-    }
+    return ['Built to ', ModeSelectorInWelcome, ' your ideas'];
   };
 
   const getPlaceholderText = (mode: ChatMode): string => {
     switch (mode) {
       case 'roast':
-        return 'Prepare for a brutal reality check...';
-      case 'stonks':
-        return 'Even dumb ideas can be worth billions...';
+        return 'Write your idea here and prepare for a brutal reality check...';
+      case 'stonk':
+        return 'Write your idea here and prepare for a wild ride...';
       default:
         return 'Send a message...';
     }
@@ -86,7 +94,8 @@ export default function ChatInterface({
       timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    const updatedMessages = [...messages, userMessage];
+    setMessages(updatedMessages);
     setInputValue('');
     setIsLoading(true);
 
@@ -97,7 +106,7 @@ export default function ChatInterface({
         body: JSON.stringify({
           message: userMessage.content,
           mode: currentMode,
-          conversation_id: `chat-${Date.now()}`,
+          history: updatedMessages,
         }),
       });
 
@@ -127,46 +136,19 @@ export default function ChatInterface({
 
   const suggestionButtons = {
     roast: [
-      'Blockchain-powered socks that mine crypto while you walk',
-      'Dating app that matches people based on their browser history',
-      'AI therapist for plants with imposter syndrome'
+      'Tinder but for finding your evil twin',
+      'App that turns your voice into Morgan Freeman',
+      'Streaming service for watching paint dry',
     ],
-    stonks: [
-      'NFTs of your future regrets (pre-mint discount)',
-      'Uber for introverts - drivers promise not to talk',
-      'Web5 protocol for transmitting dreams to the cloud (raising $80M seed)'
+    stonk: [
+      'Instagram but everything is cake',
+      'Uber for pigeons in tiny suits',
+      'AI that only speaks in movie quotes',
     ],
   };
 
   const renderInputArea = () => (
     <div className={`flex flex-col gap-0.5 ${hasStartedChat ? '' : 'mb-6'}`}>
-      <div className="self-start">
-        <Select value={currentMode} onValueChange={(value: ChatMode) => onModeChange(value)}>
-          <SelectTrigger
-            className={cn(
-              "h-auto p-1 rounded-md",
-              "bg-transparent border-none",
-              "text-xs font-medium",
-              {
-                'text-mode-roast-60 hover:text-mode-roast': currentMode === 'roast',
-                'text-mode-stonks-60 hover:text-mode-stonks': currentMode === 'stonks',
-              },
-              "focus:ring-1 focus:ring-ring ring-offset-background focus:outline-none data-[state=open]:bg-accent/5"
-            )}
-            aria-label="Select chat mode"
-          >
-            <SelectValue placeholder="Mode" />
-          </SelectTrigger>
-          <SelectContent>
-            {(Object.keys(MODE_CONFIG) as ChatMode[]).map((mode) => (
-              <SelectItem key={mode} value={mode} className="text-xs">
-                {MODE_CONFIG[mode].label}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-
       <div className="flex-grow relative">
         <textarea
           ref={inputRef}
@@ -179,8 +161,8 @@ export default function ChatInterface({
             {
               'border-mode-roast-12 focus:ring-mode-roast-60 focus:border-mode-roast-60':
                 currentMode === 'roast',
-              'border-mode-stonks-12 focus:ring-mode-stonks-60 focus:border-mode-stonks-60':
-                currentMode === 'stonks',
+              'border-mode-stonk-12 focus:ring-mode-stonk-60 focus:border-mode-stonk-60':
+                currentMode === 'stonk',
             }
           )}
           disabled={isLoading}
@@ -193,12 +175,12 @@ export default function ChatInterface({
             {
               'hover:bg-mode-roast-12 hover:text-mode-roast-60':
                 currentMode === 'roast',
-              'hover:bg-mode-stonks-12 hover:text-mode-stonks-60':
-                currentMode === 'stonks',
+              'hover:bg-mode-stonk-12 hover:text-mode-stonk-60':
+                currentMode === 'stonk',
             },
             inputValue.trim() && {
               'bg-mode-roast-12 text-mode-roast-60': currentMode === 'roast',
-              'bg-mode-stonks-12 text-mode-stonks-60': currentMode === 'stonks',
+              'bg-mode-stonk-12 text-mode-stonk-60': currentMode === 'stonk',
             }
           )}
           variant="ghost"
@@ -211,10 +193,16 @@ export default function ChatInterface({
   );
 
   return (
-    <div className={`w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}>
+    <div
+      className={`w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 ${className}`}
+    >
       {!hasStartedChat && (
         <div className="text-center mb-6">
-          <h1 className="text-4xl font-semibold mb-6">{getWelcomeMessage(currentMode)}</h1>
+          <h1 className="text-4xl md:text-5xl font-semibold mb-6 flex items-center justify-center">
+            {getWelcomeMessageParts(currentMode).map((part, index) => (
+              <span key={index}>{part}</span>
+            ))}
+          </h1>
           {renderInputArea()}
           <div className="flex flex-wrap gap-2 justify-center mt-6">
             {suggestionButtons[currentMode].map(
@@ -228,8 +216,8 @@ export default function ChatInterface({
                     {
                       'border-mode-roast-12 hover:border-mode-roast-60 hover:bg-mode-roast-4 hover:text-mode-roast-60':
                         currentMode === 'roast',
-                      'border-mode-stonks-12 hover:border-mode-stonks-60 hover:bg-mode-stonks-4 hover:text-mode-stonks-60':
-                        currentMode === 'stonks',
+                      'border-mode-stonk-12 hover:border-mode-stonk-60 hover:bg-mode-stonk-4 hover:text-mode-stonk-60':
+                        currentMode === 'stonk',
                     }
                   )}
                   onClick={() => {
@@ -258,7 +246,7 @@ export default function ChatInterface({
                     'bg-muted p-4 rounded-xl border transition-all duration-200',
                     {
                       'border-mode-roast-12': currentMode === 'roast',
-                      'border-mode-stonks-12': currentMode === 'stonks',
+                      'border-mode-stonk-12': currentMode === 'stonk',
                     }
                   )}
                 >

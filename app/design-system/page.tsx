@@ -173,7 +173,7 @@ export default function DesignSystemPage() {
                 <Tabs defaultValue="roast">
                   <TabsList>
                     <TabsTrigger value="roast">Roast</TabsTrigger>
-                    <TabsTrigger value="stonks">Stonks</TabsTrigger>
+                    <TabsTrigger value="stonk">stonk</TabsTrigger>
                   </TabsList>
                 </Tabs>
               </CardContent>
@@ -189,10 +189,15 @@ export default function DesignSystemPage() {
               <Card>
                 <CardContent className="pt-6">
                   <div className="w-full h-20 bg-mode-normal rounded-lg mb-4"></div>
-                  <h3 className="font-semibold mb-2">💼 Professional (Normal)</h3>
-                  <p className="text-xs font-mono mb-2">mode-normal (#3b82f6)</p>
+                  <h3 className="font-semibold mb-2">
+                    💼 Professional (Normal)
+                  </h3>
+                  <p className="text-xs font-mono mb-2">
+                    mode-normal (#3b82f6)
+                  </p>
                   <p className="text-sm text-muted-foreground">
-                    Professional blue for trustworthy business advice with sophisticated authority
+                    Professional blue for trustworthy business advice with
+                    sophisticated authority
                   </p>
                 </CardContent>
               </Card>
@@ -203,18 +208,20 @@ export default function DesignSystemPage() {
                   <h3 className="font-semibold mb-2">🔥 Aggressive (Roast)</h3>
                   <p className="text-xs font-mono mb-2">mode-roast (#ef4444)</p>
                   <p className="text-sm text-muted-foreground">
-                    Bold red for intense feedback and aggressive honesty with no mercy
+                    Bold red for intense feedback and aggressive honesty with no
+                    mercy
                   </p>
                 </CardContent>
               </Card>
 
               <Card>
                 <CardContent className="pt-6">
-                  <div className="w-full h-20 bg-mode-stonks rounded-lg mb-4"></div>
-                  <h3 className="font-semibold mb-2">💚 Financial (Stonks)</h3>
-                  <p className="text-xs font-mono mb-2">mode-stonks (#16a34a)</p>
+                  <div className="w-full h-20 bg-mode-stonk rounded-lg mb-4"></div>
+                  <h3 className="font-semibold mb-2">💚 Financial (stonk)</h3>
+                  <p className="text-xs font-mono mb-2">mode-stonk (#16a34a)</p>
                   <p className="text-sm text-muted-foreground">
-                    Success green for financial analysis and growth-focused insights
+                    Success green for financial analysis and growth-focused
+                    insights
                   </p>
                 </CardContent>
               </Card>
@@ -232,11 +239,13 @@ export default function DesignSystemPage() {
               </div>
 
               <div className="space-y-2">
-                <h4 className="text-sm font-medium">Financial Green Examples</h4>
+                <h4 className="text-sm font-medium">
+                  Financial Green Examples
+                </h4>
                 <div className="flex gap-2">
-                  <div className="w-8 h-8 bg-mode-stonks rounded-full"></div>
-                  <div className="w-8 h-8 bg-mode-stonks-4 border border-mode-stonks-12 rounded-full"></div>
-                  <div className="w-8 h-8 border border-mode-stonks-12 rounded-full"></div>
+                  <div className="w-8 h-8 bg-mode-stonk rounded-full"></div>
+                  <div className="w-8 h-8 bg-mode-stonk-4 border border-mode-stonk-12 rounded-full"></div>
+                  <div className="w-8 h-8 border border-mode-stonk-12 rounded-full"></div>
                 </div>
               </div>
             </div>
@@ -262,7 +271,7 @@ export default function DesignSystemPage() {
                 <CardContent className="pt-6">
                   <h3 className="font-semibold mb-2">🎯 Mode-Based Colors</h3>
                   <p className="text-sm text-muted-foreground">
-                    Each mode (Normal, Roast, Stonks) has dedicated colors that
+                    Each mode (Normal, Roast, stonk) has dedicated colors that
                     convey mood and purpose
                   </p>
                 </CardContent>

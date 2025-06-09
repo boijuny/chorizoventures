@@ -7,6 +7,7 @@
 ## 🏗 Architecture Overview
 
 ### **Simplified Stack**
+
 - **Framework**: Next.js 14 (App Router only)
 - **Components**: Shadcn/ui with minimal customization
 - **Styling**: Tailwind CSS with design tokens
@@ -14,6 +15,7 @@
 - **TypeScript**: Strict mode, proper typing
 
 ### **Core Components**
+
 ```
 app/page.tsx              # Main chat interface
 components/
@@ -32,15 +34,17 @@ components/
 ## 🎨 Design System Rules
 
 ### **Layout Principles**
+
 1. **Fixed Title**: "Chorizo Ventures" positioned on left side
 2. **Centered Content**: Core components vertically centered
 3. **Interactive Elements**: Mode words and suggestion pills
 4. **Mode-Specific Colors**: Red for Roast, Green for Stonks
 
 ### **Component Standards**
+
 ```tsx
 // ✅ Correct: Mode-specific styling
-<Button 
+<Button
   variant="ghost"
   className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
 >
@@ -54,39 +58,45 @@ components/
 ```
 
 ### **Spacing Scale**
+
 - **Title spacing**: Fixed position with proper margins
 - **Content centering**: Flexbox with min-height: 100vh
-- **Component padding**: `p-4` (16px) 
+- **Component padding**: `p-4` (16px)
 - **Section spacing**: `space-y-4` (16px)
 - **Layout margins**: `mb-6` (24px)
 
 ## 🧩 Component Guidelines
 
 ### **Fixed Title**
+
 - **Position**: Fixed on left side
 - **Font**: Inter, bold weight
 - **Color**: Text foreground
 - **Spacing**: Proper margin from content
 
 ### **Welcome Message**
+
 - **Format**: "Built to <mode> your idea"
 - **Mode Words**: Interactive with mode-specific colors
 - **Animations**: Smooth hover transitions
 - **Spacing**: Comfortable vertical margin
 
 ### **Mode Selector**
+
 - **Variants**: Roast (Red) and Stonks (Green)
 - **Styling**: Ghost variant with mode colors
 - **Hover**: Color intensity increase with background
 - **Position**: Top of chat interface
 
 ### **Suggestion Pills**
+
 - **Style**: Minimal variant with rounded full
 - **Content**: Satirical startup ideas
 - **Hover**: Border opacity increase
 - **Layout**: Horizontal scroll with proper spacing
 
 ### **Chat Interface**
+
 - **Max width**: `max-w-3xl` for optimal reading
 - **Message spacing**: `space-y-4` between messages
 - **Input height**: Auto-resize textarea
@@ -95,12 +105,14 @@ components/
 ## 📋 Development Workflow
 
 ### **Before Starting Any Task**
+
 1. ✅ Activate conda environment: `conda activate guezvc`
 2. ✅ Review relevant documentation files
 3. ✅ Check existing component patterns
 4. ✅ Verify build passes: `npm run build`
 
 ### **Code Quality Standards**
+
 - **TypeScript**: No `any` types allowed
 - **Components**: Proper props interfaces
 - **Accessibility**: ARIA attributes where needed
@@ -108,6 +120,7 @@ components/
 - **Testing**: Manual testing across breakpoints
 
 ### **Design Consistency Checklist**
+
 - [ ] Fixed title properly positioned
 - [ ] Content vertically centered
 - [ ] Mode-specific colors used correctly
@@ -118,18 +131,21 @@ components/
 ## 🚨 Critical Requirements
 
 ### **Performance**
+
 - [ ] Page load < 2 seconds
 - [ ] First Contentful Paint < 1 second
 - [ ] No layout shift (CLS = 0)
 - [ ] Efficient bundle size
 
 ### **Accessibility**
+
 - [ ] Keyboard navigation works
 - [ ] Screen reader compatible
 - [ ] Proper focus management
 - [ ] WCAG AA contrast compliance
 
 ### **Browser Support**
+
 - [ ] Chrome/Edge (latest 2 versions)
 - [ ] Safari (latest 2 versions)
 - [ ] Firefox (latest 2 versions)
@@ -138,12 +154,14 @@ components/
 ## 🎭 Brand Guidelines
 
 ### **Satirical Tone**
+
 - **Professional execution** with **playful interactions**
 - **Corporate parody** through mode-specific personalities
 - **Family-friendly** humor that's clever, not offensive
 - **Self-aware** about VC culture and startup trends
 
 ### **Content Strategy**
+
 - Fixed title establishes brand presence
 - Interactive mode words engage users
 - Satirical suggestions provide entertainment
@@ -152,6 +170,7 @@ components/
 ## 🔧 Technical Standards
 
 ### **File Organization**
+
 ```
 ├── app/                   # Next.js pages and API routes
 ├── components/           # Reusable UI components
@@ -164,6 +183,7 @@ components/
 ```
 
 ### **Import Conventions**
+
 ```tsx
 // External libraries first
 import React from 'react';
@@ -175,6 +195,7 @@ import { ChatMode } from '@/types';
 ```
 
 ### **Component Structure**
+
 ```tsx
 // 1. Interface definition
 interface ComponentProps {
@@ -192,17 +213,14 @@ export default function Component({ prop }: ComponentProps) {
   };
 
   // 5. Render
-  return (
-    <div className="p-4">
-      {/* Component JSX */}
-    </div>
-  );
+  return <div className="p-4">{/* Component JSX */}</div>;
 }
 ```
 
 ## ✅ Quality Assurance
 
 ### **Pre-Commit Checklist**
+
 - [ ] `npm run build` passes
 - [ ] `npm run lint` has no errors
 - [ ] All TypeScript types are properly defined
@@ -211,6 +229,7 @@ export default function Component({ prop }: ComponentProps) {
 - [ ] No console errors in browser
 
 ### **Manual Testing**
+
 - [ ] Desktop: Chrome, Safari, Firefox
 - [ ] Mobile: iOS Safari, Android Chrome
 - [ ] Keyboard navigation works
@@ -220,6 +239,7 @@ export default function Component({ prop }: ComponentProps) {
 ## 🚀 Deployment Guidelines
 
 ### **Production Readiness**
+
 - [ ] All environment variables configured
 - [ ] Error boundaries implemented
 - [ ] Loading states handled gracefully
@@ -227,6 +247,7 @@ export default function Component({ prop }: ComponentProps) {
 - [ ] SEO meta tags included
 
 ### **Performance Monitoring**
+
 - [ ] Core Web Vitals meet thresholds
 - [ ] Bundle size is optimized
 - [ ] Images are properly optimized

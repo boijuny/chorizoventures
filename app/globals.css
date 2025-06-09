@@ -40,27 +40,27 @@
     --radius: 0.5rem;
 
     /* Chorizo Ventures Mode Colors - Enhanced Contrast & Distinction */
-    
+
     /* NORMAL MODE - Professional blue (sophisticated, trustworthy) */
     /* --mode-normal: 217 91% 60%; */ /* #3b82f6 - Professional blue */
     /* --mode-normal-4: 217 91% 60% / 0.04; */
     /* --mode-normal-12: 217 91% 60% / 0.12; */
     /* --mode-normal-60: 217 91% 60% / 0.6; */
-    
+
     /* ROAST MODE - Fiery red (aggressive, intense) */
     --mode-roast: 0 84% 60%; /* #ef4444 - Bold red */
     --mode-roast-4: 0 84% 60% / 0.04;
     --mode-roast-12: 0 84% 60% / 0.12;
     --mode-roast-60: 0 84% 60% / 0.6;
-    
-    /* STONKS MODE - Success green (financial, growth) */
-    --mode-stonks: 142 76% 36%; /* #16a34a - Success green */
-    --mode-stonks-4: 142 76% 36% / 0.04;
-    --mode-stonks-12: 142 76% 36% / 0.12;
-    --mode-stonks-60: 142 76% 36% / 0.6;
+
+    /* stonk MODE - Success green (financial, growth) */
+    --mode-stonk: 142 76% 36%; /* #16a34a - Success green */
+    --mode-stonk-4: 142 76% 36% / 0.04;
+    --mode-stonk-12: 142 76% 36% / 0.12;
+    --mode-stonk-60: 142 76% 36% / 0.6;
 
     /* Semantic colors with chorizo theme */
-    --success: 35 91% 55%; /* Matches saffron/stonks */
+    --success: 35 91% 55%; /* Matches saffron/stonk */
     --success-foreground: 0 0% 98%;
     --warning: 35 91% 55%; /* Saffron for warnings */
     --warning-foreground: 0 0% 4%;
@@ -111,34 +111,63 @@
   * {
     @apply border-border;
   }
-  
+
   body {
     @apply bg-background text-foreground;
     /* Enhanced font stack with performance optimization */
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family:
+      'Inter',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      'Roboto',
+      'Oxygen',
+      'Ubuntu',
+      'Cantarell',
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      sans-serif;
     background-color: #0a0a0a; /* OLED black */
-    
+
     /* Typography optimization */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
-    
+
     /* Performance optimizations */
     font-display: swap;
   }
 
   /* Enhanced heading hierarchy with modular scale */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold leading-tight tracking-tight;
     text-wrap: balance;
   }
 
-  h1 { @apply text-6xl; }
-  h2 { @apply text-4xl; }
-  h3 { @apply text-3xl; }
-  h4 { @apply text-2xl; }
-  h5 { @apply text-xl; }
-  h6 { @apply text-lg; }
+  h1 {
+    @apply text-6xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+  h5 {
+    @apply text-xl;
+  }
+  h6 {
+    @apply text-lg;
+  }
 
   /* Optimized paragraph styling */
   p {
@@ -148,12 +177,15 @@
   }
 
   /* Interactive elements with touch optimization */
-  button, [role="button"] {
+  button,
+  [role='button'] {
     @apply touch-target focus-ring;
   }
 
   /* Form elements with consistent styling */
-  input, textarea, select {
+  input,
+  textarea,
+  select {
     @apply focus-ring;
   }
 
@@ -194,9 +226,9 @@
     --mode-accent: var(--mode-roast);
     @apply border-mode-roast-12;
   }
-  .mode-stonks {
-    --mode-accent: var(--mode-stonks);
-    @apply border-mode-stonks-12;
+  .mode-stonk {
+    --mode-accent: var(--mode-stonk);
+    @apply border-mode-stonk-12;
   }
 
   /* Performance-optimized animations */
@@ -205,8 +237,13 @@
   }
 
   @keyframes breathing {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.8; }
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 0.8;
+    }
   }
 
   /* Professional transitions */
@@ -243,11 +280,21 @@
       bottom: auto;
     }
 
-    .corner-top-left { grid-area: logo; }
-    .corner-top-right { grid-area: mode; }
-    .corner-bottom-left { grid-area: timezone; }
-    .corner-bottom-right { grid-area: mesh; }
-    .chat-center { grid-area: chat; }
+    .corner-top-left {
+      grid-area: logo;
+    }
+    .corner-top-right {
+      grid-area: mode;
+    }
+    .corner-bottom-left {
+      grid-area: timezone;
+    }
+    .corner-bottom-right {
+      grid-area: mesh;
+    }
+    .chat-center {
+      grid-area: chat;
+    }
   }
 
   /* Touch optimization for mobile */
@@ -259,7 +306,8 @@
     }
 
     /* Reasonable touch targets for better UX without being oversized */
-    button, [role="button"] {
+    button,
+    [role='button'] {
       min-height: 36px;
       min-width: 36px;
     }
@@ -269,11 +317,11 @@
   .content-prose {
     max-width: 65ch;
   }
-  
+
   .content-narrow {
     max-width: 45ch;
   }
-  
+
   .content-wide {
     max-width: 85ch;
   }

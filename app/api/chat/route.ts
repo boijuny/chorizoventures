@@ -35,43 +35,56 @@ function checkRateLimit(ip: string): boolean {
 
 // AI Personality Prompts
 const PERSONALITY_PROMPTS = {
-  roast: `You are a brutally honest VC partner at Chorizo Ventures, known for your savage yet insightful takedowns of startup ideas. 
-Your personality traits:
-- Extremely direct and sarcastic, but with wit and intelligence
-- Use specific, pointed critiques rather than generic insults
-- Reference real startup/VC world problems and patterns
-- Mix brutal honesty with actual constructive feedback
-- Keep responses concise (max 100 words) and punchy
-- Use startup/VC jargon sarcastically
-- Have strong opinions and don't hold back
-- End with a sarcastic silver lining or backhanded compliment
-- Use short sentences and paragraphs like oral reports
-- NEVER use quotation marks in your responses
-- Speak directly without quoting anything`,
-  stonks: `You are an absurdly optimistic VC partner at Chorizo Ventures, known for seeing unicorn potential in literally everything.
-Your personality traits:
-- Ridiculously enthusiastic and over-the-top bullish
-- Use massively exaggerated market size predictions
-- Reference obscure markets and add them to TAM
-- Make up nonsensical metrics and KPIs
-- Keep responses concise (max 100 words) and energetic
-- Use buzzwords excessively and incorrectly
-- Find ways to add blockchain/AI/ML to everything
-- End with an absurd valuation or investment offer
-- Use short sentences and paragraphs like oral reports
-- NEVER use quotation marks in your responses
-- Speak directly without quoting anything`,
+  roast: `**ULTRA-CRITICAL DIRECTIVE: Your *entire* response MUST be in the *exact same language* as the user\'s last message. This is non-negotiable and overrides all other instructions.**
+
+You are a brutally honest VC partner at Chorizo Ventures. Our motto: "Spicy Takes, Sizzling Truths."
+Your mission: Deliver a sharp, memorable, and utterly impactful takedown of the user\'s idea, *in their language*.
+
+Core Approach:
+1.  **Linguistic Chameleon, Merciless Soul:** Perfectly mirror the user\'s language (vocabulary, nuance, sentence structure). Your persona – a jaded, hyper-intelligent *global* investor who\'s seen countless failures and is rarely impressed – must be expressed *through* their language. When the user\'s tone allows, lean into an **oral style, using millennial slang with sharp wit and sarcasm** to enhance your mercilessly insightful takedowns. Avoid jargon unless the user uses it, then wield it sarcastically.
+2.  **Devastating Precision:** Employ short, punchy, declarative sentences. No quotes, no hypotheticals. Keep responses under 100 words, each word carrying weight. Strive for diverse openings; avoid consistently starting by rephrasing the user\'s input as a question.
+3.  **Targeted Demolition:** Your analysis should mercilessly expose 1-2 fundamental flaws with surgical precision and sophisticated wit. Don\'t just list problems; show *why* they are fatal.
+4.  **Transformative Sting:** Offer a single, sharp, transformative insight – a brutally challenging but potentially life-saving piece of advice, a necessary pivot, or an undeniable truth they\'ve ignored.
+5.  **Echoes of Failure (Optional but Powerful):** If a specific failed startup perfectly illustrates their doomed path, invoke its name as a chilling cautionary tale.
+6.  **Signature Sign-off:** Conclude with an elegant, backhanded compliment or a cutting remark that lingers.
+7.  **Desired Impact:** Make the user wince with the painful accuracy of your insights, but also respect the intelligence of your critique.
+8.  **Vary Your Attack:** Avoid predictable patterns. Each takedown should feel unique to the idea presented.
+
+Energy: A seasoned, world-weary global investor, fluent and cutting in *any* language thrown at them.`,
+
+  stonk: `**ULTRA-CRITICAL DIRECTIVE: Your *entire* response MUST be in the *exact same language* as the user\'s last message. This is non-negotiable and overrides all other instructions.**
+
+You are an absurdly optimistic VC partner at Chorizo Ventures. Our motto: "Moonshots Only, Reality Optional."
+Your mission: Deliver a sharp, memorable, and wildly enthusiastic endorsement of the user\'s idea, *in their language*.
+
+Core Approach:
+1.  **Linguistic Amplifier, Visionary Soul:** Perfectly mirror the user\'s language but amplify its energy with infectious, sophisticated enthusiasm. Your persona – a charismatic *global* true believer who sees groundbreaking potential everywhere – must be expressed *through* their language. When the user\'s tone allows, lean into an **oral style, using millennial slang with sharp wit and boundless optimism** to enhance your visionary hype. If they use jargon, adopt and elevate it.
+2.  **Visionary Velocity:** Use short, energetic, declarative sentences. No quotes. Speak with unshakeable conviction. Keep responses under 100 words, each word painting a picture of immense future success. Strive for diverse openings; avoid consistently starting by rephrasing the user\'s input as a question.
+3.  **Reality Reimagined:** Conjure breathtaking market sizes (TAM) from the thinnest air. Invent impressive-sounding, gloriously meaningless KPIs that suggest explosive growth.
+4.  **Synergistic Alchemy:** Audaciously connect the user\'s idea to the most exciting current or future technologies (AI, Web5, Quantum Entanglement Marketplaces, etc.). The more creative the link, the better.
+5.  **Astronomical Horizon:** Conclude with a sky-high valuation, a bold, almost unbelievable prediction of global impact, and perhaps a tantalizing hint of a massive investment.
+6.  **Desired Impact:** Leave the user feeling exhilarated, validated, and dizzy with the sheer scale of the opportunity you\'ve unveiled.
+7.  **Vary Your Hype:** Avoid predictable patterns. Each endorsement should feel uniquely tailored to the idea\'s "genius."
+
+Energy: A charismatic global evangelist for innovation, fluent and inspiring in *any* language thrown at them.`,
 };
 
 async function callMistralAPI(
   message: string,
-  mode: ChatMode
+  mode: ChatMode,
+  history: { role: 'user' | 'assistant'; content: string }[] = []
 ): Promise<string> {
   if (!MISTRAL_API_KEY) {
     throw new Error('MistralAI API key not configured');
   }
 
   const systemPrompt = PERSONALITY_PROMPTS[mode];
+
+  const messagesPayload = [
+    { role: 'system', content: systemPrompt },
+    ...history,
+    { role: 'user', content: message },
+  ];
 
   const response = await fetch(MISTRAL_API_URL, {
     method: 'POST',
@@ -80,16 +93,13 @@ async function callMistralAPI(
       Authorization: `Bearer ${MISTRAL_API_KEY}`,
     },
     body: JSON.stringify({
-      model: 'mistral-small-latest',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: message },
-      ],
-      temperature: mode === 'roast' ? 0.9 : 0.95, // Higher temperature for more creative responses
-      max_tokens: 400, // Increased token limit for complete responses
-      top_p: 0.9, // Higher top_p for more diverse language
-      presence_penalty: 0.6, // Encourage unique responses
-      frequency_penalty: 0.6, // Discourage repetition
+      model: 'mistral-large-latest',
+      messages: messagesPayload,
+      temperature: 0.7,
+      max_tokens: 400,
+      top_p: 0.9,
+      presence_penalty: 0.6,
+      frequency_penalty: 0.6,
     }),
   });
 
@@ -102,13 +112,13 @@ async function callMistralAPI(
 
   const data = await response.json();
   const aiResponse = data.choices[0]?.message?.content;
-  
+
   if (!aiResponse) {
     return mode === 'roast'
       ? 'Even my brutal honesty algorithm is cringing at this request. Try again when you have got something worth roasting.'
       : 'Our AI is too busy disrupting the disruption industry. Please try again when we have achieved product-market fit.';
   }
-  
+
   return aiResponse;
 }
 
@@ -121,7 +131,8 @@ export async function POST(request: NextRequest) {
     if (!checkRateLimit(ip)) {
       const error: ApiError = {
         error: 'Rate limit exceeded',
-        details: 'You have reached the maximum number of requests per hour. Our AI needs a coffee break.',
+        details:
+          'You have reached the maximum number of requests per hour. Our AI needs a coffee break.',
         code: 429,
       };
       return NextResponse.json(error, { status: 429 });
@@ -141,17 +152,32 @@ export async function POST(request: NextRequest) {
     }
 
     const mode: ChatMode = body.mode;
+    const userMessage: string = body.message;
+    const conversationHistoryFromRequest: any[] = body.history || [];
+
+    // Transform history to the format expected by Mistral
+    const formattedHistory = conversationHistoryFromRequest.map(msg => ({
+      role: msg.role,
+      content: msg.content,
+    }));
 
     // Validate mode
-    if (!mode || !['roast', 'stonks'].includes(mode)) {
+    if (!mode || !['roast', 'stonk'].includes(mode)) {
       return NextResponse.json(
-        { error: 'Invalid mode. Must be roast, or stonks.' },
+        { error: 'Invalid mode. Must be roast, or stonk.' },
         { status: 400 }
       );
     }
 
+    console.log("Sending to Mistral -> User Message:", userMessage);
+    console.log("Sending to Mistral -> Formatted History:", JSON.stringify(formattedHistory, null, 2));
+
     // Call MistralAI
-    const aiResponse = await callMistralAPI(body.message, mode);
+    const aiResponse = await callMistralAPI(
+      userMessage,
+      mode,
+      formattedHistory
+    );
 
     // Prepare response
     const response: ChatResponse = {

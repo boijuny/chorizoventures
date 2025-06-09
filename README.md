@@ -6,7 +6,7 @@ A satirical venture capital website that parodies the pretentious startup ecosys
 
 🚀 **Try it out:** [Chorizo Ventures](https://chorizoventures.vercel.app/)
 
-Experience the satirical startup ecosystem firsthand through our AI-powered chat interface. Engage with our sophisticated-yet-satirical VC bot in two distinct modes:
+![Guez VC Homepage](ressources/home.png)
 
 - **Roast Mode:** Brutal honesty about your "groundbreaking" startup idea
 - **Stonks Mode:** Over-the-top enthusiasm for even the most absurd concepts

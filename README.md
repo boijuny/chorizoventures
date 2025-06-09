@@ -1,90 +1,73 @@
-# Guez VC - Satirical Venture Capital Website
+# Guez VC
 
-A satirical VC website that parodies the pretentious startup ecosystem through AI-powered interactions.
+A satirical venture capital website that parodies the pretentious startup ecosystem through AI-powered interactions.
 
-## 🎯 Project Overview
+## Overview
 
-**Vision:** Create a satirical VC website that parodies the pretentious startup ecosystem through an AI-powered chat interface, providing entertainment for developers and startup community members.
+Guez VC provides entertainment for developers and startup community members through a sophisticated chat interface that embodies the most absurd aspects of venture capital culture.
 
-**Status:** Phase 1 Complete ✅ - Foundation & Setup
+**Status:** Phase 1 Complete ✅
 
-## 🛠 Technology Stack
+## Technology Stack
 
-- **Frontend:** Next.js 14 (App Router) with TypeScript
+- **Frontend:** Next.js 14 with TypeScript
 - **Styling:** Tailwind CSS with custom design system
 - **Animations:** Framer Motion
 - **Code Quality:** ESLint + Prettier
-- **Font:** Inter (Google Fonts)
 
-## 🏗 Architecture
+## Project Structure
 
 ```
 guezvc/
-├── app/                    # Next.js App Router
-│   ├── globals.css        # Global styles with design system
-│   ├── layout.tsx         # Root layout with metadata
-│   └── page.tsx           # Homepage
-├── components/            # React components (Phase 2)
-├── lib/                   # Shared libraries
-│   └── constants.ts       # App constants and taglines
-├── types/                 # TypeScript definitions
-│   └── index.ts          # Core type definitions
-├── utils/                 # Utility functions
-│   └── helpers.ts        # Helper functions
-├── tailwind.config.js     # Tailwind configuration
-├── tsconfig.json         # TypeScript configuration
+├── app/                   # Next.js App Router
+│   ├── globals.css       # Global styles
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Homepage
+├── components/           # React components
+├── lib/                  # Shared libraries
+├── types/                # TypeScript definitions
+├── utils/                # Utility functions
 └── package.json          # Dependencies and scripts
 ```
 
-## 🎨 Design System
+## Design System
 
-The project implements a sophisticated design system based on the PRD specifications:
-
-### Color Palette
-
-- **Backgrounds:** Deep black (`#0a0a0a`) to tertiary (`#2a2a2a`)
-- **Text:** Primary white (`#f5f5f5`) to muted gray (`#6b7280`)
-- **Accents:** Mode-specific colors (blue, red, green, magenta)
+### Colors
+- **Backgrounds:** Deep black to charcoal
+- **Text:** White to muted gray
+- **Accents:** Dynamic mode-specific colors
 
 ### Typography
-
-- **Primary Font:** Inter (professional, clean)
-- **Chaos Font:** Comic Sans MS (for humor elements)
-- **Scale:** Responsive from 12px to 64px
+- **Primary:** Inter font family
+- **Chaos Mode:** Comic Sans MS
+- **Scale:** Responsive typography system
 
 ### Animations
+- Liquid morphing effects
+- Floating animations
+- Subtle glitch effects
 
-- **Liquid Effects:** Smooth morphing animations
-- **Float Animation:** 6s ease-in-out cycle
-- **Glitch Effects:** Random 1% chance color pops
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-
 - Node.js 18+
-- npm or yarn
-- Conda environment named `guezvc` (as per project requirements)
+- Conda environment `guezvc`
 
-### Installation
+### Development
 
-1. **Activate the conda environment:**
-
+1. **Activate environment:**
    ```bash
    conda activate guezvc
    ```
 
 2. **Install dependencies:**
-
    ```bash
    npm install
    ```
 
 3. **Start development server:**
-
    ```bash
    npm run dev
    ```
 
-4. **Open browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
+4. **Open [http://localhost:3000](http://localhost:3000)**

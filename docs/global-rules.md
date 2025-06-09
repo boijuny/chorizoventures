@@ -17,18 +17,21 @@
 ### **Core Components**
 
 ```
-app/page.tsx              # Main chat interface
+app/
+├── page.tsx              # Main chat interface
+├── layout.tsx            # Root layout component
+├── globals.css           # Global styles and design tokens
+└── api/chat/route.ts     # Chat API endpoint
+
 components/
-├── ui/                   # Shadcn/ui components (Button, Tabs, Card)
-├── layout/              # Layout components
-│   ├── FixedTitle.tsx   # Fixed "Chorizo Ventures" title
-│   └── CenteredContent.tsx # Centered content wrapper
-├── chat/               # Chat components
-│   ├── ChatInterface.tsx # Primary chat component
-│   ├── ChatMessage.tsx  # Message display component
-│   ├── ModeSelector.tsx # Roast/Stonks mode selector
-│   ├── WelcomeMessage.tsx # Interactive welcome message
-│   └── SuggestionPills.tsx # Satirical suggestion buttons
+├── ui/                   # Shadcn/ui components (Button, Tabs, Card, etc.)
+├── base/                # Base design system components
+├── layout/              # Layout components and utilities
+├── corners/             # Corner UI components
+│   └── timezone-corner.tsx # Live timezone display
+├── ChatInterface.tsx    # Primary chat component (includes mode selector and suggestions)
+├── ChatMessage.tsx      # Message display component
+└── FixedTitle.tsx       # Fixed "Chorizo Ventures" title
 ```
 
 ## 🎨 Design System Rules
@@ -81,19 +84,19 @@ components/
 - **Animations**: Smooth hover transitions
 - **Spacing**: Comfortable vertical margin
 
-### **Mode Selector**
+### **Integrated Mode Selector**
 
+- **Location**: Built into welcome message as dropdown
 - **Variants**: Roast (Red) and Stonks (Green)
-- **Styling**: Ghost variant with mode colors
-- **Hover**: Color intensity increase with background
-- **Position**: Top of chat interface
+- **Styling**: Inline select component with mode colors
+- **Interaction**: Updates welcome message and interface colors
 
-### **Suggestion Pills**
+### **Integrated Suggestion Pills**
 
-- **Style**: Minimal variant with rounded full
+- **Location**: Built into ChatInterface component
+- **Style**: Mode-specific suggestion buttons
 - **Content**: Satirical startup ideas
-- **Hover**: Border opacity increase
-- **Layout**: Horizontal scroll with proper spacing
+- **Behavior**: Populate input field when clicked
 
 ### **Chat Interface**
 
@@ -101,6 +104,20 @@ components/
 - **Message spacing**: `space-y-4` between messages
 - **Input height**: Auto-resize textarea
 - **Mode colors**: Applied to relevant elements
+
+### **Corner Components**
+
+- **Timezone Corner**: Live timezone display with location
+- **Position**: Fixed bottom-right corner with minimal interference
+- **Styling**: Subtle with low opacity for non-distraction
+
+### **API Integration**
+
+- **Endpoint**: `/api/chat` for chat completions
+- **Method**: POST with streaming response
+- **Modes**: Handles Roast and Stonks personalities
+- **Error handling**: Graceful fallbacks and user feedback
+- **Rate limiting**: Implemented for responsible usage
 
 ## 📋 Development Workflow
 
@@ -173,12 +190,22 @@ components/
 
 ```
 ├── app/                   # Next.js pages and API routes
+│   ├── page.tsx          # Main chat interface
+│   ├── layout.tsx        # Root layout
+│   ├── globals.css       # Global styles
+│   ├── design-system/    # Component showcase
+│   └── api/chat/         # Chat API endpoint
 ├── components/           # Reusable UI components
 │   ├── ui/              # Shadcn/ui components
-│   ├── layout/          # Layout components
-│   └── chat/            # Chat interface components
-├── lib/                 # Utility functions
+│   ├── base/            # Base design system components  
+│   ├── layout/          # Layout components and utilities
+│   ├── corners/         # Corner UI components
+│   ├── ChatInterface.tsx # Main chat component
+│   ├── ChatMessage.tsx  # Message component
+│   └── FixedTitle.tsx   # Fixed title component
+├── lib/                 # Utility functions and constants
 ├── types/               # TypeScript definitions
+├── utils/               # Helper utilities
 └── docs/                # Documentation
 ```
 
@@ -223,6 +250,8 @@ export default function Component({ prop }: ComponentProps) {
 
 - [ ] `npm run build` passes
 - [ ] `npm run lint` has no errors
+- [ ] `npm run format` applied (code formatted)
+- [ ] `npm run type-check` passes
 - [ ] All TypeScript types are properly defined
 - [ ] Component works on mobile
 - [ ] Follows design system guidelines

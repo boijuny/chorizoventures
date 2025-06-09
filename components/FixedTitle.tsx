@@ -26,8 +26,8 @@ const FixedTitle = ({ onReset }: FixedTitleProps) => {
     <>
       {/* Left side title */}
       <div className="fixed top-6 left-6 z-50">
-        <button 
-          onClick={onReset} 
+        <button
+          onClick={onReset}
           className="block text-left focus:outline-none focus:ring-2 focus:ring-white/20 rounded-md p-1 -m-1"
         >
           <h1 className="text-xl font-bold text-white hover:text-white/80 transition-colors duration-200 cursor-pointer">

@@ -20,7 +20,7 @@ export default function DesignSystemPage() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      <FixedTitle />
+      <FixedTitle onReset={() => {}} />
 
       <main className="px-6 py-8 flex-1 flex flex-col items-center">
         <div className="max-w-4xl w-full space-y-12">
